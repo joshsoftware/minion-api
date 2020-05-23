@@ -1,7 +1,5 @@
-require 'json'
-
 class Minion
-  module JSONAble
+  module Model
     def to_json
       hsh = {}
       self.instance_variables.each do |v|
