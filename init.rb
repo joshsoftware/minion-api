@@ -28,4 +28,7 @@ end
 
 APPLICATION_ROOT = File.expand_path(File.dirname(__FILE__))
 
-#
+# Set up a rethinkdb instance as a global variable for easy use going forward
+# afaik it'll be threadsafe
+include RethinkDB::Shortcuts
+$r = r.connect(host: ENV['RETHINKDB_HOST'], port: 28015, db:'minion')
