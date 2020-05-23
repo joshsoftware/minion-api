@@ -1,7 +1,7 @@
 require 'em-websocket'
 
-class Minion
-  class Service
+module Minion
+  module Service
     def self.start
       EM.run {
         EM::WebSocket.start(

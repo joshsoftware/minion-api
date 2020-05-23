@@ -1,4 +1,4 @@
-class Minion
+module Minion
   module Model
     def to_json
       hsh = {}
