@@ -1,15 +1,20 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    coderay (1.1.2)
     em-websocket (0.5.1)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0.6.0)
     eventmachine (1.2.7)
     http_parser.rb (0.6.0)
     jwt (2.2.1)
+    method_source (1.0.0)
     mustermann (1.1.1)
       ruby2_keywords (~> 0.0.1)
     nio4r (2.5.2)
+    pry (0.13.1)
+      coderay (~> 1.1)
+      method_source (~> 1.0)
     puma (4.3.5)
       nio4r (~> 2.0)
     rack (2.2.2)
@@ -30,6 +35,7 @@ PLATFORMS
 DEPENDENCIES
   em-websocket
   jwt
+  pry
   puma
   rethinkdb
   sinatra
