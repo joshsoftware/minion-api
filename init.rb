@@ -26,8 +26,6 @@ DIRS.each do |dir|
   Dir.glob(File.join(FileUtils.pwd, dir, '**', '*.rb')).each { |f| require f }
 end
 
-# Bring in the primary application start points
-require_relative File.join('.', 'api')
-require_relative File.join('.', 'service')
-
 APPLICATION_ROOT = File.expand_path(File.dirname(__FILE__))
+
+#
