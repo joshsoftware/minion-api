@@ -4,6 +4,7 @@
 require 'fileutils'
 require 'rethinkdb'
 require 'em-websocket'
+require 'connection_pool'
 require 'json'
 require 'jwt'
 require 'pry' # yes, even in prod, for the console feature
@@ -28,7 +29,8 @@ end
 
 APPLICATION_ROOT = File.expand_path(File.dirname(__FILE__))
 
-# Set up a rethinkdb instance as a global variable for easy use going forward
-# afaik it'll be threadsafe
-include RethinkDB::Shortcuts
-$r = r.connect(host: ENV['RETHINKDB_HOST'], port: 28015, db:'minion')
+# Create a connection pool for RethinkDB so multiple threads can access
+# that pool rather easily.
+$pool ||= ConnectionPool.new(size: 10, timeout: 5) {
+  RethinkDB::RQL.new.connect(host: ENV['RETHINKDB_HOST'], port: 28015, db:'minion')
+}
