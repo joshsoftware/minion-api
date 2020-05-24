@@ -13,3 +13,8 @@ desc "see what TODOs remain in the code"
 task :todo do
   exec('grep -Rin --include="*.rb" "TODO" *')
 end
+
+desc "check for any stray binding.pry calls"
+task :pry do
+  exec('grep -Rin --include="*.rb" "binding.pry" *')
+end
