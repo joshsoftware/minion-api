@@ -1,17 +1,22 @@
+# frozen_string_literal: true
+
 # init.rb
 # Initialization for Minion's API/TCP service
 
-require 'fileutils'
-require 'rethinkdb'
-require 'em-websocket'
+require 'active_support'
+require "active_support/core_ext/hash/indifferent_access"
 require 'connection_pool'
+require 'dry-struct'
+require 'em-websocket'
+require 'fileutils'
 require 'json'
 require 'jwt'
 require 'pry' # yes, even in prod, for the console feature
+require 'rethinkdb'
 
 # Check for necessary database connection variables and exit if not present
 unless ENV['RETHINKDB_HOST'] && ENV['RETHINKDB_HOST'] != ''
-  if ['production', 'staging'].include? ENV['RUNTIME_ENV']
+  if %w[production staging].include? ENV['RUNTIME_ENV']
     puts "No RETHINKDB_HOST environment variable, cannot continue."
     exit(1)
   end
@@ -21,7 +26,7 @@ end
 ENV['RUNTIME_ENV'] ||= (ENV['RACK_ENV'] || ENV['RAILS_ENV'] || 'development')
 
 # Grab all the stuff under the following directories:
-DIRS = ['lib', 'api', 'service']
+DIRS = ['lib', 'api', 'service'].freeze
 
 DIRS.each do |dir|
   Dir.glob(File.join(FileUtils.pwd, dir, '**', '*.rb')).each { |f| require f }

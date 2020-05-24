@@ -1,68 +1,68 @@
+# frozen_string_literal: true
+
+# Minion overall app
 module Minion
+  # Model is a submodule that we mix in to stuff in lib/models to avoid
+  # duplication functionality/code unnecessarily
   module Model
-    def self.included base
+
+    module Types
+      include Dry.Types(default: :nominal)
+      Dry::Types.load_extensions(:maybe)
+    end
+
+    # Automatically include Instance and Class methods when mixed-in
+    def self.included(base)
       base.send :include, InstanceMethods
       base.extend ClassMethods
     end
 
+    # InstanceMethods - these will be available on new instances of the class
     module InstanceMethods
-      def to_json
+      def to_json(_ = nil)
         hsh = {}
-        self.instance_variables.each do |v|
-          hsh["#{v}".gsub(/@/, '')] = self.instance_variable_get v
+        attributes.each do |atr|
+          hsh[atr] = instance_variable_get atr
         end
-        return hsh.to_json
+        hsh.to_json
       end
 
       def destroy
         $pool.with do |conn|
-          self.class.r.table(self.class::TABLE).get(self.id).delete().run(conn)
+          self.class.r.table(self.class::TABLE).get(id).delete.run(conn)
         end
       end
     end
 
+    # ClassMethods - mixed in at the class level (e.g. User.count)
     module ClassMethods
       def count
         $pool.with do |conn|
-          r.table(self::TABLE).count().run(conn)
+          r.table(self::TABLE).count.run(conn)
         end
-      end
-
-      def from_json(str)
-        hsh = JSON.load(str)
-        thing = self.new
-        thing.instance_variables.each do |var|
-          thing.instance_variable_set var, hsh[var.to_s.gsub(/@/, '')]
-        end
-        return thing
       end
 
       def find(id)
         $pool.with do |conn|
-          return self.from_json(r.table(self::TABLE).get(id).run(conn).to_json)
+          hsh = r.table(self::TABLE).get(id).run(conn).symbolize_keys
+          return new(hsh)
         end
       end
 
-      def create(thing)
+      def create(hsh)
+        hsh = hsh.with_indifferent_access.symbolize_keys
         # First, look for protected keys and remove their values
-        thing.class::PROTECTED_METHODS.each do |prot|
-          if thing.instance_variables.include?(prot)
-            thing.instance_variable_set(prot, nil)
-          end
+        self::PROTECTED_ATTRIBUTES.each do |prot|
+          hsh.delete(prot)
         end
+
 
         # Set the created_at attribute to now
-        if thing.instance_variables.include?(:@created_at)
-          thing.created_at = Time.now.utc
-        end
-
-        hsh = JSON.parse(thing.to_json)
-        hsh.delete('id')
+        hsh[:created_at] = Time.now.utc
         $pool.with do |conn|
-          id = r.table(thing.class::TABLE).insert(hsh).run(conn)['generated_keys'][0]
-          return thing.class.find(id)
+          id = r.table(self::TABLE).insert(hsh).run(conn)['generated_keys'][0]
+          return find(id)
         end
-        # TODO: Somehow get the user or at least their ID back from this stmt
       end
 
       def r(*args)
@@ -70,13 +70,4 @@ module Minion
       end
     end
   end
-end
-
-
-def self.find(id)
-  $pool.with do |conn|
-    u = User.from_json(r.table("users").get(id).run(conn).to_json)
-    return u
-  end
-  # return User.new.from_json((r.table("users").get(id).run($r)).to_json)
 end

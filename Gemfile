@@ -1,11 +1,14 @@
 source 'https://rubygems.org'
 
-gem 'sinatra'
-gem 'rethinkdb'
+gem 'activesupport'
+gem 'connection_pool'
+gem 'dry-monads'
+gem 'dry-struct'
+gem 'em-websocket'
 gem 'jwt'
 gem 'puma'
-gem 'em-websocket'
-gem 'connection_pool'
+gem 'rethinkdb'
+gem 'sinatra'
 
 group :development, :test do
   gem 'pry'
