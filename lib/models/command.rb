@@ -21,10 +21,10 @@ class Command < Dry::Struct
   end
 end
 
-
+=begin
 #
 # For using in tests
-#
+
 c = Command.new({
   id: nil, server_id: 'abc123', user_id: 'asdfasdf', command:'ls /tmp',
   stdout: [
@@ -36,3 +36,4 @@ c = Command.new({
     { output: '"/somethingthatdoesntexist": No such file or directory (os error 2)', at: Time.now.utc }
   ]
 })
+=end

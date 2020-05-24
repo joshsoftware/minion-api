@@ -5,7 +5,7 @@ module Minion
   # Model is a submodule that we mix in to stuff in lib/models to avoid
   # duplication functionality/code unnecessarily
   module Model
-
+    # To use data types provided by Dry::Types
     module Types
       include Dry.Types(default: :nominal)
       Dry::Types.load_extensions(:maybe)
@@ -19,14 +19,6 @@ module Minion
 
     # InstanceMethods - these will be available on new instances of the class
     module InstanceMethods
-      def to_json(_ = nil)
-        hsh = {}
-        attributes.each do |atr|
-          hsh[atr] = instance_variable_get atr
-        end
-        hsh.to_json
-      end
-
       def destroy
         $pool.with do |conn|
           self.class.r.table(self.class::TABLE).get(id).delete.run(conn)
@@ -44,7 +36,7 @@ module Minion
 
       def find(id)
         $pool.with do |conn|
-          hsh = r.table(self::TABLE).get(id).run(conn).symbolize_keys
+          hsh = r.table(self::TABLE).get(id).run(conn).deep_symbolize_keys
           return new(hsh)
         end
       end
@@ -55,7 +47,6 @@ module Minion
         self::PROTECTED_ATTRIBUTES.each do |prot|
           hsh.delete(prot)
         end
-
 
         # Set the created_at attribute to now
         hsh[:created_at] = Time.now.utc
