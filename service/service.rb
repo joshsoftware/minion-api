@@ -103,7 +103,6 @@ end
 
             callback = proc { |result|
               # TODO: Send result to websocket client (result should be hash)
-binding.pry
               ws.send "Result: #{result.to_json}"
             }
 
