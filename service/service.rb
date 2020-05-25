@@ -65,19 +65,13 @@ end
               operation = proc {
                 $pool.with do |conn|
 # binding.pry
-                EM.run {
-                  RethinkDB::RQL.new.table('commands').changes.run(conn).each { |cmd| puts cmd; ws.send cmd.to_json }
-                }
-                  # RethinkDB::RQL.new.table('commands').filter do |cmd|
-                  #   (
-                  #     cmd['server_id'].eq(message[:server_id]) &&
-                  #     cmd['completed_at'].eq(nil) &&
-                  #     cmd['started_at'].eq(nil) &&
-                  #     cmd['issued_at'].gt(Time.now.utc - 5.minutes)
-                  #   )
-                  # end.changes.run(conn).each { |cmd|
-                  #   ws.send cmd.to_json
-                  # }
+                  EM.run {
+                  # RethinkDB::RQL.new.table('commands').changes.run(conn).each { |cmd| puts cmd; ws.send cmd.to_json }
+
+                    RethinkDB::RQL.new.table('commands').filter do |cmd|
+                      cmd['server_id'].eq(message[:server_id])
+                    end.changes.run(conn).each { |cmd| ws.send cmd.to_json }
+                  }
                 end
               }
             when 'update'
