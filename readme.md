@@ -50,6 +50,19 @@ Content-Length: 547
 {"id":"004e0036-be86-4a45-b31a-b6179d19db47","server_id":"abc123","user_id":"asdfasdf","command":"ls /tmp","stderr":[{"output":"\"/somethingthatdoesntexist\": No such file or directory (os error 2)","at":"2020-05-24 23:41:43 +0000"}],"stdout":[{"output":"Permissions Size User Date Modified Name","at":"2020-05-24 23:41:43 +0000"},{"output":"srwxrwxrwx     0 jah  23 May 22:11  .s.PGSQL.5432","at":"2020-05-24 23:41:43 +0000"},{"output":"drwxr-xr-x     - jah  23 May  0:53  7AECB408-B6F3-4E22-ACD9-243D21358609","at":"2020-05-24 23:41:43 +0000"}]}%
 ```
 
+### POST /commands
+
+Post a request with a response body in JSON to /commands to create a command.
+
+```
+$ curl -i http://localhost:9292/commands -X POST -d @test/command.json
+HTTP/1.1 201 Created
+Content-Type: application/json
+Content-Length: 449
+
+{"id":"c72cca08-6163-433e-929a-730f2e92e5e8","server_id":"abc123","user_id":"abcdef","command":"ls /tmp","stderr":[{"output":"\"/somethingthatdoesntexist\": No such file or directory (os error 2)","at":"2020-05-24 23:47:04 +0000"}],"stdout":[{"output":"Permissions Size User Date Modified Name","at":"2020-05-24 23:47:04 +0000"},{"output":"drwxr-xr-x     - jah  23 May  0:53  7AECB408-B6F3-4E22-ACD9-243D21358609","at":"2020-05-24 23:47:04 +0000"}]}
+```
+
 ## Security Issues
 
 Please email [J. Austin Hughey](https://github.com/jahio) at minion@jah.io.

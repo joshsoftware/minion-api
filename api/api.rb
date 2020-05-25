@@ -27,6 +27,12 @@ module Minion
           c.to_h
         end
       end
+      desc 'Creates a command to be executed by the minion agent'
+      params {}
+      post do
+        cmd = JSON.parse(request.body.read)
+        Command.create(cmd).to_h
+      end
     end
   end
 end
