@@ -17,6 +17,16 @@ module Minion
         end
         return commands
       end
+      desc 'Returns a the command specified by id (a uuid)'
+      params do
+        requires :id, type: String, desc: 'Command UUID (string)'
+      end
+      route_param :id do
+        get do
+          c = Command.find(params[:id])
+          c.to_h
+        end
+      end
     end
   end
 end
