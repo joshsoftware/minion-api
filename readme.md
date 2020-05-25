@@ -11,6 +11,10 @@ for additional services, like the MINION Agent Service (aka "MAS").
 because the main thread might be running Puma, but the other thread is running
 the real-time service that the agent and websocket talk to.
 
+### To Start The API _and_ Service:
+
+The API and service are started together. Just run `bundle exec puma`. Done.
+
 ### Console
 
 You can use **`rake console`** to interact with the database much like a
@@ -62,6 +66,32 @@ Content-Length: 449
 
 {"id":"c72cca08-6163-433e-929a-730f2e92e5e8","server_id":"abc123","user_id":"abcdef","command":"ls /tmp","stderr":[{"output":"\"/somethingthatdoesntexist\": No such file or directory (os error 2)","at":"2020-05-24 23:47:04 +0000"}],"stdout":[{"output":"Permissions Size User Date Modified Name","at":"2020-05-24 23:47:04 +0000"},{"output":"drwxr-xr-x     - jah  23 May  0:53  7AECB408-B6F3-4E22-ACD9-243D21358609","at":"2020-05-24 23:47:04 +0000"}]}
 ```
+
+## Real-time Service Command Updates
+
+When doing an update to a command (appending a line of text from STDERR, STDOUT)
+the agent needs to report in the following format:
+
+```json
+{
+  "action":"update"
+  "command_id":"some id here",
+  "device":"stdout",
+  "output":"whatever line just happened",
+  "at":"Whatever the time was the line was output"
+}
+```
+
+The service will respond with the following **on success**:
+
+```json
+{
+  "status":"ok"
+}
+```
+
+And on failure, it either _won't_ respond (maybe it's down? can't be reached?)
+or an error structure as defined by RethinkDB.
 
 ## Security Issues
 
