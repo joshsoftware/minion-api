@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+      function init() {
+        function debug(string) {
+          var element = document.getElementById("debug");
+          var p = document.createElement("p");
+          p.appendChild(document.createTextNode(string));
+          element.appendChild(p);
+        }
+
+        var Socket = "MozWebSocket" in window ? MozWebSocket : WebSocket;
+        var ws = new Socket("ws://localhost:9000/command");
+        ws.onmessage = function(evt) { debug("Received: " + evt.data); };
+        ws.onclose = function(event) {
+          debug("Closed - code: " + event.code + ", reason: " + event.reason + ", wasClean: " + event.wasClean);
+        };
+        ws.onopen = function() {
+          debug("connected...");
+          ws.send('{ "action": "new_commands","server_id": "abc123" }');
+        };
+      };
+    </script>
+  </head>
+  <body onload="init();">
+    <div id="debug"></div>
+  </body>
+</html>
+
+<!-- In another websocket client, paste this to get the above to update: -->
+<!-- {"action":"update_command","command_id":"c541ba89-9df0-469f-8d27-a5c2ae9d255b","server_id":"abc123","stdout": [{"output":"asdf hello world", "at":"2020-05-24 21:24:39 +0000"}],"stderr": [{"output": "oh noes stderr!", "at":"2020-05-24 21:24:39 +0000" }]} -->
