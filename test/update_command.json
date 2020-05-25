@@ -1,0 +1,11 @@
+{
+  "action":"update",
+  "command_id":"abc-123-xyz-456-def",
+  "server_id":"abc123",
+  "stdout": [
+    { "output":"asdf hello world", "at":"2020-05-24 21:24:39 +0000" }
+  ],
+  "stderr": [
+    { "output": "oh noes stderr!", "at":"2020-05-24 21:24:39 +0000" }
+  ]
+}
