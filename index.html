@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+
+<body class="font-family: mono;">
+
+  <script>
+    var ws = new WebSocket('ws://localhost:9000/command');
+
+    // Listen for messages
+    ws.addEventListener('message', function (event) {
+      body.innerHTML = event.data;
+      console.log('Message from server ', event.data);
+    });
+
+    ws.send('{"action":"output_command", "command_id":"c541ba89-9df0-469f-8d27-a5c2ae9d255b"}')
+  </script>
+</body>
+
+</html>

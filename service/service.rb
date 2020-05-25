@@ -35,12 +35,7 @@ end
       EM.run {
         EM::WebSocket.start(
           :host => "0.0.0.0",
-          :port => 9000,
-          :secure => true,
-          :tls_options => {
-            :private_key_file => File.join(Dir.pwd, 'service', 'ssl', 'server.key'),
-            :cert_chain_file => File.join(Dir.pwd, 'service', 'ssl', 'server.crt')
-          }
+          :port => 9000
         ) do |ws|
           ws.onopen { |handshake|
             puts "WebSocket connection opened from #{ws.remote_ip}"
@@ -108,6 +103,7 @@ end
 
             callback = proc { |result|
               # TODO: Send result to websocket client (result should be hash)
+binding.pry
               ws.send "Result: #{result.to_json}"
             }
 
@@ -115,6 +111,7 @@ end
             # something, try to reconnect. Otherwise log the error and
             # move on.
             errback = proc { |err|
+binding.pry
               puts err
             }
 
