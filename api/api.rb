@@ -1,7 +1,22 @@
-require 'sinatra'
-require 'pp'
+# frozen_string_literal: true
 
-get '/' do
-  @now = Time.now.strftime("I was first rendered on %D at %I:%M:%S%p %Z (UTC %z)")
-  pp @now
+# Minion
+module Minion
+  # API
+  class API < Grape::API
+    format :json
+
+    resource :commands do
+      desc 'Returns all the commands issued (big query)'
+      get :all do
+        commands = []
+        $pool.with do |conn|
+          RethinkDB::RQL.new.table("commands").run(conn).each do |cmd|
+            commands << cmd
+          end
+        end
+        return commands
+      end
+    end
+  end
 end

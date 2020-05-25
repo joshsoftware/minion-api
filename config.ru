@@ -3,8 +3,7 @@
 require File.join('.', 'init')
 
 Thread.new {
-  Sinatra::Application.set :port => 9000
-  run Sinatra::Application
+  run Minion::API
 }.join
 
 Thread.new {

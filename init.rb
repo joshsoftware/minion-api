@@ -9,6 +9,7 @@ require 'connection_pool'
 require 'dry-struct'
 require 'em-websocket'
 require 'fileutils'
+require 'grape'
 require 'json'
 require 'jwt'
 require 'pry' # yes, even in prod, for the console feature
