@@ -39,6 +39,7 @@ end
         ) do |ws|
           ws.onopen { |handshake|
             puts "WebSocket connection opened from #{ws.remote_ip}"
+            ws.send("{\"status\":\"connected\", \"your_ip\":\"#{ws.remote_ip}\"}")
           }
 
           ws.onclose { puts "WebSocket Connection closed for #{ws.remote_ip}" }
