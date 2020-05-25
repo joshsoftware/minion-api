@@ -55,9 +55,27 @@ end
             # to add that to the database...which will trigger an update to
             # the first situation.
             puts "Recieved message from #{ws.remote_ip}: #{msg}"
+# binding.pry
             message = JSON.parse(msg).deep_symbolize_keys
             case message[:action]
-            when 'subscribe'
+            when 'output_command'
+              operation = proc {
+                EM.run {
+                  $pool.with do |conn|
+
+                    RethinkDB::RQL.new.table('commands').get(message[:command_id]).changes.run(conn).each do |cmd|
+
+                      # Here we send more than just the most recent item just
+                      # in case for some reason the client didn't see the other
+                      # output lines.
+# binding.pry
+                      msg = { stdout: cmd['new_val']['stdout'], stderr: cmd['new_val']['stderr'] }
+                      ws.send msg.to_json
+                    end
+                  end
+                }
+              }
+            when 'new_commands'
               # TODO: Authenticate the request and verify identity so you can't
               # subscribe to changes for somebody else's server.
               # Client wants to be notified when there are new commands
@@ -74,14 +92,14 @@ end
                   }
                 end
               }
-            when 'update'
+            when 'update_command'
               # Client is adding new output to a command. Look for the
               # command by ID and update it accordingly (command.add_line)
               operation = proc {
                 command = Command.find(message[:command_id])
                 # TODO: Make sure the command's server ID matches this server's id
                 [:stdout, :stderr].each do |dev|
-                  command.add_line(message[dev])
+                  command.add_line(dev, message[dev])
                 end
               }
             else

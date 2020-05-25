@@ -11,6 +11,18 @@ for additional services, like the MINION Agent Service (aka "MAS").
 because the main thread might be running Puma, but the other thread is running
 the real-time service that the agent and websocket talk to.
 
+**If you see a crash on MacOS with this:**
+
+```
+libc++abi.dylib: Pure virtual function called!
+[1]    23292 abort      bundle exec puma
+```
+
+Chances are something inside an EventMachine block had a Ruby error in it. This
+may look like an error with MacOS libraries when multi-threading, but it's more
+likely a bug in your code. Poke around with `binding.pry` to find out what's
+going on.
+
 ### To Start The API _and_ Service:
 
 The API and service are started together. Just run `bundle exec puma`. Done.

@@ -36,6 +36,7 @@ module Minion
 
       def find(id)
         $pool.with do |conn|
+          # TODO: What if this returns nil? deep_symbolize_keys won't run
           hsh = r.table(self::TABLE).get(id).run(conn).deep_symbolize_keys
           return new(hsh)
         end

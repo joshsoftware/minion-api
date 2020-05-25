@@ -19,6 +19,29 @@ class Command < Dry::Struct
     attribute :output,  Types::String.optional
     attribute :at,      Types::DateTime.optional
   end
+
+  def add_line(device, output)
+    # device will be :stdout or :stderr
+    # output will be [{output:"some output line", at: "some timestamp"}]
+    # Start by finding the object in the database.
+    # cmd = find(id) # TODO indefficient as hell, it's found when we're calling this method in service.rb
+
+    case device
+    when :stdout
+      self.stdout << output ; self.stdout.flatten!
+    when :stderr
+      self.stderr << output ; self.stderr.flatten!
+    else
+      # throw error?
+    end
+
+    # Run a query to make this happen
+    EM.run {
+      $pool.with do |conn|
+        RethinkDB::RQL.new.table("commands").get(self.id).update(self.to_h).run(conn)
+      end
+    }
+  end
 end
 
 =begin
