@@ -5,9 +5,18 @@
 
 require 'active_support'
 require "active_support/core_ext/hash/indifferent_access"
+require "active_support/time_with_zone"
+require "active_support/core_ext/object/blank"
+require "active_support/core_ext/object/json"
+require "active_support/core_ext/time/acts_like"
+require "active_support/core_ext/time/calculations"
+require "active_support/core_ext/time/compatibility"
+require "active_support/core_ext/time/conversions"
+require "active_support/core_ext/time/zones"
 require 'connection_pool'
 require 'dry-struct'
 require 'em-websocket'
+require 'eventmachine'
 require 'fileutils'
 require 'grape'
 require 'json'
