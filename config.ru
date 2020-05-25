@@ -8,4 +8,4 @@ Thread.new {
 
 Thread.new {
   Minion::Service.start
-}
+}.join
