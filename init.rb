@@ -23,7 +23,7 @@ unless ENV['RETHINKDB_HOST'] && ENV['RETHINKDB_HOST'] != ''
   ENV['RETHINKDB_HOST'] = 'localhost' # dev/test fallback
 end
 
-ENV['RUNTIME_ENV'] ||= (ENV['RACK_ENV'] || ENV['RAILS_ENV'] || 'development')
+ENV['RUNTIME_ENV'] = (ENV['RACK_ENV'] || ENV['RAILS_ENV'] || 'development')
 
 # Grab all the stuff under the following directories:
 DIRS = ['lib', 'api', 'service'].freeze
@@ -36,6 +36,6 @@ APPLICATION_ROOT = File.expand_path(File.dirname(__FILE__))
 
 # Create a connection pool for RethinkDB so multiple threads can access
 # that pool rather easily.
-$pool ||= ConnectionPool.new(size: 10, timeout: 5) {
+$pool = ConnectionPool.new(size: 10, timeout: 5) {
   RethinkDB::RQL.new.connect(host: ENV['RETHINKDB_HOST'], port: 28015, db:'minion')
 }

@@ -94,11 +94,12 @@ end
               # Client is adding new output to a command. Look for the
               # command by ID and update it accordingly (command.add_line)
               operation = proc {
-                command = Command.find(message[:command_id])
+                command = Command.find(message[:id])
                 # TODO: Make sure the command's server ID matches this server's id
                 [:stdout, :stderr].each do |dev|
                   command.add_line(dev, message[dev])
                 end
+                ws.send({action: "updated_command", id: message[:id]}.to_json)
               }
             else
               operation = {}

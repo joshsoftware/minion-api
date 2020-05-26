@@ -19,6 +19,7 @@
         ws.onopen = function() {
           debug("connected...");
           ws.send('{ "action": "new_commands","server_id": "abc123" }');
+          ws.send('{ "action":"output_command", "command_id":"19ebf1d6-ad55-4aa3-bbc9-709c1f19addf"}')
         };
       };
     </script>
@@ -29,4 +30,4 @@
 </html>
 
 <!-- In another websocket client, paste this to get the above to update: -->
-<!-- {"action":"update_command","command_id":"c541ba89-9df0-469f-8d27-a5c2ae9d255b","server_id":"abc123","stdout": [{"output":"asdf hello world", "at":"2020-05-24 21:24:39 +0000"}],"stderr": [{"output": "oh noes stderr!", "at":"2020-05-24 21:24:39 +0000" }]} -->
+<!-- {"action":"update_command","command_id":"c541ba89-9df0-469f-8d27-a5c2ae9d255b" },"server_id":"abc123","stdout": [{"output":"asdf hello world", "at":"2020-05-24 21:24:39 +0000"}],"stderr": [{"output": "oh noes stderr!", "at":"2020-05-24 21:24:39 +0000" }]} -->
