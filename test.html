@@ -47,13 +47,16 @@
 
         var Socket = "MozWebSocket" in window ? MozWebSocket : WebSocket;
         var ws = new Socket("ws://localhost:9000/command");
-        ws.onmessage = function(evt) { debug("Received: " + evt.data); };
+        ws.onmessage = function(evt) {
+           debug("Received: " + evt.data);
+        };
+
         ws.onclose = function(event) {
           debug("Closed - code: " + event.code + ", reason: " + event.reason + ", wasClean: " + event.wasClean);
         };
+
         ws.onopen = function() {
           debug("connected...");
-          ws.send('{ "action": "new_commands","server_id": "abc123" }');
           ws.send('{ "action":"output_command", "command_id":"' + id + '"}')
         };
       };
