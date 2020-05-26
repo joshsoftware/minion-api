@@ -5,6 +5,11 @@ PostgreSQL database for most things, but also communicates with LogStash for
 whole log retrieval, and ElasticSearch for log search. It also handles authentication
 for additional services, like the MINION Agent Service (aka "MAS").
 
+## There's a V1 and a V2
+
+V1 of the API is the original, semi-working API and service code used for demo purposes.
+Version 2 is a rewrite based on lessons learned in the first version.
+
 ## Helpful Notes
 
 **To exit the server program**, you'll need to hit CTRL+C _twice_. This is
