@@ -21,7 +21,8 @@ class Command < Dry::Struct
     attribute :at,      Types::Integer.default(Time.now.to_i)
   end
   attribute :created_at, Types::Integer.default(Time.now.to_i)
-  attribute :started_at, Types::Integer.default(Time.now.to_i)
+  attribute :started_at, Types::Integer.optional
+  attribute :completed_at, Types::Integer.optional
 
   def add_line(device, output)
     # device will be :stdout or :stderr
