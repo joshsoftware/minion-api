@@ -50,6 +50,8 @@ end
             # id. Otherwise, it's going to be an add line command, so we need
             # to add that to the database...which will trigger an update to
             # the first situation.
+            #
+            # This is for the DASHBOARD to subscribe for new command output
             puts "Recieved message from #{ws.remote_ip}: #{msg}"
 # binding.pry
             message = JSON.parse(msg).deep_symbolize_keys
@@ -84,7 +86,7 @@ end
 
                     RethinkDB::RQL.new.table('commands').filter do |cmd|
                       cmd['server_id'].eq(message[:server_id])
-                    end.changes.run(conn).each { |cmd| ws.send cmd.to_json }
+                    end.changes.run(conn).each { |cmd| ws.send ({action: "new_commands"}.merge(cmd)).to_json }
                   }
                 end
               }

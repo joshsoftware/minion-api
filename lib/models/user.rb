@@ -2,6 +2,7 @@
 
 # User - represents a user of the platform
 class User < Dry::Struct
+  transform_keys(&:to_sym)
   # Declare the table we'll use and methods only the app can set
   TABLE = 'users'
   PROTECTED_ATTRIBUTES = %i[id created_at].freeze
@@ -13,7 +14,7 @@ class User < Dry::Struct
   attribute :id, Types::String
   attribute :name, Types::String.optional
   attribute :email, Types::String
-  attribute :created_at, Types::DateTime
+  attribute :created_at, Types::Integer.default(Time.now.to_i)
 
   def self.find_by_email(email)
     $pool.with do |conn|

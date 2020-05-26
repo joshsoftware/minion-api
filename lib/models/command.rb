@@ -3,9 +3,10 @@
 # Command - class representing a command executed on a user's server
 class Command < Dry::Struct
   include Minion::Model
+  transform_keys(&:to_sym)
 
   TABLE = "commands"
-  PROTECTED_ATTRIBUTES = [:id]
+  PROTECTED_ATTRIBUTES = [:id, :created_at]
 
   attribute :id,        Types::String.optional
   attribute :server_id, Types::String
@@ -13,12 +14,14 @@ class Command < Dry::Struct
   attribute :command,   Types::String
   attribute :stderr,    Types::Array do
     attribute :output,  Types::String.optional
-    attribute :at,      Types::DateTime.optional
+    attribute :at,      Types::Integer.default(Time.now.to_i)
   end
   attribute :stdout,    Types::Array do
     attribute :output,  Types::String.optional
-    attribute :at,      Types::DateTime.optional
+    attribute :at,      Types::Integer.default(Time.now.to_i)
   end
+  attribute :created_at, Types::Integer.default(Time.now.to_i)
+  attribute :started_at, Types::Integer.default(Time.now.to_i)
 
   def add_line(device, output)
     # device will be :stdout or :stderr

@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-gem 'activesupport'
 gem 'connection_pool'
 gem 'dry-monads'
 gem 'dry-struct'

@@ -8,7 +8,7 @@ module Minion
     # To use data types provided by Dry::Types
     module Types
       include Dry.Types(default: :nominal)
-      Dry::Types.load_extensions(:maybe)
+      # Dry::Types.load_extensions(:maybe)
     end
 
     # Automatically include Instance and Class methods when mixed-in
@@ -43,14 +43,14 @@ module Minion
       end
 
       def create(hsh)
-        hsh = hsh.with_indifferent_access.symbolize_keys
+        hsh = hsh.with_indifferent_access.deep_symbolize_keys
         # First, look for protected keys and remove their values
         self::PROTECTED_ATTRIBUTES.each do |prot|
           hsh.delete(prot)
         end
 
         # Set the created_at attribute to now
-        hsh[:created_at] = Time.now.utc
+        hsh[:created_at] = Time.now.to_i
         $pool.with do |conn|
           id = r.table(self::TABLE).insert(hsh).run(conn)['generated_keys'][0]
           return find(id)

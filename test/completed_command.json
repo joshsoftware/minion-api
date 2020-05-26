@@ -1,0 +1,1 @@
+{"id": "351f96a5-e7fb-406d-a881-9314e4f6980e","server_id": "abc123","user_id": "abcdef","command": "ls /tmp","started_at": 1590457506,"completed_at": 1590457506,"created_at": 1590457506,"stdout": [{"output": "Permissions Size User Date Modified Name", "at":1590457506},{"output": "srwxrwxrwx     0 jah  24 May 17:12  mysql.sock", "at":1590457506}], "stderr":[] }
