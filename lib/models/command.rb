@@ -40,11 +40,10 @@ class Command < Dry::Struct
     end
 
     # Run a query to make this happen
-    EM.run {
-      $pool.with do |conn|
-        RethinkDB::RQL.new.table("commands").get(self.id).update(self.to_h).run(conn)
-      end
-    }
+    $pool.with do |conn|
+      RethinkDB::RQL.new.table("commands").get(self.id).update(self.to_h).run(conn)
+    end
+
   end
 end
 
