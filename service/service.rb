@@ -1,37 +1,6 @@
 module Minion
   module Service
     def self.start
-=begin
-    # module TLSHandler
-    #   def post_init
-    #     start_tls(:private_key_file => '/tmp/server.key', :cert_chain_file => '/tmp/server.crt', :verify_peer => false)
-    #   end
-    # end
-
-    App = lambda do |env|
-      if Faye::WebSocket.websocket?(env)
-        ws = Faye::WebSocket.new(env)
-
-        ws.on :message do |event|
-          ws.send(event.data)
-        end
-
-        ws.on :close do |event|
-          p [:close, event.code, event.reason]
-          ws = nil
-        end
-
-        # Return async Rack response
-        ws.rack_response
-
-      else
-        # Normal HTTP request
-        [200, { 'Content-Type' => 'text/plain' }, ['Hello']]
-      end
-    end
-  end
-end
-=end
       EM.run {
         EM::WebSocket.start(
           :host => "0.0.0.0",
@@ -53,7 +22,6 @@ end
             #
             # This is for the DASHBOARD to subscribe for new command output
             puts "Recieved message from #{ws.remote_ip}: #{msg}"
-# binding.pry
             message = JSON.parse(msg).deep_symbolize_keys
             case message[:action]
             when 'output_command'
@@ -66,7 +34,6 @@ end
                       # Here we send more than just the most recent item just
                       # in case for some reason the client didn't see the other
                       # output lines.
-# binding.pry
                       msg = { stdout: cmd['new_val']['stdout'], stderr: cmd['new_val']['stderr'] }
                       ws.send msg.to_json
                     end
@@ -80,10 +47,7 @@ end
               # to be executed.
               operation = proc {
                 $pool.with do |conn|
-# binding.pry
                   EM.run {
-                  # RethinkDB::RQL.new.table('commands').changes.run(conn).each { |cmd| puts cmd; ws.send cmd.to_json }
-
                     RethinkDB::RQL.new.table('commands').filter do |cmd|
                       cmd['server_id'].eq(message[:server_id])
                     end.changes.run(conn).each { |cmd| ws.send ({action: "new_commands"}.merge(cmd)).to_json }
@@ -114,7 +78,6 @@ end
             # something, try to reconnect. Otherwise log the error and
             # move on.
             errback = proc { |err|
-binding.pry
               puts err
             }
 

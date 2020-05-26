@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
       function init() {
         function debug(string) {
@@ -9,6 +10,40 @@
           p.appendChild(document.createTextNode(string));
           element.appendChild(p);
         }
+
+        // Start with creating a command and retrieving the command ID.
+        var server_id = 'abc123'
+
+        // Be sure you specify ALL of these when sending a post, otherwise
+        // the request will fail somewhat silently.
+        var command = {
+          server_id: server_id,
+          command: '/tmp/infinity',
+          user_id: 'abcdef',
+          stderr: [],
+          stdout: [],
+          created_at: null,
+          started_at: null,
+          completed_at: null
+        }
+
+        var id;
+
+        axios.post('http://localhost:9292/commands', command,
+        {
+          headers: [
+            {'Content-Type':'application/json'}
+            // {'Access-Control-Request-Method': 'POST'}
+            // {'Access-Control-Request-Header': ''}
+          ]
+        })
+        .then(function (response) {
+          console.log(response);
+          id = response.data.id;
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
 
         var Socket = "MozWebSocket" in window ? MozWebSocket : WebSocket;
         var ws = new Socket("ws://localhost:9000/command");
@@ -19,7 +54,7 @@
         ws.onopen = function() {
           debug("connected...");
           ws.send('{ "action": "new_commands","server_id": "abc123" }');
-          ws.send('{ "action":"output_command", "command_id":"19ebf1d6-ad55-4aa3-bbc9-709c1f19addf"}')
+          ws.send('{ "action":"output_command", "command_id":"' + id + '"}')
         };
       };
     </script>
