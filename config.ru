@@ -3,9 +3,7 @@
 require File.join('.', 'init')
 
 Thread.new {
-  run Minion::API
-}.join
-
-Thread.new {
   Minion::Service.start
-}.join
+}
+
+run Minion::API

@@ -12,6 +12,8 @@ require 'grape'
 require 'json'
 require 'jwt'
 require 'pry' # yes, even in prod, for the console feature
+require 'puma'
+require 'rack'
 require 'rethinkdb'
 
 # Check for necessary database connection variables and exit if not present

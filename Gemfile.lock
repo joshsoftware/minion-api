@@ -73,17 +73,9 @@ GEM
     rack (2.2.2)
     rack-accept (0.4.5)
       rack (>= 0.4)
-    rack-protection (2.0.8.1)
-      rack
     rethinkdb (2.4.0.0)
     ruby2_keywords (0.0.2)
-    sinatra (2.0.8.1)
-      mustermann (~> 1.0)
-      rack (~> 2.0)
-      rack-protection (= 2.0.8.1)
-      tilt (~> 2.0)
     thread_safe (0.3.6)
-    tilt (2.0.10)
     tzinfo (1.2.7)
       thread_safe (~> 0.1)
     zeitwerk (2.3.0)
@@ -92,7 +84,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activesupport
   connection_pool
   dry-monads
   dry-struct
@@ -101,8 +92,8 @@ DEPENDENCIES
   jwt
   pry
   puma
+  rack
   rethinkdb
-  sinatra
 
 BUNDLED WITH
    2.1.4

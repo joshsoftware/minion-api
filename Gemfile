@@ -7,8 +7,8 @@ gem 'em-websocket'
 gem 'grape'
 gem 'jwt'
 gem 'puma'
+gem 'rack'
 gem 'rethinkdb'
-gem 'sinatra'
 
 group :development, :test do
   gem 'pry'
