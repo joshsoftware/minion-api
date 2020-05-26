@@ -50,6 +50,7 @@ module Minion
                   EM.run {
                     RethinkDB::RQL.new.table('commands').filter do |cmd|
                       cmd['server_id'].eq(message[:server_id])
+                      # & cmd['started_at'].eq(nil)
                     end.changes.run(conn).each { |cmd| ws.send ({action: "new_commands"}.merge(cmd)).to_json }
                   }
                 end
@@ -58,12 +59,35 @@ module Minion
               # Client is adding new output to a command. Look for the
               # command by ID and update it accordingly (command.add_line)
               operation = proc {
-                command = Command.find(message[:id])
+                c = Command.find(message[:id])
                 # TODO: Make sure the command's server ID matches this server's id
-                [:stdout, :stderr].each do |dev|
-                  command.add_line(dev, message[dev])
+                # [:stdout, :stderr].each do |dev|
+                #   command.add_line(dev, message[dev])
+                # end
+
+                $pool.with do |conn|
+                  RethinkDB::RQL.new.db('minion').table('commands').get(c.id).update { |cmd|
+                    { started_at: message[:started_at], completed_at: message[:completed_at] }
+                  }.run(conn)
                 end
-                ws.send({action: "updated_command", id: message[:id]}.to_json)
+
+                # Bring up the command again (reload) and send it back with an action
+                c = Command.find(message[:id])
+binding.pry
+                ws.send ({action: 'new_commands'}.merge(c.to_h)).to_json
+
+                # Update the started and/or completed at actions as well
+                # $pool.with do |conn|
+                #   update = RethinkDB::RQL.new.db('minion').table('commands').get(command.id).update { |x|
+                #     {
+                #       started_at: message[:started_at],
+                #       completed_at: message[:completed_at],
+                #       stdout: message[:stdout],
+                #       stderr: message[:stderr]
+                #     }
+                #   }.run(conn)
+                #   ws.send({action: "updated_command", id: message[:id]}.merge(update).to_json)
+                # end
               }
             else
               operation = {}
