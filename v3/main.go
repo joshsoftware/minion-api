@@ -5,7 +5,14 @@ import (
 	"encoding/json"
 	"log"
 	"net"
+
+	"gopkg.in/rethinkdb/rethinkdb-go.v6"
+	r "gopkg.in/rethinkdb/rethinkdb-go.v6"
 )
+
+type Command struct {
+	CommandID string `json:"command_id" gorethink:"command_id"`
+}
 
 func main() {
 	log.SetFlags(0)
@@ -39,12 +46,16 @@ func handleConn(c net.Conn) {
 		}
 		switch payload["action"] {
 		case "subscribe_command":
+			// {"action":"subscribe_command", "command_id":"914501cb-3071-4598-a0ab-6c876c949b1d", "server_id":"some-uuid"}
 			// Used for keeping a persistent connection open to ask for new
 			// commands to be run; agent will form a separate connection to
 			// stream up the responses of those commands.
 			// Necessary fields: command_id, server_id
 			// TODO: Add some form of security key to verify that user can view
 			// that particular command
+			cid := payload["command_id"].(string)
+			sid := payload["server_id"].(string)
+			subscribeCommand(c, cid, sid)
 		case "stream_command_response":
 			// When streaming back stdout and stderr from an issued command
 			// Need: command_id, stderr_line, stdout_line, at
@@ -70,4 +81,27 @@ func handleConn(c net.Conn) {
 		}
 	}
 	return
+}
+
+func subscribeCommand(c net.Conn, commandID string, serverID string) {
+	// TODO: Find some way to securely validate the server id is the one
+	// corresponding to the command id.
+	rdbOpts := rethinkdb.ConnectOpts{Database: "minion", Address: "localhost:28015"}
+	rdb, err := r.Connect(rdbOpts)
+	if err != nil {
+		log.Println("subscribeCommand: ", err)
+	}
+	cursor, err := r.DB("minion").Table("commands").Get(commandID).Run(rdb)
+	if err != nil {
+		log.Println("subscribeCommand: ", err)
+	}
+	defer cursor.Close()
+	var cmd interface{}
+	err = cursor.One(&cmd)
+	if err != nil {
+		log.Println("subscribeCommand:", err)
+	}
+
+	cmdJSON, _ := json.Marshal(cmd)
+	log.Println(string(cmdJSON))
 }
