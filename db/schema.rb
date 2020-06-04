@@ -10,10 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_04_135612) do
+ActiveRecord::Schema.define(version: 2020_06_04_151100) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
+
+  create_table "orgs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.string "website"
+    t.uuid "admin_id"
+    t.index ["admin_id"], name: "index_orgs_on_admin_id"
+  end
+
+  create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "phone"
+    t.string "password_digest"
+    t.bigint "org_id"
+    t.index ["email"], name: "index_users_on_email"
+    t.index ["org_id"], name: "index_users_on_org_id"
+  end
 
 end

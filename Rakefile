@@ -33,13 +33,6 @@ namespace :db do
     puts 'Database migrated.'
   end
 
-  desc 'Resets the database'
-  desc :reset do
-    Rake::Task['db:drop'].invoke
-    Rake::Task['db:create'].invoke
-    Rake::Task['db:migrate'].invoke
-  end
-
   desc 'Create db/schema.rb file that is portable against database supported by ActiveRecord'
   task :schema do
     require 'active_record/schema_dumper'
@@ -48,6 +41,14 @@ namespace :db do
       ActiveRecord::SchemaDumper.dump(ActiveRecord::Base.connection, f)
     end
   end
+
+  desc 'Resets the database'
+  task :reset do
+    Rake::Task['db:drop'].invoke
+    Rake::Task['db:create'].invoke
+    Rake::Task['db:migrate'].invoke
+  end
+
 end
 
 namespace :g do # short for "generate"

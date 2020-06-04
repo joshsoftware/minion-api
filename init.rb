@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
+require('active_model')
 require('active_record')
+require('bcrypt')
 require('grape')
 require('pry') # for the console
 
 # Grab all the stuff under the following directories:
-DIRS = %w[lib api].freeze
+DIRS = %w[lib api models].freeze
 
 DIRS.each do |dir|
   Dir.glob(File.join(FileUtils.pwd, dir, '**', '*.rb')).sort.each { |f| require f }
