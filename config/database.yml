@@ -1,0 +1,26 @@
+# This file should be overwritten at deploy time with the deploy tool of choice
+
+development:
+    host: 'localhost'
+    adapter: 'postgresql'
+    encoding: 'utf-8'
+    database: 'minion_api_development'
+staging:
+    host: 'localhost'
+    adapter: 'postgresql'
+    encoding: 'utf-8'
+    database: 'minion_api_staging'
+    username: 'dev'
+    password: 'dev'
+test:
+    host: 'localhost'
+    adapter: 'postgresql'
+    encoding: 'utf-8'
+    database: 'minion_api_test'
+production:
+    host: 'localhost'
+    adapter: 'postgresql'
+    encoding: 'utf-8'
+    database: 'minion_api'
+    username: 'dev'
+    password: 'dev'
