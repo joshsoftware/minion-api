@@ -2,5 +2,8 @@
 # frozen_string_literal: true
 
 require_relative(File.join('.', 'init'))
-use ActiveRecord::ConnectionAdapters::ConnectionManagement
+
+use ActionDispatch::Executor, ActiveSupport::Executor
+ActiveRecord::QueryCache.install_executor_hooks
+
 run Minion::API

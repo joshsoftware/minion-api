@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
-require('active_model')
-require('active_record')
-require('bcrypt')
-require('grape')
-require('pry') # for the console
+require 'active_model'
+require 'active_record'
+require 'action_dispatch/middleware/executor'
+require 'bcrypt'
+require 'grape'
+require 'pry'
 
 # Grab all the stuff under the following directories:
 DIRS = %w[lib api models].freeze
