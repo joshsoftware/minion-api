@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 2020_06_04_151100) do
     t.string "phone"
     t.string "password_digest"
     t.bigint "org_id"
-    t.index ["email"], name: "index_users_on_email"
+    t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["org_id"], name: "index_users_on_org_id"
   end
 

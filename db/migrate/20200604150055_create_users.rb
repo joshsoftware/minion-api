@@ -11,7 +11,7 @@ class CreateUsers < ActiveRecord::Migration[6.0]
       t.references :org
     end
 
-    add_index :users, :email
+    add_index :users, :email, unique: true
   end
 
   def self.down
