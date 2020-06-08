@@ -10,18 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_04_151100) do
+ActiveRecord::Schema.define(version: 2020_06_08_221843) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
 
-  create_table "orgs", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "organizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "website"
     t.uuid "admin_id"
-    t.index ["admin_id"], name: "index_orgs_on_admin_id"
+    t.index ["admin_id"], name: "index_organizations_on_admin_id"
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -29,9 +29,11 @@ ActiveRecord::Schema.define(version: 2020_06_04_151100) do
     t.string "email"
     t.string "phone"
     t.string "password_digest"
-    t.bigint "org_id"
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["org_id"], name: "index_users_on_org_id"
+    t.bigint "organization_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_users_on_email"
+    t.index ["organization_id"], name: "index_users_on_organization_id"
   end
 
 end

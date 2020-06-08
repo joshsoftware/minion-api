@@ -1,9 +1,5 @@
-#!/usr/bin/env ruby
-# frozen_string_literal: true
+# This file is used by Rack-based servers to start the application.
 
-require_relative(File.join('.', 'init'))
+require_relative 'config/environment'
 
-use ActionDispatch::Executor, ActiveSupport::Executor
-ActiveRecord::QueryCache.install_executor_hooks
-
-run Minion::API
+run Rails.application
