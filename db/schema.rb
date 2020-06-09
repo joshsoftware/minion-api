@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_08_221843) do
+ActiveRecord::Schema.define(version: 2020_06_08_224554) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "hstore"
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
@@ -22,6 +23,18 @@ ActiveRecord::Schema.define(version: 2020_06_08_221843) do
     t.string "website"
     t.uuid "admin_id"
     t.index ["admin_id"], name: "index_organizations_on_admin_id"
+  end
+
+  create_table "servers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.bigint "organization_id"
+    t.hstore "config"
+    t.string "name"
+    t.datetime "last_checkin_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.uuid "created_by"
+    t.index ["created_by"], name: "index_servers_on_created_by"
+    t.index ["organization_id"], name: "index_servers_on_organization_id"
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
