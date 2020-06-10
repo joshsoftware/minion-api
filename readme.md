@@ -10,7 +10,7 @@ I've missed it and it seems like it's something that's needed, use your best
 judgement and add it. That goes for all of this - use your best judgement and
 if anything's unclear, **feel free to get in touch with me!** Questions and
 comments are welcome, and I'd rather hear from you if you have concerns than
-see it implemented incorrectly, so get in touch if you have questions!
+see it implemented incorrectly, so when in doubt, get in touch!
 
 - [J. Austin Hughey](mailto:j.austin.hughey@joshsoftware.com)
 
@@ -207,7 +207,6 @@ following information about that server:
 {
   "server_id":"<the uuid of the server>",
   "organization_id":"<the server's organization's uuid>",
-  "last_checkin_at":"the last time the server 'ping'ed the API, ex 2020-06-10 02:00:32 +0000",
   "name":"Dancing Catfish"
 }
 ```
@@ -222,10 +221,6 @@ plot a graph.
 
 **TODO** - We're still working on the details on how this should be implemented.
 Stay tuned.
-
-#### POST /servers/<UUID>/ping
-
-**TODO** - Still working on how this might be implemented as well.
 
 ### Streaming / WebSockets
 
