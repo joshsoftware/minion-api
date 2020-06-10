@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(version: 2020_06_08_224554) do
   create_table "organizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "website"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.uuid "admin_id"
     t.index ["admin_id"], name: "index_organizations_on_admin_id"
   end

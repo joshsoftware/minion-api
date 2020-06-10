@@ -3,6 +3,7 @@ class CreateOrganizations < ActiveRecord::Migration[6.0]
     create_table :organizations, id: :uuid do |t|
       t.string :name
       t.string :website
+      t.timestamps
     end
   end
 end
