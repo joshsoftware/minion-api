@@ -8,7 +8,9 @@ expected output.
 I'm trying to put down "Authentication Required" where it's necessary, but if
 I've missed it and it seems like it's something that's needed, use your best
 judgement and add it. That goes for all of this - use your best judgement and
-if anything's unclear, **feel free to get in touch with me!**
+if anything's unclear, **feel free to get in touch with me!** Questions and
+comments are welcome, and I'd rather hear from you if you have concerns than
+see it implemented incorrectly, so get in touch if you have questions!
 
 - [J. Austin Hughey](mailto:j.austin.hughey@joshsoftware.com)
 
@@ -156,6 +158,11 @@ by registration date (e.g. `created_at`) that belong to the user's organization.
 
 #### POST /servers
 
+(Authentication not required here since we want to allow easy server
+registration. The user will be responsible for specifying their organization
+id in a config file that the minion agent will read, and that agent will be
+responsible for issuing this HTTP request.)
+
 Server registration as described above. A Minion agent will register a server
 by performing a POST request with a body similar to the following example:
 
@@ -182,3 +189,99 @@ with something like:
   }
 }
 ```
+
+#### GET /servers/<UUID>
+
+**AUTHENTICATION REQUIRED**
+
+Given a UUID, and given that the user making the request is of the same
+organization as the server that UUID represents, retrieve and render the
+following information about that server:
+
+```json
+{
+  "server_id":"<the uuid of the server>",
+  "organization_id":"<the server's organization's uuid>",
+  "last_checkin_at":"the last time the server 'ping'ed the API, ex 2020-06-10 02:00:32 +0000",
+  "name":"Dancing Catfish"
+}
+```
+
+#### GET /servers/<UUID>/metrics
+
+**AUTHENTICATION REQUIRED**
+
+This path should get the CPU and memory usage statistics from the database for
+that server and return them in a format that can be used by the front-end to
+plot a graph.
+
+**TODO** - We're still working on the details on how this should be implemented.
+Stay tuned.
+
+#### POST /servers/<UUID>/ping
+
+**TODO** - Still working on how this might be implemented as well.
+
+### Streaming / WebSockets
+
+This section of the API deals with streaming information directly from
+[RethinkDB](https://rethinkdb.com/), though the final data modeling isn't yet
+quite ready as of this writing (it's being worked on). The API will need to
+implement a WebSocket streaming connection from the front-end (built separately)
+using the API as a bridge, to the RethinkDB server that will hold and notify of
+updates when changes occur to a given record.
+
+An example on how to subscribe to record changes with RethinkDB is on their
+website: https://rethinkdb.com/docs/changefeeds/ruby/
+
+#### GET /servers/<UUID>/logs/<UUID>
+
+**AUTHENTICATION REQUIRED**
+
+Given the UUID for a log, a client will open a WebSocket connection to the API -
+which **you should open a new thread for each WebSocket connection using the
+[async](https://github.com/socketry/async) library** - and subscribe to changes
+for the log's data in that thread. Every time it's updated by the agent and
+streamserver, RethinkDB will _automatically_ report that there's been a change
+and return that data to you.
+
+**TODO** - We're still working on the implementation details here. Stay tuned.
+
+#### GET /servers/<UUID>/commands/<UUID>
+
+**AUTHENTICATION REQUIRED**
+
+Given a server UUID and a command for that server, open a WebSocket connection
+with the client that will, just as in the logs portion above, stream out new
+lines of data to the front-end when requested.
+
+**TODO** - We're still working on the implementation details here. Stay tuned.
+
+### Commands
+
+The bread and butter of Minion is to allow operators (our eventual customers)
+to issue commands through the dashboard, and have those commands executed on the
+server by minion itself. We need the ability to create a command for a given
+server, and that command needs to be saved in RethinkDB so that the stream
+server can then pick up that new command and instruct a minion agent to run it.
+
+#### POST /servers/<UUID>/commands
+
+**AUTHENTICATION REQUIRED**
+
+Given a post body like the following:
+
+```json
+{
+  "server_id":"<uuid for the server>",
+  "command":"/bin/bash -c echo \"hello world!\""
+}
+```
+
+Create a command object in RethinkDB (not PostgreSQL) for that server. That's
+it; that's all you have to do. Other parts of the infrastructure will pick up
+the change, execute the command, and report the telemetry from it.
+
+### Logs
+
+**TODO** - We're still working on the implementation details here. Stay tuned.
