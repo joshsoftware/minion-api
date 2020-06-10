@@ -14,6 +14,11 @@ see it implemented incorrectly, so get in touch if you have questions!
 
 - [J. Austin Hughey](mailto:j.austin.hughey@joshsoftware.com)
 
+## Sample Code
+
++ [ref/rails](ref/rails) is a sample Rails app with Grape API set up, server
+name creation and user registration features.
+
 ## API FUNCTIONS
 
 We'll put all API paths under `/api/v1/` to start with rather than making it
