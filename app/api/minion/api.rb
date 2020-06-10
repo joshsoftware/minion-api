@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
-require_relative File.join('.', 'users.rb')
-require_relative File.join('.', 'authenticate.rb')
+require_relative File.join('.', 'users')
+require_relative File.join('.', 'authenticate')
+require_relative File.join('.', 'servers')
 
 module Minion
   # API - Primary API object. See api/*.rb for other resources
@@ -12,6 +13,7 @@ module Minion
 
     mount ::Minion::Users
     mount ::Minion::Authenticate
+    mount ::Minion::Servers
 
     helpers do
       def current_user
