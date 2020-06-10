@@ -5,6 +5,7 @@ ruby '2.7.1'
 
 gem 'bcrypt'
 gem 'bootsnap', '>= 1.4.2', require: false
+gem 'faker'
 gem 'grape'
 gem 'pg'
 gem 'pry'
