@@ -18,6 +18,13 @@ see it implemented incorrectly, so when in doubt, get in touch!
 
 + [ref/rails](ref/rails) is a sample Rails app with Grape API set up, server
 name creation and user registration features.
++ [ref/rethinkdb_stream](ref/rethinkdb_stream) is a sample app showing how to
+subscribe for changes from RethinkDB and how to _make_ those changes. Bundle
+install, then create the `minion` RethinkDB database, and the `commands` table,
+then create a command (do this using the RethinkDB data explorer). Then run
+server.rb and in another tab run agent.rb to simulate an agent update to the
+server. You'll see RethinkDB stream new output to your terminal every time you
+run agent.rb.
 
 ## API FUNCTIONS
 
@@ -253,7 +260,7 @@ and return that data to you.
 
 Given a server UUID and a command for that server, open a WebSocket connection
 with the client that will, just as in the logs portion above, stream out new
-lines of data to the front-end when requested.
+lines of data to the front-end when an update is received from RethinkDB.
 
 **TODO** - We're still working on the implementation details here. Stay tuned.
 
