@@ -291,4 +291,74 @@ the change, execute the command, and report the telemetry from it.
 
 ### Logs
 
-**TODO** - We're still working on the implementation details here. Stay tuned.
+There will be two ways for users to view logs:
+
+1. By searching them for a specific string or regex within a specific timeframe;
+1. By tailing a specific log file in real time on a specific machine.
+
+In the first case, the interface will provide controls for specifying the time
+range (between X and Y), and the string or regex to search for. The API then
+needs to query Elastic Search for the log information as specified.
+
+In the second case, the API needs to hold open a WebSocket connection with the
+end user and stream changes from RethinkDB where the log is specified by UUID.
+
+#### Tailing Logs in Real Time
+
+In RethinkDB, logs will look similar to this:
+
+```json
+{
+  "uuid":"<uuid>",
+  "server_id":"<server uuid>",
+  "filename":"/var/log/syslog",
+  "lines":[
+    {"at":1592022382, "stderr":"Some error", "stdout":"output"},
+    {"at":1592022383, "stderr":"Some error", "stdout":"output"},
+    {"at":1592022386, "stderr":"Some error", "stdout":"output"},
+    {...}
+  ]
+}
+```
+
+(Note that `at` is a Unix timestamp; seconds since the Unix epoch.)
+
+So in RethinkDB, we'll have one document for all the lines of any log file, and
+we'll be pushing to that `lines` array in it every time the agent sees a new
+line output to either STDERR or STDOUT. The API then needs to subscribe to
+changes on the UUID of the log document the user specifies, then over an active
+WebSocket, report those changes as new JSON documents. You can just stream new
+lines each time you get a new line in the `lines` array, such as:
+
+```json
+{"at":1592022383, "stderr":"Some error", "stdout":"output"}
+```
+
+#### Searching Logs
+
+In Elastic Search, logs are going to be split up into different documents where
+_each line is its own document_. This means that each line needs to hold
+metadata about the log and server with it. An entire Elastic Search document
+might look like this:
+
+```json
+{
+  "stderr":"some error",
+  "stdout":"some regular output",
+  "filename":"/var/log/messages",
+  "log_id":"<uuid of log object>",
+  "at":1592022383,
+  "id":"<uuid specific to elastic search>"
+}
+```
+
+This is going to result in billions of entries in Elastic Search, _and that's
+OK_. We can query against these fields later to aggregate and show log data
+that's been searched for.
+
+The API needs to provide a way to search for regex or string match on the
+`stderr`, `stdout` fields (either or both) and in a range, specified by the user,
+of time that's then converted into the Unix epoch and searched as values between
+the lower and upper bounds of said range, inclusive. Return all records in the
+above format to the front-end, while creating a way to paginate those results
+and order them in chronological order (order of occurrence).
