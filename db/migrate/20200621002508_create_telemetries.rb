@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class CreateTelemetries < ActiveRecord::Migration[6.0]
   def change
-    create_table :telemetries, primary_key: [:id, :server_id] do |t|
+    create_table :telemetries, primary_key: %i[id server_id] do |t|
       t.bigint :id, null: false
       t.uuid :server_id, null: false
       t.uuid :uuid, null: false

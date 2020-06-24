@@ -30,4 +30,21 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  auth:
+    login:
+      success: 'Login successful'
+      failed: 'You have entered invalid email or password. Please try again'
+    signup:
+      failed: 'We are unable to create your account. Please check errors and try again'
+      success: 'Your account is created successfully. Please login to continue'
+  user:
+    invalid: 'We are unable to find an User with the given id, please try again with the valid id.'
+    create:
+      success: 'User has been created successfully.'
+      failed: 'We are unable to create User. Please check errors and try again'
+    delete:
+      success: 'User deleted successfully'
+      failed: 'Unable to delete User!'
+  organization:
+    invalid: 'We are unable to find an Organization with the given organization_id.
+      Please try again with the valid organization_id.'
