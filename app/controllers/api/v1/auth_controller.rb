@@ -3,7 +3,6 @@
 module Api::V1
   class AuthController < BaseController
     skip_before_action :authenticate!
-    before_action :load_organization, :load_role, only: :signup
     before_action :load_user, only: :login
 
     def login
@@ -28,8 +27,7 @@ module Api::V1
     def signup
       data = V1::SignupService.new(
         params: signup_params,
-        role: @role,
-        organization: @organization
+        role: ROLES[:admin],
       ).signup
 
       if data[:success]
@@ -48,27 +46,8 @@ module Api::V1
     private
 
     def signup_params
-      params.require(:user).permit(:name, :email, :mobile_number, :password, :organization_id)
-    end
-
-    def load_organization
-      @organization = Organization.find_by(id: params[:user][:organization_id])
-      return if @organization
-
-      error_response(
-        message: I18n.t('organization.invalid'),
-        status_code: :bad_request
-      )
-    end
-
-    def load_role
-      @role = Role.where(name: ROLES[:employee]).first
-      return if @role
-
-      error_response(
-        message: I18n.t('user.role.not_found', ROLES[:employee]),
-        status_code: :not_found
-      )
+      params.require(:user).permit(:name, :email, :mobile_number, :password,
+                                   organizations_attributes: %i[name])
     end
 
     def load_user

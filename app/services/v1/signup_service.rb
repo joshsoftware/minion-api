@@ -2,23 +2,22 @@
 
 module V1
   class SignupService
-    def initialize(organization: nil, role: nil, params: nil)
-      @organization = organization
+    def initialize(role: nil, params: nil)
       @role = role
       @params = params
     end
 
     def signup
       user = User.new(@params)
-      user.organization = @organization
       user.role = @role
-
       ActiveRecord::Base.transaction do
         user.save!
       end
       { success: true }
     rescue StandardError
-      { success: false, errors: user.errors.full_messages }
+      errors = user.errors.full_messages.present? ? user.errors.full_messages : 
+                {organization_name: I18n.t('organization.create.failed')}
+      { success: false, errors: errors }
     end
   end
 end

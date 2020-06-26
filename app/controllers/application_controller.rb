@@ -7,7 +7,7 @@ class ApplicationController < ActionController::API
       errors: errors,
       success: false
     },
-           status: status_code
+    status: status_code
   end
 
   def success_response(message: '', data: nil, status_code: 200)
@@ -16,7 +16,7 @@ class ApplicationController < ActionController::API
       success: true,
       message: message
     },
-           status: status_code
+    status: status_code
   end
 
   def resource_error_response(message:, errors:, status_code:)

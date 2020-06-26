@@ -6,14 +6,8 @@ module V1
 
     set_type :user
 
-    attributes :id, :name, :email, :mobile_number
+    attributes :id, :name, :email, :mobile_number, :role
 
-    attributes :role do |object|
-      object.role.name
-    end
-
-    attributes :organization do |object|
-      object.organization.name
-    end
+    attributes :organizations, serializer: OrganizationSerializer
   end
 end

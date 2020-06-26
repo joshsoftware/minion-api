@@ -2,18 +2,19 @@
 
 class User < ApplicationRecord
   has_secure_password
-  validates :name, :email, :mobile_number, presence: true
-  validates :email, uniqueness: true
-  validates :password, length: { minimum: 6 }
+  validates :name, :email, :mobile_number, :password, :role, presence: true
+  validates :email, :mobile_number, uniqueness: true
+  validates :password, length: { minimum: MIN_PASSWORD_LEN }
   validates_format_of :email, with: URI::MailTo::EMAIL_REGEXP
-  belongs_to :organization
-  belongs_to :role
+  has_many :organization_users, dependent: :destroy
+  has_many :organizations, through: :organization_users
+  accepts_nested_attributes_for :organizations
 
   def admin?
-    role.name == ROLES[:admin]
+    role == ROLES[:admin]
   end
 
   def employee?
-    role.name == ROLES[:employee]
+    role == ROLES[:employee]
   end
 end

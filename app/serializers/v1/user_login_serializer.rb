@@ -6,15 +6,9 @@ module V1
 
     set_type :user
 
-    attributes :id, :name, :email, :mobile_number
+    attributes :id, :name, :email, :mobile_number, :role
 
-    attribute :role do |object|
-      object.role.name
-    end
-
-    attribute :organization do |object|
-      object.organization.name
-    end
+    attributes :organizations, serializer: OrganizationSerializer
 
     attribute :jwt_token do |object|
       JwtService.encode(object)

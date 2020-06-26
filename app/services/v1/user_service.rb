@@ -2,8 +2,7 @@
 
 module V1
   class UserService
-    def initialize(organization_id: nil, role: nil, params: nil)
-      @organization_id = organization_id
+    def initialize(role: nil, params: nil)
       @role = role
       @params = params
       @page = params[:page]
@@ -13,7 +12,6 @@ module V1
 
     def create
       user = User.new(@params)
-      user.organization_id = @organization_id
       user.role = @role
 
       if user.save

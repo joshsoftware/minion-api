@@ -1,0 +1,58 @@
+{
+  "resource": "Auth",
+  "resource_explanation": null,
+  "http_method": "POST",
+  "route": "/signup",
+  "description": "User signup",
+  "explanation": null,
+  "parameters": [
+    {
+      "scope": "user",
+      "required": true,
+      "name": "name",
+      "description": "user's name"
+    },
+    {
+      "scope": "user",
+      "required": true,
+      "name": "email",
+      "description": "user's email"
+    },
+    {
+      "scope": "user",
+      "required": true,
+      "name": "mobile_number",
+      "description": "user's mobile number"
+    },
+    {
+      "scope": "user",
+      "required": true,
+      "name": "password",
+      "description": "user's password"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "POST",
+      "request_path": "/signup",
+      "request_body": "{\"user\":{\"name\":\"Edna Will\",\"email\":\"deanne@medhurst-bahringer.io\",\"mobile_number\":1685398965,\"password\":\"85057bed2932c2110e49acb1b211fba7\"}}",
+      "request_headers": {
+        "Content-Type": "application/json",
+        "X-Auth-Token": ""
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "[binary data]",
+      "response_headers": {
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": "curl \"http://api.example.com/signup\" -d '{\"user\":{\"name\":\"Edna Will\",\"email\":\"deanne@medhurst-bahringer.io\",\"mobile_number\":1685398965,\"password\":\"85057bed2932c2110e49acb1b211fba7\"}}' -X POST \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"X-Auth-Token: \""
+    }
+  ]
+}

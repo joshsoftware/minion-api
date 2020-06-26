@@ -9,6 +9,7 @@ class AddLogsAutoincrement < ActiveRecord::Migration[6.0]
 
   def self.down
     execute <<-SQL
+      ALTER TABLE logs ALTER COLUMN id DROP DEFAULT;
       DROP SEQUENCE logs_id_seq;
     SQL
   end

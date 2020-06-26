@@ -1,0 +1,37 @@
+{
+  "resources": [
+    {
+      "name": "Auth",
+      "explanation": null,
+      "examples": [
+        {
+          "description": "User login",
+          "link": "auth/user_login.json",
+          "groups": "all",
+          "route": "/login",
+          "method": "post"
+        },
+        {
+          "description": "User signup",
+          "link": "auth/user_signup.json",
+          "groups": "all",
+          "route": "/signup",
+          "method": "post"
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "explanation": null,
+      "examples": [
+        {
+          "description": "me",
+          "link": "users/me.json",
+          "groups": "all",
+          "route": "api/v1/me",
+          "method": "get"
+        }
+      ]
+    }
+  ]
+}

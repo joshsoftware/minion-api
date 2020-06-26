@@ -5,10 +5,9 @@ class CreateUsers < ActiveRecord::Migration[6.0]
     create_table :users, id: :uuid do |t|
       t.string :name
       t.string :email
-      t.string :mobile_number
+      t.string :mobile_number, index: true
       t.string :password_digest
-      t.belongs_to :organization, type: :uuid, null: false
-      t.references :role
+      t.string :role, index: true
       t.timestamps
     end
     add_index :users, :email

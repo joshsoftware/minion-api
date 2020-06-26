@@ -6,7 +6,6 @@ class JwtService
   def self.encode(user)
     payload = {
       id: user.id,
-      role: user.role.name,
       exp: Time.current.to_i + AUTH_TOKEN_EXPIRY
     }
 

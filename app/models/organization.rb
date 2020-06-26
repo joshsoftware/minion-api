@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Organization < ApplicationRecord
-  validates :name, presence: true
-  has_many :users
+  validates :name, presence: true, uniqueness: true
+  has_many :organization_users, dependent: :destroy
+  has_many :users, through: :organization_users
 end

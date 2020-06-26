@@ -1,0 +1,35 @@
+{
+  "resource": "Users",
+  "resource_explanation": null,
+  "http_method": "GET",
+  "route": "api/v1/me",
+  "description": "me",
+  "explanation": null,
+  "parameters": [
+
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "GET",
+      "request_path": "api/v1/me",
+      "request_body": null,
+      "request_headers": {
+        "Content-Type": "application/json",
+        "X-Auth-Token": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjM0ZTlkYmRlLTRhNzctNDhlNy1iYzhhLTI0ODZiMzQ2NzFiNiIsImV4cCI6MTU5MzIwNTg4N30.DjoG70PYKXzpAyIgp3TnrpA_0P8dL_oTgsa1sonMQUU"
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "[binary data]",
+      "response_headers": {
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": "curl -g \"http://api.example.comapi/v1/me\" -X GET \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"X-Auth-Token: eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjM0ZTlkYmRlLTRhNzctNDhlNy1iYzhhLTI0ODZiMzQ2NzFiNiIsImV4cCI6MTU5MzIwNTg4N30.DjoG70PYKXzpAyIgp3TnrpA_0P8dL_oTgsa1sonMQUU\""
+    }
+  ]
+}

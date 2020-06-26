@@ -2,7 +2,7 @@
 
 module Api::V1
   class UsersController < BaseController
-    before_action :load_organization, except: %i[index show destroy me]
+    # before_action :load_organization, except: %i[index show destroy me]
     before_action :load_user, only: %i[show update destroy]
     before_action :load_role, only: :create
 
@@ -27,7 +27,6 @@ module Api::V1
 
     def create
       response = V1::UserService.new(
-        organization: @organization,
         role: @role,
         params: user_params
       ).create
@@ -86,22 +85,13 @@ module Api::V1
 
     private
 
-    def load_organization
-      @organization = Organization.find_by(id: params[:user][:organization_id])
-      return if @organization
-
-      error_response(
-        message: I18n.t('organization.invalid'),
-        status_code: :not_found
-      )
-    end
-
     def load_role
-      @role = Role.where(name: ROLES[:employee]).first
-      return if @role
-
+      if params[:user][:role].present?
+        @role = ROLES[params[:user][:role].to_sym]
+        return if @role
+      end
       error_response(
-        message: I18n.t('role.not_found', ROLES[:employee]),
+        message: I18n.t('role.invalid'),
         status_code: :not_found
       )
     end
@@ -117,7 +107,7 @@ module Api::V1
     end
 
     def user_params
-      params.require(:user).permit(:name, :email, :mobile_number, :password)
+      params.require(:user).permit(:name, :email, :mobile_number, :password, :role)
     end
   end
 end
