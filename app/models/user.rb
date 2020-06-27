@@ -3,7 +3,7 @@
 class User < ApplicationRecord
   has_secure_password
   validates :name, :email, :mobile_number, :password, :role, presence: true
-  validates :email, :mobile_number, uniqueness: true
+  validates :email, uniqueness: true
   validates :password, length: { minimum: MIN_PASSWORD_LEN }
   validates_format_of :email, with: URI::MailTo::EMAIL_REGEXP
   has_many :organization_users, dependent: :destroy

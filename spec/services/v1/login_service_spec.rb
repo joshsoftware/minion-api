@@ -4,7 +4,7 @@ RSpec.describe V1::LoginService do
   describe '.login' do
     let!(:user) { create(:user, role: ROLES[:admin]) }
 
-    context 'valid login information of employee' do
+    context 'valid login information of User' do
       it 'login success' do
         response = V1::LoginService.new(
           user: user,
@@ -21,7 +21,7 @@ RSpec.describe V1::LoginService do
       end
     end
 
-    context 'invalid login information of user' do
+    context 'invalid login information of User' do
       it 'login failed' do
         response = V1::LoginService.new(
           user: user,

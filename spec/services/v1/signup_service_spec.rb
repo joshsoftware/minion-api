@@ -24,9 +24,9 @@ RSpec.describe V1::SignupService do
 
     let!(:invalid_signup_params) do
       {
-        "name": "Minion",
+        "name": Faker::Name.name,
         "email": "minion@test.com",
-        "mobile_number": "1111111111",
+        "mobile_number": Faker::Number.number(digits: 10),
         "password": Faker::Crypto.md5
       }
     end
@@ -56,7 +56,6 @@ RSpec.describe V1::SignupService do
         errors = response[:errors]
         expect(errors).not_to be_nil
         expect(errors.first).to eq("Email has already been taken")
-        expect(errors.last).to eq("Mobile number has already been taken")
       end
     end
   end

@@ -10,7 +10,7 @@ class ApplicationController < ActionController::API
     status: status_code
   end
 
-  def success_response(message: '', data: nil, status_code: 200)
+  def success_response(message: nil, data: nil, status_code: 200)
     render json: {
       data: data,
       success: true,

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_25_114502) do
+ActiveRecord::Schema.define(version: 2020_06_26_192724) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -57,11 +57,10 @@ ActiveRecord::Schema.define(version: 2020_06_25_114502) do
     t.string "tag", null: false
   end
 
-  create_table "telemetries", primary_key: ["id", "server_id"], force: :cascade do |t|
-    t.bigint "id", null: false
+  create_table "telemetries", primary_key: ["server_id", "uuid"], force: :cascade do |t|
     t.uuid "server_id", null: false
     t.uuid "uuid", null: false
-    t.string "data", null: false, array: true
+    t.jsonb "data"
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
