@@ -1,0 +1,40 @@
+{
+  "resource": "Users",
+  "resource_explanation": null,
+  "http_method": "GET",
+  "route": "api/v1/users",
+  "description": "index",
+  "explanation": null,
+  "parameters": [
+    {
+      "required": true,
+      "name": "organization_id",
+      "description": " organization"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "GET",
+      "request_path": "api/v1/users?organization_id=90a1d46e-0f38-4c69-be59-cb45a98428e6",
+      "request_body": null,
+      "request_headers": {
+        "Content-Type": "application/json",
+        "X-Auth-Token": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImY5MjFmYjg1LThmYWMtNDdhNS04OWQ1LTIxM2VkNjQ3M2E3YiIsImV4cCI6MTU5MzQ2Mjk4NH0.5GXLTVH6_tfNSIHCgtbZI1VvUtqesTYmL5KHuAOvJw8"
+      },
+      "request_query_parameters": {
+        "organization_id": "90a1d46e-0f38-4c69-be59-cb45a98428e6"
+      },
+      "request_content_type": "application/json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "[binary data]",
+      "response_headers": {
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": "curl -g \"http://api.example.comapi/v1/users?organization_id=90a1d46e-0f38-4c69-be59-cb45a98428e6\" -X GET \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"X-Auth-Token: eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImY5MjFmYjg1LThmYWMtNDdhNS04OWQ1LTIxM2VkNjQ3M2E3YiIsImV4cCI6MTU5MzQ2Mjk4NH0.5GXLTVH6_tfNSIHCgtbZI1VvUtqesTYmL5KHuAOvJw8\""
+    }
+  ]
+}

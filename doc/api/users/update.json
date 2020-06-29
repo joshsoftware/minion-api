@@ -1,0 +1,64 @@
+{
+  "resource": "Users",
+  "resource_explanation": null,
+  "http_method": "PATCH",
+  "route": "api/v1/users/:id",
+  "description": "update",
+  "explanation": null,
+  "parameters": [
+    {
+      "required": true,
+      "name": "id",
+      "description": "user id"
+    },
+    {
+      "scope": "user",
+      "name": "email",
+      "description": "user's email"
+    },
+    {
+      "scope": "user",
+      "name": "mobile_number",
+      "description": "user's mobile number"
+    },
+    {
+      "scope": "user",
+      "name": "name",
+      "description": "user's name"
+    },
+    {
+      "scope": "user",
+      "name": "password",
+      "description": "user's password"
+    },
+    {
+      "scope": "user",
+      "name": "role",
+      "description": "user's role"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "PATCH",
+      "request_path": "api/v1/users/04332234-03cc-4745-901a-646d726ab365",
+      "request_body": "{\"user\":{\"name\":\"Delta Walker\",\"email\":\"mikaela_borer@bosco.com\",\"mobile_number\":7885724293,\"password\":\"5pa2yad8eagx\",\"role\":\"admin\"}}",
+      "request_headers": {
+        "Content-Type": "application/json",
+        "X-Auth-Token": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjA0MzMyMjM0LTAzY2MtNDc0NS05MDFhLTY0NmQ3MjZhYjM2NSIsImV4cCI6MTU5MzQ2Mjk4NH0.u572w-J1fcHiNKL-7aXlCSfWNgJaL-jER7GFi1bomSg"
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "[binary data]",
+      "response_headers": {
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": "curl \"http://api.example.comapi/v1/users/04332234-03cc-4745-901a-646d726ab365\" -d '{\"user\":{\"name\":\"Delta Walker\",\"email\":\"mikaela_borer@bosco.com\",\"mobile_number\":7885724293,\"password\":\"5pa2yad8eagx\",\"role\":\"admin\"}}' -X PATCH \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"X-Auth-Token: eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjA0MzMyMjM0LTAzY2MtNDc0NS05MDFhLTY0NmQ3MjZhYjM2NSIsImV4cCI6MTU5MzQ2Mjk4NH0.u572w-J1fcHiNKL-7aXlCSfWNgJaL-jER7GFi1bomSg\""
+    }
+  ]
+}

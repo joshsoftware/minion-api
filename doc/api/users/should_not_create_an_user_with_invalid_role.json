@@ -1,0 +1,57 @@
+{
+  "resource": "Users",
+  "resource_explanation": null,
+  "http_method": "POST",
+  "route": "api/v1/users",
+  "description": "Should not create an user with invalid Role",
+  "explanation": null,
+  "parameters": [
+    {
+      "scope": "user",
+      "required": true,
+      "name": "name",
+      "description": "user's name"
+    },
+    {
+      "scope": "user",
+      "required": true,
+      "name": "email",
+      "description": "user's email"
+    },
+    {
+      "scope": "user",
+      "required": true,
+      "name": "mobile_number",
+      "description": "user's mobile number"
+    },
+    {
+      "scope": "user",
+      "name": "role",
+      "description": "user's role"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "POST",
+      "request_path": "api/v1/users",
+      "request_body": "{\"user\":{\"name\":\"Curtis Stoltenberg\",\"email\":\"lauren@stiedemann.com\",\"mobile_number\":4953802528,\"password\":\"jwixlyq73w6k\",\"role\":\"Winnie DuBuque\"}}",
+      "request_headers": {
+        "Content-Type": "application/json",
+        "X-Auth-Token": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjU2OGZjNWNjLTU2OTEtNDA4NS1hNGJiLWE1Y2FjZmE5NmYyOSIsImV4cCI6MTU5MzQ2Mjk4M30.rNZ-9kdl-B3V7jDmu7q3UpHAoM3CZXOhuty7PobKheE"
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/json",
+      "response_status": 404,
+      "response_status_text": "Not Found",
+      "response_body": "[binary data]",
+      "response_headers": {
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": "curl \"http://api.example.comapi/v1/users\" -d '{\"user\":{\"name\":\"Curtis Stoltenberg\",\"email\":\"lauren@stiedemann.com\",\"mobile_number\":4953802528,\"password\":\"jwixlyq73w6k\",\"role\":\"Winnie DuBuque\"}}' -X POST \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"X-Auth-Token: eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjU2OGZjNWNjLTU2OTEtNDA4NS1hNGJiLWE1Y2FjZmE5NmYyOSIsImV4cCI6MTU5MzQ2Mjk4M30.rNZ-9kdl-B3V7jDmu7q3UpHAoM3CZXOhuty7PobKheE\""
+    }
+  ]
+}

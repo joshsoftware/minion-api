@@ -1,0 +1,39 @@
+{
+  "resource": "Organizations",
+  "resource_explanation": null,
+  "http_method": "DELETE",
+  "route": "api/v1/organizations/:id",
+  "description": "delete",
+  "explanation": null,
+  "parameters": [
+    {
+      "required": true,
+      "name": "id",
+      "description": "organization id"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "DELETE",
+      "request_path": "api/v1/organizations/b10b06bb-6d22-4f99-b950-ecb94e83173a",
+      "request_body": null,
+      "request_headers": {
+        "Content-Type": "application/json",
+        "X-Auth-Token": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImE3N2E5MWM4LTkyMjItNDM3YS05Y2E5LWQ4YjRlY2QwYjY3NCIsImV4cCI6MTU5MzQ2Mjk4M30.emD3sIhckjhGiX8qRQJ3tzfacr0zjV1sIYdhSFV_D1I"
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "[binary data]",
+      "response_headers": {
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": "curl \"http://api.example.comapi/v1/organizations/b10b06bb-6d22-4f99-b950-ecb94e83173a\" -d '' -X DELETE \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"X-Auth-Token: eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImE3N2E5MWM4LTkyMjItNDM3YS05Y2E5LWQ4YjRlY2QwYjY3NCIsImV4cCI6MTU5MzQ2Mjk4M30.emD3sIhckjhGiX8qRQJ3tzfacr0zjV1sIYdhSFV_D1I\""
+    }
+  ]
+}
