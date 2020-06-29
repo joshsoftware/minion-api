@@ -5,18 +5,66 @@
       "explanation": null,
       "examples": [
         {
-          "description": "User login",
-          "link": "auth/user_login.json",
+          "description": "Invalid login credentials",
+          "link": "auth/invalid_login_credentials.json",
           "groups": "all",
           "route": "/login",
           "method": "post"
         },
         {
-          "description": "User signup",
-          "link": "auth/user_signup.json",
+          "description": "login",
+          "link": "auth/login.json",
+          "groups": "all",
+          "route": "/login",
+          "method": "post"
+        },
+        {
+          "description": "signup",
+          "link": "auth/signup.json",
           "groups": "all",
           "route": "/signup",
           "method": "post"
+        }
+      ]
+    },
+    {
+      "name": "Organizations",
+      "explanation": null,
+      "examples": [
+        {
+          "description": "create",
+          "link": "organizations/create.json",
+          "groups": "all",
+          "route": "api/v1/organizations",
+          "method": "post"
+        },
+        {
+          "description": "delete",
+          "link": "organizations/delete.json",
+          "groups": "all",
+          "route": "api/v1/organizations/:id",
+          "method": "delete"
+        },
+        {
+          "description": "index",
+          "link": "organizations/index.json",
+          "groups": "all",
+          "route": "api/v1/organizations",
+          "method": "get"
+        },
+        {
+          "description": "show",
+          "link": "organizations/show.json",
+          "groups": "all",
+          "route": "api/v1/organizations/:id",
+          "method": "get"
+        },
+        {
+          "description": "update",
+          "link": "organizations/update.json",
+          "groups": "all",
+          "route": "api/v1/organizations/:id",
+          "method": "patch"
         }
       ]
     },
@@ -25,11 +73,53 @@
       "explanation": null,
       "examples": [
         {
+          "description": "Should not create an user with invalid Role",
+          "link": "users/should_not_create_an_user_with_invalid_role.json",
+          "groups": "all",
+          "route": "api/v1/users",
+          "method": "post"
+        },
+        {
+          "description": "create",
+          "link": "users/create.json",
+          "groups": "all",
+          "route": "api/v1/users",
+          "method": "post"
+        },
+        {
+          "description": "delete",
+          "link": "users/delete.json",
+          "groups": "all",
+          "route": "api/v1/users/:id",
+          "method": "delete"
+        },
+        {
+          "description": "index",
+          "link": "users/index.json",
+          "groups": "all",
+          "route": "api/v1/users",
+          "method": "get"
+        },
+        {
           "description": "me",
           "link": "users/me.json",
           "groups": "all",
           "route": "api/v1/me",
           "method": "get"
+        },
+        {
+          "description": "show",
+          "link": "users/show.json",
+          "groups": "all",
+          "route": "api/v1/users/:id",
+          "method": "get"
+        },
+        {
+          "description": "update",
+          "link": "users/update.json",
+          "groups": "all",
+          "route": "api/v1/users/:id",
+          "method": "patch"
         }
       ]
     }

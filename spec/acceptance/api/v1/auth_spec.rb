@@ -13,7 +13,7 @@ resource 'Auth' do
       parameter :password, "user's password", required: true
     end
 
-    example 'User login' do
+    example 'login' do
       request = {
         "user": {
           "email": user.email,
@@ -24,6 +24,28 @@ resource 'Auth' do
       do_request(request)
       expect(status).to eq(200)
     end
+
+    example 'Invalid login credentials' do
+      request = {
+        "user": {
+          "email": user.email,
+          "password": Faker::Lorem.characters(number: 12)
+        }
+      }
+
+      do_request(request)
+      expect(status).to eq(401)
+
+      request = {
+        "user": {
+          "email": Faker::Internet.email,
+          "password": user.password
+        }
+      }
+
+      do_request(request)
+      expect(status).to eq(401)
+    end
   end
 
   post '/signup' do
@@ -32,15 +54,19 @@ resource 'Auth' do
       parameter :email, "user's email", required: true
       parameter :mobile_number, "user's mobile number", required: true
       parameter :password, "user's password", required: true
+      with_options scope: :organizations_attributes do
+        parameter :name, "organization's name", required: true
+      end
     end
 
-    example 'User signup' do
+    example 'signup' do
       request = {
         "user": {
           "name": Faker::Name.name,
           "email": Faker::Internet.email,
           "mobile_number": Faker::Number.number(digits: 10),
-          "password": Faker::Crypto.md5
+          "password": Faker::Crypto.md5,
+          "organizations_attributes": [{ "name": Faker::Name.name }]
         }
       }
       do_request(request)

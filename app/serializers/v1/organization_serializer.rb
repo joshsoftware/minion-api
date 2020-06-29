@@ -7,5 +7,9 @@ module V1
     set_type :organization
 
     attributes :id, :name
+
+    attributes :discarded do |object|
+      object.discarded?
+    end
   end
 end

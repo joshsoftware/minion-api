@@ -1,0 +1,39 @@
+{
+  "resource": "Users",
+  "resource_explanation": null,
+  "http_method": "DELETE",
+  "route": "api/v1/users/:id",
+  "description": "delete",
+  "explanation": null,
+  "parameters": [
+    {
+      "required": true,
+      "name": "id",
+      "description": "user id"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "DELETE",
+      "request_path": "api/v1/users/305f7560-492b-4783-91e4-34fdc3de9899",
+      "request_body": null,
+      "request_headers": {
+        "Content-Type": "application/json",
+        "X-Auth-Token": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjMwNWY3NTYwLTQ5MmItNDc4My05MWU0LTM0ZmRjM2RlOTg5OSIsImV4cCI6MTU5MzQ2Mjk4NH0.z3CRKB1SBcSxFOxOP6iJwUv_fIbvB-JS9sURUgt04B8"
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "[binary data]",
+      "response_headers": {
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": "curl \"http://api.example.comapi/v1/users/305f7560-492b-4783-91e4-34fdc3de9899\" -d '' -X DELETE \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"X-Auth-Token: eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjMwNWY3NTYwLTQ5MmItNDc4My05MWU0LTM0ZmRjM2RlOTg5OSIsImV4cCI6MTU5MzQ2Mjk4NH0.z3CRKB1SBcSxFOxOP6iJwUv_fIbvB-JS9sURUgt04B8\""
+    }
+  ]
+}

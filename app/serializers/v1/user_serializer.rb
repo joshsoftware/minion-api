@@ -8,6 +8,10 @@ module V1
 
     attributes :id, :name, :email, :mobile_number, :role
 
+    attributes :discarded do |object|
+      object.discarded?
+    end
+
     attributes :organizations, serializer: OrganizationSerializer
   end
 end

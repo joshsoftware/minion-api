@@ -2,22 +2,14 @@
 
 module Api::V1
   class UsersController < BaseController
-    # before_action :load_organization, except: %i[index show destroy me]
+    before_action :load_organization, only: [:index]
     before_action :load_user, only: %i[show update destroy]
     before_action :load_role, only: :create
 
     def index
-      organization = Organization.find_by(id: params[:organization_id])
-      if organization.present?
-        users = organization.users
-        response = V1::UserSerializer.new(users).serializable_hash
-        success_response(data: response[:data])
-      else
-        error_response(
-          message: I18n.t('organization.invalid'),
-          status_code: :not_found
-        )
-      end
+      users = @organization.users
+      response = V1::UserSerializer.new(users).serializable_hash
+      success_response(data: response[:data])
     end
 
     def show
@@ -65,7 +57,7 @@ module Api::V1
     end
 
     def destroy
-      if @user.destroy
+      if @user.discard
         success_response(
           message: I18n.t('user.delete.success')
         )
@@ -102,6 +94,15 @@ module Api::V1
 
       error_response(
         message: I18n.t('user.invalid'),
+        status_code: :not_found
+      )
+    end
+
+    def load_organization
+      @organization = Organization.find_by(id: params[:organization_id])
+      return if @organization.present?
+      error_response(
+        message: I18n.t('organization.invalid'),
         status_code: :not_found
       )
     end

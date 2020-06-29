@@ -1,0 +1,57 @@
+{
+  "resource": "Users",
+  "resource_explanation": null,
+  "http_method": "POST",
+  "route": "api/v1/users",
+  "description": "create",
+  "explanation": null,
+  "parameters": [
+    {
+      "scope": "user",
+      "required": true,
+      "name": "name",
+      "description": "user's name"
+    },
+    {
+      "scope": "user",
+      "required": true,
+      "name": "email",
+      "description": "user's email"
+    },
+    {
+      "scope": "user",
+      "required": true,
+      "name": "mobile_number",
+      "description": "user's mobile number"
+    },
+    {
+      "scope": "user",
+      "name": "role",
+      "description": "user's role"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "POST",
+      "request_path": "api/v1/users",
+      "request_body": "{\"user\":{\"name\":\"May Frami\",\"email\":\"corrie_bartoletti@hudson.io\",\"mobile_number\":7689996486,\"password\":\"l9r3j7ryeuyq\",\"role\":\"employee\"}}",
+      "request_headers": {
+        "Content-Type": "application/json",
+        "X-Auth-Token": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImY2ODNjYmNiLTA2Y2YtNDE4OC1hNjI4LTE2MDQxYzg3NWQyMSIsImV4cCI6MTU5MzQ2Mjk4M30.tmG5LV05MDuf6b_G8M7gnlNHpPWzgwS36ALFkfJhAyc"
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/json",
+      "response_status": 201,
+      "response_status_text": "Created",
+      "response_body": "[binary data]",
+      "response_headers": {
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": "curl \"http://api.example.comapi/v1/users\" -d '{\"user\":{\"name\":\"May Frami\",\"email\":\"corrie_bartoletti@hudson.io\",\"mobile_number\":7689996486,\"password\":\"l9r3j7ryeuyq\",\"role\":\"employee\"}}' -X POST \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"X-Auth-Token: eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImY2ODNjYmNiLTA2Y2YtNDE4OC1hNjI4LTE2MDQxYzg3NWQyMSIsImV4cCI6MTU5MzQ2Mjk4M30.tmG5LV05MDuf6b_G8M7gnlNHpPWzgwS36ALFkfJhAyc\""
+    }
+  ]
+}

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_26_192724) do
+ActiveRecord::Schema.define(version: 2020_06_29_084936) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -41,6 +41,8 @@ ActiveRecord::Schema.define(version: 2020_06_26_192724) do
 
   create_table "organizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
+    t.datetime "discarded_at"
+    t.index ["discarded_at"], name: "index_organizations_on_discarded_at"
   end
 
   create_table "servers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -71,6 +73,8 @@ ActiveRecord::Schema.define(version: 2020_06_26_192724) do
     t.string "role"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "discarded_at"
+    t.index ["discarded_at"], name: "index_users_on_discarded_at"
     t.index ["email"], name: "index_users_on_email"
     t.index ["mobile_number"], name: "index_users_on_mobile_number"
     t.index ["role"], name: "index_users_on_role"
