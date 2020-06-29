@@ -1,0 +1,46 @@
+{
+  "resource": "Auth",
+  "resource_explanation": null,
+  "http_method": "POST",
+  "route": "/login",
+  "description": "login",
+  "explanation": null,
+  "parameters": [
+    {
+      "scope": "user",
+      "required": true,
+      "name": "email",
+      "description": "user's email"
+    },
+    {
+      "scope": "user",
+      "required": true,
+      "name": "password",
+      "description": "user's password"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "POST",
+      "request_path": "/login",
+      "request_body": "{\"user\":{\"email\":\"fredia_greenholt@herman.net\",\"password\":\"kh4j9jw4vtta\"}}",
+      "request_headers": {
+        "Content-Type": "application/json",
+        "X-Auth-Token": ""
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/json",
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "[binary data]",
+      "response_headers": {
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": "curl \"http://api.example.com/login\" -d '{\"user\":{\"email\":\"fredia_greenholt@herman.net\",\"password\":\"kh4j9jw4vtta\"}}' -X POST \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"X-Auth-Token: \""
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "resource": "Organizations",
+  "resource_explanation": null,
+  "http_method": "POST",
+  "route": "api/v1/organizations",
+  "description": "create",
+  "explanation": null,
+  "parameters": [
+    {
+      "scope": "organization",
+      "required": true,
+      "name": "name",
+      "description": "organization's name"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "POST",
+      "request_path": "api/v1/organizations",
+      "request_body": "{\"organization\":{\"name\":\"Marcella Wolff\"}}",
+      "request_headers": {
+        "Content-Type": "application/json",
+        "X-Auth-Token": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjlhMzU0OGJiLTRlYjAtNDllYy04MGZiLTlkYTA2YTRmZWUxMCIsImV4cCI6MTU5MzQ2Mjk4M30.rQAcA0hfzUo5JhN2al5hGtqjlfD2uDL0SvC2uo5LH3k"
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/json",
+      "response_status": 201,
+      "response_status_text": "Created",
+      "response_body": "[binary data]",
+      "response_headers": {
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": "curl \"http://api.example.comapi/v1/organizations\" -d '{\"organization\":{\"name\":\"Marcella Wolff\"}}' -X POST \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"X-Auth-Token: eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjlhMzU0OGJiLTRlYjAtNDllYy04MGZiLTlkYTA2YTRmZWUxMCIsImV4cCI6MTU5MzQ2Mjk4M30.rQAcA0hfzUo5JhN2al5hGtqjlfD2uDL0SvC2uo5LH3k\""
+    }
+  ]
+}
