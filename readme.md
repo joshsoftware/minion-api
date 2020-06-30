@@ -14,18 +14,6 @@ see it implemented incorrectly, so when in doubt, get in touch!
 
 - [J. Austin Hughey](mailto:j.austin.hughey@joshsoftware.com)
 
-## Sample Code
-
-+ [ref/rails](ref/rails) is a sample Rails app with Grape API set up, server
-name creation and user registration features.
-+ [ref/rethinkdb_stream](ref/rethinkdb_stream) is a sample app showing how to
-subscribe for changes from RethinkDB and how to _make_ those changes. Bundle
-install, then create the `minion` RethinkDB database, and the `commands` table,
-then create a command (do this using the RethinkDB data explorer). Then run
-server.rb and in another tab run agent.rb to simulate an agent update to the
-server. You'll see RethinkDB stream new output to your terminal every time you
-run agent.rb.
-
 ## API FUNCTIONS
 
 We'll put all API paths under `/api/v1/` to start with rather than making it
@@ -202,7 +190,7 @@ with something like:
 }
 ```
 
-#### GET /servers/<UUID>
+#### GET /servers/{UUID}
 
 **AUTHENTICATION REQUIRED**
 
@@ -218,7 +206,7 @@ following information about that server:
 }
 ```
 
-#### GET /servers/<UUID>/metrics
+#### GET /servers/{UUID}/metrics
 
 **AUTHENTICATION REQUIRED**
 
@@ -241,7 +229,7 @@ updates when changes occur to a given record.
 An example on how to subscribe to record changes with RethinkDB is on their
 website: https://rethinkdb.com/docs/changefeeds/ruby/
 
-#### GET /servers/<UUID>/logs/<UUID>
+#### GET /servers/{UUID}/logs/{UUID}
 
 **AUTHENTICATION REQUIRED**
 
@@ -254,7 +242,7 @@ and return that data to you.
 
 **TODO** - We're still working on the implementation details here. Stay tuned.
 
-#### GET /servers/<UUID>/commands/<UUID>
+#### GET /servers/{UUID}/commands/<UUID>
 
 **AUTHENTICATION REQUIRED**
 
@@ -272,7 +260,7 @@ server by minion itself. We need the ability to create a command for a given
 server, and that command needs to be saved in RethinkDB so that the stream
 server can then pick up that new command and instruct a minion agent to run it.
 
-#### POST /servers/<UUID>/commands
+#### POST /servers/{UUID}/commands
 
 **AUTHENTICATION REQUIRED**
 
@@ -362,3 +350,20 @@ of time that's then converted into the Unix epoch and searched as values between
 the lower and upper bounds of said range, inclusive. Return all records in the
 above format to the front-end, while creating a way to paginate those results
 and order them in chronological order (order of occurrence).
+
+### Minion Agent
+
+We'll need a route to tell the agent what the latest published version is, and
+where to go to download it. This is so the agent can upgrade itself.
+
+#### GET `/api/v1/minion`
+
+Sample response:
+
+```json
+{
+  "latest_version":"0.1.0",
+  "sha256":"ad2d3c84228b0d2107173a7291a33931b25de95c",
+  "download":"http://localhost:3000/agent"
+}
+```
