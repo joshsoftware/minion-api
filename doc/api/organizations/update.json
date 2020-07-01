@@ -23,11 +23,11 @@
   "requests": [
     {
       "request_method": "PATCH",
-      "request_path": "api/v1/organizations/b2a39b8b-a7af-42d5-81c3-7f79a5993218",
-      "request_body": "{\"organization\":{\"name\":\"Dr. Gail Greenholt\"}}",
+      "request_path": "api/v1/organizations/0027db6c-01aa-4cb4-ab20-b688acd836ee",
+      "request_body": "{\"organization\":{\"name\":\"Garland Ruecker JD\"}}",
       "request_headers": {
         "Content-Type": "application/json",
-        "X-Auth-Token": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjZiOWE4ZmIxLTZjZjgtNDRiZS05M2U2LWYwZWI3NTE0M2ZjNCIsImV4cCI6MTU5MzQ2Mjk4M30.WGGKknQmNSPFep0dMUtNgKGmgKmcDDH58PKwHTOuiRc"
+        "X-Auth-Token": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjlmMmMyMWYxLTkwZGItNGQ0OS1hMGQ4LTJmMjYwMmFiNmNlMyIsImV4cCI6MTU5MzYzMzM0NX0.PlMVzweC8L8YsuSInNlZMJX8TnXtUGLJeOAIUfAfsSg"
       },
       "request_query_parameters": {
       },
@@ -38,7 +38,7 @@
       "response_headers": {
       },
       "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl \"http://api.example.comapi/v1/organizations/b2a39b8b-a7af-42d5-81c3-7f79a5993218\" -d '{\"organization\":{\"name\":\"Dr. Gail Greenholt\"}}' -X PATCH \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"X-Auth-Token: eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjZiOWE4ZmIxLTZjZjgtNDRiZS05M2U2LWYwZWI3NTE0M2ZjNCIsImV4cCI6MTU5MzQ2Mjk4M30.WGGKknQmNSPFep0dMUtNgKGmgKmcDDH58PKwHTOuiRc\""
+      "curl": "curl \"http://api.example.comapi/v1/organizations/0027db6c-01aa-4cb4-ab20-b688acd836ee\" -d '{\"organization\":{\"name\":\"Garland Ruecker JD\"}}' -X PATCH \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"X-Auth-Token: eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjlmMmMyMWYxLTkwZGItNGQ0OS1hMGQ4LTJmMjYwMmFiNmNlMyIsImV4cCI6MTU5MzYzMzM0NX0.PlMVzweC8L8YsuSInNlZMJX8TnXtUGLJeOAIUfAfsSg\""
     }
   ]
 }

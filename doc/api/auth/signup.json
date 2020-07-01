@@ -44,7 +44,7 @@
     {
       "request_method": "POST",
       "request_path": "/signup",
-      "request_body": "{\"user\":{\"name\":\"Jackson Bosco\",\"email\":\"iraida@shanahan-romaguera.co\",\"mobile_number\":6830643460,\"password\":\"ba337e897fff99a49da377ef65352384\",\"organizations_attributes\":[{\"name\":\"Josef Boyle\"}]}}",
+      "request_body": "{\"user\":{\"name\":\"Nicky Borer VM\",\"email\":\"alphonse@hoppe.info\",\"mobile_number\":8238234690,\"password\":\"24c636c4325e074ec434403a523c34ab\",\"organizations_attributes\":[{\"name\":\"Alphonse Schamberger\"}]}}",
       "request_headers": {
         "Content-Type": "application/json",
         "X-Auth-Token": ""
@@ -58,7 +58,7 @@
       "response_headers": {
       },
       "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl \"http://api.example.com/signup\" -d '{\"user\":{\"name\":\"Jackson Bosco\",\"email\":\"iraida@shanahan-romaguera.co\",\"mobile_number\":6830643460,\"password\":\"ba337e897fff99a49da377ef65352384\",\"organizations_attributes\":[{\"name\":\"Josef Boyle\"}]}}' -X POST \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"X-Auth-Token: \""
+      "curl": "curl \"http://api.example.com/signup\" -d '{\"user\":{\"name\":\"Nicky Borer VM\",\"email\":\"alphonse@hoppe.info\",\"mobile_number\":8238234690,\"password\":\"24c636c4325e074ec434403a523c34ab\",\"organizations_attributes\":[{\"name\":\"Alphonse Schamberger\"}]}}' -X POST \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"X-Auth-Token: \""
     }
   ]
 }

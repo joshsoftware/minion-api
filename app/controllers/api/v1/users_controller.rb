@@ -5,6 +5,7 @@ module Api::V1
     before_action :load_organization, only: [:index]
     before_action :load_user, only: %i[show update destroy]
     before_action :load_role, only: :create
+    before_action :authorize_user
 
     def index
       users = @organization.users
@@ -105,6 +106,14 @@ module Api::V1
         message: I18n.t('organization.invalid'),
         status_code: :not_found
       )
+    end
+
+    def authorize_user
+      if @user.present?
+        authorize @user, policy_class: V1::UserPolicy
+      else
+        authorize current_user, policy_class: V1::UserPolicy
+      end
     end
 
     def user_params

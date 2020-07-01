@@ -43,11 +43,11 @@
   "requests": [
     {
       "request_method": "PATCH",
-      "request_path": "api/v1/users/04332234-03cc-4745-901a-646d726ab365",
-      "request_body": "{\"user\":{\"name\":\"Delta Walker\",\"email\":\"mikaela_borer@bosco.com\",\"mobile_number\":7885724293,\"password\":\"5pa2yad8eagx\",\"role\":\"admin\"}}",
+      "request_path": "api/v1/users/ce950035-5f53-481a-8c34-56b3f943f79c",
+      "request_body": "{\"user\":{\"name\":\"Jimmy Runolfsson\",\"email\":\"napoleon.hansen@orn-effertz.org\",\"mobile_number\":8186157634,\"password\":\"s79cizueqyyi\",\"role\":\"admin\"}}",
       "request_headers": {
         "Content-Type": "application/json",
-        "X-Auth-Token": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjA0MzMyMjM0LTAzY2MtNDc0NS05MDFhLTY0NmQ3MjZhYjM2NSIsImV4cCI6MTU5MzQ2Mjk4NH0.u572w-J1fcHiNKL-7aXlCSfWNgJaL-jER7GFi1bomSg"
+        "X-Auth-Token": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImNlOTUwMDM1LTVmNTMtNDgxYS04YzM0LTU2YjNmOTQzZjc5YyIsImV4cCI6MTU5MzYzMzM0NX0.wNmNyP-pmgLqYlbSj99adUZBvgDn_vDK2IzGW_dfgPQ"
       },
       "request_query_parameters": {
       },
@@ -58,7 +58,7 @@
       "response_headers": {
       },
       "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl \"http://api.example.comapi/v1/users/04332234-03cc-4745-901a-646d726ab365\" -d '{\"user\":{\"name\":\"Delta Walker\",\"email\":\"mikaela_borer@bosco.com\",\"mobile_number\":7885724293,\"password\":\"5pa2yad8eagx\",\"role\":\"admin\"}}' -X PATCH \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"X-Auth-Token: eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjA0MzMyMjM0LTAzY2MtNDc0NS05MDFhLTY0NmQ3MjZhYjM2NSIsImV4cCI6MTU5MzQ2Mjk4NH0.u572w-J1fcHiNKL-7aXlCSfWNgJaL-jER7GFi1bomSg\""
+      "curl": "curl \"http://api.example.comapi/v1/users/ce950035-5f53-481a-8c34-56b3f943f79c\" -d '{\"user\":{\"name\":\"Jimmy Runolfsson\",\"email\":\"napoleon.hansen@orn-effertz.org\",\"mobile_number\":8186157634,\"password\":\"s79cizueqyyi\",\"role\":\"admin\"}}' -X PATCH \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"X-Auth-Token: eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImNlOTUwMDM1LTVmNTMtNDgxYS04YzM0LTU2YjNmOTQzZjc5YyIsImV4cCI6MTU5MzYzMzM0NX0.wNmNyP-pmgLqYlbSj99adUZBvgDn_vDK2IzGW_dfgPQ\""
     }
   ]
 }

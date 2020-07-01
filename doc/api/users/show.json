@@ -18,11 +18,11 @@
   "requests": [
     {
       "request_method": "GET",
-      "request_path": "api/v1/users/219f1ab5-5da0-4f7c-8a8c-78d4e37d96f5",
+      "request_path": "api/v1/users/c09c5c0c-9f25-4a8b-aa01-18d0af96045a",
       "request_body": null,
       "request_headers": {
         "Content-Type": "application/json",
-        "X-Auth-Token": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIxOWYxYWI1LTVkYTAtNGY3Yy04YThjLTc4ZDRlMzdkOTZmNSIsImV4cCI6MTU5MzQ2Mjk4M30.cXBIkfSBpolONivwQMZcjd_iB0wvEpUuuSjP9jNIgbs"
+        "X-Auth-Token": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImMwOWM1YzBjLTlmMjUtNGE4Yi1hYTAxLTE4ZDBhZjk2MDQ1YSIsImV4cCI6MTU5MzYzMzM0NX0.4xZE0j6SONdRXUoWMW-zEvt2NHWz3-Be4Fkj1yw3Nhw"
       },
       "request_query_parameters": {
       },
@@ -33,7 +33,7 @@
       "response_headers": {
       },
       "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl -g \"http://api.example.comapi/v1/users/219f1ab5-5da0-4f7c-8a8c-78d4e37d96f5\" -X GET \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"X-Auth-Token: eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIxOWYxYWI1LTVkYTAtNGY3Yy04YThjLTc4ZDRlMzdkOTZmNSIsImV4cCI6MTU5MzQ2Mjk4M30.cXBIkfSBpolONivwQMZcjd_iB0wvEpUuuSjP9jNIgbs\""
+      "curl": "curl -g \"http://api.example.comapi/v1/users/c09c5c0c-9f25-4a8b-aa01-18d0af96045a\" -X GET \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"X-Auth-Token: eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImMwOWM1YzBjLTlmMjUtNGE4Yi1hYTAxLTE4ZDBhZjk2MDQ1YSIsImV4cCI6MTU5MzYzMzM0NX0.4xZE0j6SONdRXUoWMW-zEvt2NHWz3-Be4Fkj1yw3Nhw\""
     }
   ]
 }

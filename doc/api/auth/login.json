@@ -26,7 +26,7 @@
     {
       "request_method": "POST",
       "request_path": "/login",
-      "request_body": "{\"user\":{\"email\":\"fredia_greenholt@herman.net\",\"password\":\"kh4j9jw4vtta\"}}",
+      "request_body": "{\"user\":{\"email\":\"setsuko@oconner-ankunding.net\",\"password\":\"461x3vebn2nk\"}}",
       "request_headers": {
         "Content-Type": "application/json",
         "X-Auth-Token": ""
@@ -40,7 +40,7 @@
       "response_headers": {
       },
       "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl \"http://api.example.com/login\" -d '{\"user\":{\"email\":\"fredia_greenholt@herman.net\",\"password\":\"kh4j9jw4vtta\"}}' -X POST \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"X-Auth-Token: \""
+      "curl": "curl \"http://api.example.com/login\" -d '{\"user\":{\"email\":\"setsuko@oconner-ankunding.net\",\"password\":\"461x3vebn2nk\"}}' -X POST \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"X-Auth-Token: \""
     }
   ]
 }

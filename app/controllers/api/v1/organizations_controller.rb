@@ -3,6 +3,7 @@
 module Api::V1
   class OrganizationsController < BaseController
     before_action :load_organization, only: %i[show update destroy]
+    before_action :authorize_organization
 
     def index
       organizations = current_user.organizations
@@ -76,6 +77,14 @@ module Api::V1
 
     def organization_params
       params.require(:organization).permit(:name)
+    end
+
+    def authorize_organization
+      if @organization.present?
+        authorize @organization, policy_class: V1::OrganizationPolicy
+      else
+        authorize current_user, policy_class: V1::OrganizationPolicy
+      end
     end
   end
 end
