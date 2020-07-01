@@ -2,6 +2,10 @@ require 'rails_helper'
 
 resource 'Users' do
   let(:user) { create(:user) }
+  let(:employee) { create(:user, role: 'Employee') }
+  let(:organization) { create(:organization) }
+  let!(:organization_user) { create(:organization_user, organization: organization, user: user) }
+  let!(:organization_employee) { create(:organization_user, organization: organization, user: employee) }
 
   before(:each) do
     add_request_headers(user: user)
@@ -93,7 +97,7 @@ resource 'Users' do
 
   delete 'api/v1/users/:id' do
     parameter :id, "user id", required: true
-    let(:id) { user.id }
+    let(:id) { employee.id }
 
     example 'delete' do
       do_request

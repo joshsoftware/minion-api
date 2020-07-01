@@ -18,11 +18,11 @@
   "requests": [
     {
       "request_method": "GET",
-      "request_path": "api/v1/organizations/2effd9cb-9851-4884-a39e-2596012d01db",
+      "request_path": "api/v1/organizations/f3895a08-54b0-4269-91f9-4bc92b721a2e",
       "request_body": null,
       "request_headers": {
         "Content-Type": "application/json",
-        "X-Auth-Token": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY2NmYyMDUwLTJlYjctNGFjZS05MDYwLTBiYTY2Y2NiZjgwMiIsImV4cCI6MTU5MzQ2Mjk4M30.AKmXamo4LqP2YrTs0jjfAg30klJgiRx2IT2Jt6ldm-w"
+        "X-Auth-Token": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImFlOWI4NzNlLTBlNGItNDg4OC1hMTRmLTEyYWI2MGYyNWEyMiIsImV4cCI6MTU5MzYzMzM0NX0.4ETaIR6UnVFr8HHQs4awzqhwb4mPp7RVqjhP0ZBerjM"
       },
       "request_query_parameters": {
       },
@@ -33,7 +33,7 @@
       "response_headers": {
       },
       "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl -g \"http://api.example.comapi/v1/organizations/2effd9cb-9851-4884-a39e-2596012d01db\" -X GET \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"X-Auth-Token: eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjY2NmYyMDUwLTJlYjctNGFjZS05MDYwLTBiYTY2Y2NiZjgwMiIsImV4cCI6MTU5MzQ2Mjk4M30.AKmXamo4LqP2YrTs0jjfAg30klJgiRx2IT2Jt6ldm-w\""
+      "curl": "curl -g \"http://api.example.comapi/v1/organizations/f3895a08-54b0-4269-91f9-4bc92b721a2e\" -X GET \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"X-Auth-Token: eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImFlOWI4NzNlLTBlNGItNDg4OC1hMTRmLTEyYWI2MGYyNWEyMiIsImV4cCI6MTU5MzYzMzM0NX0.4ETaIR6UnVFr8HHQs4awzqhwb4mPp7RVqjhP0ZBerjM\""
     }
   ]
 }

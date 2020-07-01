@@ -15,6 +15,7 @@ require 'rspec/rails'
 require 'rspec_api_documentation/dsl'
 require 'rspec_api_documentation_helper'
 require 'common_methods'
+require 'pundit/rspec'
 
 # Add additional requires below this line. Rails is not loaded until this point!
 

@@ -37,10 +37,10 @@
     {
       "request_method": "POST",
       "request_path": "api/v1/users",
-      "request_body": "{\"user\":{\"name\":\"Curtis Stoltenberg\",\"email\":\"lauren@stiedemann.com\",\"mobile_number\":4953802528,\"password\":\"jwixlyq73w6k\",\"role\":\"Winnie DuBuque\"}}",
+      "request_body": "{\"user\":{\"name\":\"Santos Friesen\",\"email\":\"eldon_brown@mosciski.biz\",\"mobile_number\":1203038841,\"password\":\"uyyorybjhl1j\",\"role\":\"Mellie Hand\"}}",
       "request_headers": {
         "Content-Type": "application/json",
-        "X-Auth-Token": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjU2OGZjNWNjLTU2OTEtNDA4NS1hNGJiLWE1Y2FjZmE5NmYyOSIsImV4cCI6MTU5MzQ2Mjk4M30.rNZ-9kdl-B3V7jDmu7q3UpHAoM3CZXOhuty7PobKheE"
+        "X-Auth-Token": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImMzNGEyZGYxLTJjNDEtNDE0ZC04NGQ4LTliNjYxZjZjN2Q0MiIsImV4cCI6MTU5MzYzMzM0NX0.aoGezwux33yf0eeS14SDrW9c4LHIV1ZGwysMsGteYeU"
       },
       "request_query_parameters": {
       },
@@ -51,7 +51,7 @@
       "response_headers": {
       },
       "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl \"http://api.example.comapi/v1/users\" -d '{\"user\":{\"name\":\"Curtis Stoltenberg\",\"email\":\"lauren@stiedemann.com\",\"mobile_number\":4953802528,\"password\":\"jwixlyq73w6k\",\"role\":\"Winnie DuBuque\"}}' -X POST \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"X-Auth-Token: eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjU2OGZjNWNjLTU2OTEtNDA4NS1hNGJiLWE1Y2FjZmE5NmYyOSIsImV4cCI6MTU5MzQ2Mjk4M30.rNZ-9kdl-B3V7jDmu7q3UpHAoM3CZXOhuty7PobKheE\""
+      "curl": "curl \"http://api.example.comapi/v1/users\" -d '{\"user\":{\"name\":\"Santos Friesen\",\"email\":\"eldon_brown@mosciski.biz\",\"mobile_number\":1203038841,\"password\":\"uyyorybjhl1j\",\"role\":\"Mellie Hand\"}}' -X POST \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"X-Auth-Token: eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImMzNGEyZGYxLTJjNDEtNDE0ZC04NGQ4LTliNjYxZjZjN2Q0MiIsImV4cCI6MTU5MzYzMzM0NX0.aoGezwux33yf0eeS14SDrW9c4LHIV1ZGwysMsGteYeU\""
     }
   ]
 }

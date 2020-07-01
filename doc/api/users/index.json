@@ -18,14 +18,14 @@
   "requests": [
     {
       "request_method": "GET",
-      "request_path": "api/v1/users?organization_id=90a1d46e-0f38-4c69-be59-cb45a98428e6",
+      "request_path": "api/v1/users?organization_id=a8b22a9f-82c9-4f70-ab5c-62eb05497667",
       "request_body": null,
       "request_headers": {
         "Content-Type": "application/json",
-        "X-Auth-Token": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImY5MjFmYjg1LThmYWMtNDdhNS04OWQ1LTIxM2VkNjQ3M2E3YiIsImV4cCI6MTU5MzQ2Mjk4NH0.5GXLTVH6_tfNSIHCgtbZI1VvUtqesTYmL5KHuAOvJw8"
+        "X-Auth-Token": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjJmYTE1NTY4LTNhZWUtNDA3Zi04MWYyLTVkNTkzZGM0ZTMwMyIsImV4cCI6MTU5MzYzMzM0NX0.mrIZAUsaKR-26N-FN4XtC0SqYkA3rTpJjUFanrOHm4A"
       },
       "request_query_parameters": {
-        "organization_id": "90a1d46e-0f38-4c69-be59-cb45a98428e6"
+        "organization_id": "a8b22a9f-82c9-4f70-ab5c-62eb05497667"
       },
       "request_content_type": "application/json",
       "response_status": 200,
@@ -34,7 +34,7 @@
       "response_headers": {
       },
       "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl -g \"http://api.example.comapi/v1/users?organization_id=90a1d46e-0f38-4c69-be59-cb45a98428e6\" -X GET \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"X-Auth-Token: eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImY5MjFmYjg1LThmYWMtNDdhNS04OWQ1LTIxM2VkNjQ3M2E3YiIsImV4cCI6MTU5MzQ2Mjk4NH0.5GXLTVH6_tfNSIHCgtbZI1VvUtqesTYmL5KHuAOvJw8\""
+      "curl": "curl -g \"http://api.example.comapi/v1/users?organization_id=a8b22a9f-82c9-4f70-ab5c-62eb05497667\" -X GET \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"X-Auth-Token: eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjJmYTE1NTY4LTNhZWUtNDA3Zi04MWYyLTVkNTkzZGM0ZTMwMyIsImV4cCI6MTU5MzYzMzM0NX0.mrIZAUsaKR-26N-FN4XtC0SqYkA3rTpJjUFanrOHm4A\""
     }
   ]
 }

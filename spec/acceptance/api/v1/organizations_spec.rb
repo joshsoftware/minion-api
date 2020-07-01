@@ -3,6 +3,7 @@ require 'rails_helper'
 resource 'Organizations' do
   let(:user) { create(:user) }
   let(:organization) { create(:organization) }
+  let!(:organization_user) { create(:organization_user, organization: organization, user: user) }
 
   before(:each) do
     add_request_headers(user: user)
