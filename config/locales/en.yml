@@ -37,6 +37,9 @@ en:
     signup:
       failed: 'We are unable to create your account. Please check errors and try again'
       success: 'Your account is created successfully. Please login to continue'
+    logout:
+      success: 'You have been logged out!'
+      failed: 'We are unable to log you out. Please check errors for more details'
   session:
     access_denied: 'You need additional privileges in order to perform this action'
     invalid: 'Your session is invalid. Please login to continue'

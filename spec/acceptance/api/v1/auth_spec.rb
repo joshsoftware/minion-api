@@ -73,4 +73,14 @@ resource 'Auth' do
       expect(status).to eq(200)
     end
   end
+
+  get '/logout' do
+    let!(:user) { create(:user) }
+
+    example 'logout' do
+      add_request_headers(user: user)
+      do_request
+      expect(status).to eq(200)
+    end
+  end
 end
