@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_29_084936) do
+ActiveRecord::Schema.define(version: 2020_07_02_113524) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -22,6 +22,19 @@ ActiveRecord::Schema.define(version: 2020_06_29_084936) do
     t.json "configuration", default: "{}", null: false
     t.string "source", default: "admin", null: false
     t.integer "version", default: 0, null: false
+  end
+
+  create_table "agent_versions", force: :cascade do |t|
+    t.string "version", null: false
+    t.string "md5", null: false
+    t.string "file_path", null: false
+  end
+
+  create_table "blacklisted_tokens", force: :cascade do |t|
+    t.string "token"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["token"], name: "index_blacklisted_tokens_on_token"
   end
 
   create_table "logs", primary_key: ["id", "server_id"], force: :cascade do |t|

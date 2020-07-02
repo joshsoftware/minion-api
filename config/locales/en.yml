@@ -64,3 +64,5 @@ en:
     delete:
       success: 'Organization deleted successfully'
       failed: 'Unable to delete an Organizationer!'
+  agent_version:
+    failed: 'We are unable to get the latest Agent version!'

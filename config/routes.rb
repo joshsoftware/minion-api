@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       resources :users
       get 'me', to: 'users#me'
       resources :organizations
+      get 'minion', to: 'base#minion'
     end
   end
   post 'login', to: 'api/v1/auth#login'
