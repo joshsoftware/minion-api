@@ -2,10 +2,10 @@
 
 module Api::V1
   class BaseController < ApplicationController
-    before_action :authenticate!
+    before_action :authenticate!, except: :minion
 
     def minion
-      latest_version = AgentVersion.last
+      latest_version = AgentVersion.last.as_json(except: :id)
       return success_response(data: latest_version) if latest_version
       error_response(
         message: I18n.t('agent_version.failed'),

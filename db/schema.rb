@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 2020_07_02_113524) do
   create_table "agent_versions", force: :cascade do |t|
     t.string "version", null: false
     t.string "md5", null: false
-    t.string "file_path", null: false
+    t.string "url", null: false
   end
 
   create_table "blacklisted_tokens", force: :cascade do |t|
