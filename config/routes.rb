@@ -12,4 +12,5 @@ Rails.application.routes.draw do
   end
   post 'login', to: 'api/v1/auth#login'
   post 'signup', to: 'api/v1/auth#signup'
+  get 'logout', to: 'api/v1/auth#logout'
 end

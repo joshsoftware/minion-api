@@ -16,6 +16,7 @@ module Api::V1
     private
 
     def authenticate!
+      validate_token
       current_user
     rescue JWT::ExpiredSignature
       error_response(
@@ -39,6 +40,11 @@ module Api::V1
       @jwt_payload ||= JwtService.decode(
         request.headers[HTTP_AUTH_HEADER]
       ).first
+    end
+
+    def validate_token
+      token = request.headers[HTTP_AUTH_HEADER]
+      raise JWT::ExpiredSignature if BlacklistedToken.find_by(token: token)
     end
   end
 end
