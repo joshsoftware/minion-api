@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_many :organization_users, dependent: :destroy
   has_many :organizations, through: :organization_users
   accepts_nested_attributes_for :organizations
+  accepts_nested_attributes_for :organization_users
 
   def admin?
     role == ROLES[:admin]
