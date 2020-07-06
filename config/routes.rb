@@ -6,8 +6,11 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :users
       get 'me', to: 'users#me'
-      resources :organizations
       get 'minion', to: 'base#minion'
+      resources :organizations
+      resources :organization_users, only: [:create] do
+        delete :destroy, on: :collection
+      end
     end
   end
   post 'login', to: 'api/v1/auth#login'

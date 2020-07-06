@@ -9,6 +9,7 @@ RSpec.describe User, type: :model do
     it { should have_many(:organization_users) }
     it { should have_many(:organizations).through(:organization_users) }
     it { should accept_nested_attributes_for(:organizations) }
+    it { should accept_nested_attributes_for(:organization_users) }
   end
 
   describe 'validations' do
