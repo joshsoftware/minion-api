@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_29_084936) do
+ActiveRecord::Schema.define(version: 2020_07_02_154926) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -22,6 +22,29 @@ ActiveRecord::Schema.define(version: 2020_06_29_084936) do
     t.json "configuration", default: "{}", null: false
     t.string "source", default: "admin", null: false
     t.integer "version", default: 0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "command_queues", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "command_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["created_at"], name: "index_command_queues_on_created_at"
+  end
+
+  create_table "command_responses", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "response", null: false, array: true
+    t.string "hash", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["hash"], name: "index_command_responses_on_hash", unique: true
+  end
+
+  create_table "commands", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "argv", array: true
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "logs", primary_key: ["id", "server_id"], force: :cascade do |t|
@@ -30,6 +53,8 @@ ActiveRecord::Schema.define(version: 2020_06_29_084936) do
     t.uuid "uuid", null: false
     t.string "service", null: false
     t.string "msg", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "organization_users", force: :cascade do |t|
@@ -42,27 +67,50 @@ ActiveRecord::Schema.define(version: 2020_06_29_084936) do
   create_table "organizations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
     t.datetime "discarded_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["discarded_at"], name: "index_organizations_on_discarded_at"
   end
 
   create_table "servers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "aliases", array: true
     t.inet "addresses", array: true
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "servers_commands", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "server_id", null: false
+    t.uuid "command_id", null: false
+    t.uuid "response_id"
+    t.datetime "dispatched_at"
+    t.datetime "response_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["command_id"], name: "index_servers_commands_on_command_id"
+    t.index ["response_id"], name: "index_servers_commands_on_response_id"
+    t.index ["server_id"], name: "index_servers_commands_on_server_id"
   end
 
   create_table "servers_tags", force: :cascade do |t|
     t.uuid "server_id", null: false
     t.bigint "tag_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "tags", force: :cascade do |t|
     t.string "tag", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "telemetries", primary_key: ["server_id", "uuid"], force: :cascade do |t|
     t.uuid "server_id", null: false
     t.uuid "uuid", null: false
     t.jsonb "data"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
