@@ -75,3 +75,5 @@ en:
     delete:
       success: 'Organization has been disabled for the user'
       failed: 'Unable to delete the membership. Please check errors and try again'
+  agent_version:
+    failed: 'We are unable to get the latest Agent version!'
