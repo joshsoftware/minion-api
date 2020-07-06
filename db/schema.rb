@@ -47,6 +47,19 @@ ActiveRecord::Schema.define(version: 2020_07_02_154926) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "agent_versions", force: :cascade do |t|
+    t.string "version", null: false
+    t.string "md5", null: false
+    t.string "url", null: false
+  end
+
+  create_table "blacklisted_tokens", force: :cascade do |t|
+    t.string "token"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["token"], name: "index_blacklisted_tokens_on_token"
+  end
+
   create_table "logs", primary_key: ["id", "server_id"], force: :cascade do |t|
     t.bigserial "id", null: false
     t.uuid "server_id", null: false

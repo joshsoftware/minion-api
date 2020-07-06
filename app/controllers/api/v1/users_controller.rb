@@ -117,7 +117,8 @@ module Api::V1
     end
 
     def user_params
-      params.require(:user).permit(:name, :email, :mobile_number, :password, :role)
+      params.require(:user).permit(:name, :email, :mobile_number, :password, :role,
+                                   organization_users_attributes: [:organization_id])
     end
   end
 end

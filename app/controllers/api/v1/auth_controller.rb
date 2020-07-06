@@ -2,7 +2,7 @@
 
 module Api::V1
   class AuthController < BaseController
-    skip_before_action :authenticate!
+    skip_before_action :authenticate!, except: :logout
     before_action :load_user, only: :login
 
     def login
@@ -37,6 +37,25 @@ module Api::V1
       else
         resource_error_response(
           message: I18n.t('auth.signup.failed'),
+          status_code: :unprocessable_entity,
+          errors: data[:errors]
+        )
+      end
+    end
+
+    def logout
+      token = request.headers[HTTP_AUTH_HEADER]
+      data = V1::LogoutService.new(
+        token: token
+      ).logout
+
+      if data[:success]
+        success_response(
+          message: I18n.t('auth.logout.success')
+        )
+      else
+        resource_error_response(
+          message: I18n.t('auth.logout.failed'),
           status_code: :unprocessable_entity,
           errors: data[:errors]
         )

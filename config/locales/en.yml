@@ -37,6 +37,9 @@ en:
     signup:
       failed: 'We are unable to create your account. Please check errors and try again'
       success: 'Your account is created successfully. Please login to continue'
+    logout:
+      success: 'You have been logged out!'
+      failed: 'We are unable to log you out. Please check errors for more details'
   session:
     access_denied: 'You need additional privileges in order to perform this action'
     invalid: 'Your session is invalid. Please login to continue'
@@ -64,3 +67,13 @@ en:
     delete:
       success: 'Organization deleted successfully'
       failed: 'Unable to delete an Organizationer!'
+  organization_user:
+    invalid: 'We are unable to find the record for given organization_id & user_id'
+    create:
+      success: 'Organization is assigned successfully'
+      failed: 'Unable to assign organization. Please check errors and try again'
+    delete:
+      success: 'Organization has been disabled for the user'
+      failed: 'Unable to delete the membership. Please check errors and try again'
+  agent_version:
+    failed: 'We are unable to get the latest Agent version!'

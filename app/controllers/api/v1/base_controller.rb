@@ -2,11 +2,21 @@
 
 module Api::V1
   class BaseController < ApplicationController
-    before_action :authenticate!
+    before_action :authenticate!, except: :minion
+
+    def minion
+      latest_version = AgentVersion.last.as_json(except: :id)
+      return success_response(data: latest_version) if latest_version
+      error_response(
+        message: I18n.t('agent_version.failed'),
+        status_code: :unauthorized
+      )
+    end
 
     private
 
     def authenticate!
+      validate_token
       current_user
     rescue JWT::ExpiredSignature
       error_response(
@@ -30,6 +40,11 @@ module Api::V1
       @jwt_payload ||= JwtService.decode(
         request.headers[HTTP_AUTH_HEADER]
       ).first
+    end
+
+    def validate_token
+      token = request.headers[HTTP_AUTH_HEADER]
+      raise JWT::ExpiredSignature if BlacklistedToken.find_by(token: token)
     end
   end
 end
