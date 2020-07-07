@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_02_154926) do
+ActiveRecord::Schema.define(version: 2020_07_07_135226) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -26,27 +26,6 @@ ActiveRecord::Schema.define(version: 2020_07_02_154926) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "command_queues", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "command_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["created_at"], name: "index_command_queues_on_created_at"
-  end
-
-  create_table "command_responses", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "response", null: false, array: true
-    t.string "hash", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["hash"], name: "index_command_responses_on_hash", unique: true
-  end
-
-  create_table "commands", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "argv", array: true
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "agent_versions", force: :cascade do |t|
     t.string "version", null: false
     t.string "md5", null: false
@@ -58,6 +37,28 @@ ActiveRecord::Schema.define(version: 2020_07_02_154926) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["token"], name: "index_blacklisted_tokens_on_token"
+  end
+
+  create_table "command_queues", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "command_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["created_at"], name: "index_command_queues_on_created_at"
+  end
+
+  create_table "command_responses", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "stdout", null: false, array: true
+    t.string "hash", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "stderr", default: [], null: false, array: true
+    t.index ["hash"], name: "index_command_responses_on_hash", unique: true
+  end
+
+  create_table "commands", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "argv", array: true
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "logs", primary_key: ["id", "server_id"], force: :cascade do |t|
