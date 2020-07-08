@@ -5,4 +5,5 @@ class Organization < ApplicationRecord
   validates :name, presence: true, uniqueness: true
   has_many :organization_users, dependent: :destroy
   has_many :users, through: :organization_users
+  has_many :servers, dependent: :destroy
 end
