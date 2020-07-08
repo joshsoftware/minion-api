@@ -77,3 +77,14 @@ en:
       failed: 'Unable to delete the membership. Please check errors and try again'
   agent_version:
     failed: 'We are unable to get the latest Agent version!'
+  server:
+    invalid: 'We are unable to find any Server with the given server_id. Please try again with the valid server_id.'
+    create:
+      success: 'Server has been created successfully'
+      failed: 'Failed to create a Server, please try again with valid details'
+    update:
+      success: 'Server has been updated successfully.'
+      failed: 'We are unable to update the Server. Please check errors and try again'
+    delete:
+      success: 'Server deleted successfully'
+      failed: 'Unable to delete the Server!'

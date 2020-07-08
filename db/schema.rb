@@ -91,6 +91,10 @@ ActiveRecord::Schema.define(version: 2020_07_07_181433) do
     t.string "addresses", default: [], null: false, array: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.uuid "organization_id"
+    t.datetime "discarded_at"
+    t.index ["discarded_at"], name: "index_servers_on_discarded_at"
+    t.index ["organization_id"], name: "index_servers_on_organization_id"
   end
 
   create_table "servers_commands", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
