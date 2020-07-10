@@ -1,8 +1,8 @@
 {
-  "resource": "Organizations",
+  "resource": "Servers",
   "resource_explanation": null,
   "http_method": "GET",
-  "route": "api/v1/organizations",
+  "route": "api/v1/servers",
   "description": "index",
   "explanation": null,
   "parameters": [
@@ -14,11 +14,11 @@
   "requests": [
     {
       "request_method": "GET",
-      "request_path": "api/v1/organizations",
+      "request_path": "api/v1/servers",
       "request_body": null,
       "request_headers": {
         "Content-Type": "application/json",
-        "X-Auth-Token": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIwMWQyZGY0LTc3ZjgtNGY3MC05ZWMyLTQ0ZDRiYWNhZTNmZSIsImV4cCI6MTU5NDM5NjM4N30.rBv4EF5Cx8HP7vnxhxi-l7r7ZeSa_-BHRXXZaOb6Kzc"
+        "X-Auth-Token": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjdkZmZmNzJjLTkyMjYtNGYyNi05MTczLTQ2NTc0ZjkyMjU1MSIsImV4cCI6MTU5NDM5NjM4N30.1i4yD_SzOoFQan79lFK1aAMOb9djO0SX4TEh_kPmZ9s"
       },
       "request_query_parameters": {
       },
@@ -29,7 +29,7 @@
       "response_headers": {
       },
       "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl -g \"http://api.example.comapi/v1/organizations\" -X GET \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"X-Auth-Token: eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjIwMWQyZGY0LTc3ZjgtNGY3MC05ZWMyLTQ0ZDRiYWNhZTNmZSIsImV4cCI6MTU5NDM5NjM4N30.rBv4EF5Cx8HP7vnxhxi-l7r7ZeSa_-BHRXXZaOb6Kzc\""
+      "curl": "curl -g \"http://api.example.comapi/v1/servers\" -X GET \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"X-Auth-Token: eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjdkZmZmNzJjLTkyMjYtNGYyNi05MTczLTQ2NTc0ZjkyMjU1MSIsImV4cCI6MTU5NDM5NjM4N30.1i4yD_SzOoFQan79lFK1aAMOb9djO0SX4TEh_kPmZ9s\""
     }
   ]
 }

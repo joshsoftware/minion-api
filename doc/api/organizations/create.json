@@ -20,10 +20,10 @@
     {
       "request_method": "POST",
       "request_path": "api/v1/organizations",
-      "request_body": "{\"organization\":{\"name\":\"Bebe Connelly\"}}",
+      "request_body": "{\"organization\":{\"name\":\"Tamika Rempel\"}}",
       "request_headers": {
         "Content-Type": "application/json",
-        "X-Auth-Token": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjhiN2EzMmRjLWExYTEtNGE0Ni1hZGM4LWFmZmU0YjBmZGU4NyIsImV4cCI6MTU5MzYzMzM0NX0.NNuyRd5Qx6W-o5cwXUS48fjl1ZmomDJansZykBGmrK0"
+        "X-Auth-Token": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjRjNTRjMWFmLWUwZWQtNDhiMS1iYjI3LTFjNmFlMjA2ZWM0NiIsImV4cCI6MTU5NDM5NjM4N30.w2NGvjSV-FRrBu00K-1e6gCGU-eCi0nIQ1IiddEVS8Y"
       },
       "request_query_parameters": {
       },
@@ -34,7 +34,7 @@
       "response_headers": {
       },
       "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl \"http://api.example.comapi/v1/organizations\" -d '{\"organization\":{\"name\":\"Bebe Connelly\"}}' -X POST \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"X-Auth-Token: eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjhiN2EzMmRjLWExYTEtNGE0Ni1hZGM4LWFmZmU0YjBmZGU4NyIsImV4cCI6MTU5MzYzMzM0NX0.NNuyRd5Qx6W-o5cwXUS48fjl1ZmomDJansZykBGmrK0\""
+      "curl": "curl \"http://api.example.comapi/v1/organizations\" -d '{\"organization\":{\"name\":\"Tamika Rempel\"}}' -X POST \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"X-Auth-Token: eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjRjNTRjMWFmLWUwZWQtNDhiMS1iYjI3LTFjNmFlMjA2ZWM0NiIsImV4cCI6MTU5NDM5NjM4N30.w2NGvjSV-FRrBu00K-1e6gCGU-eCi0nIQ1IiddEVS8Y\""
     }
   ]
 }

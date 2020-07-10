@@ -1,0 +1,46 @@
+{
+  "resource": "OrganizationUsers",
+  "resource_explanation": null,
+  "http_method": "POST",
+  "route": "api/v1/organization_users",
+  "description": "create",
+  "explanation": null,
+  "parameters": [
+    {
+      "scope": "organization_user",
+      "required": true,
+      "name": "organization_id",
+      "description": "Organization ID"
+    },
+    {
+      "scope": "organization_user",
+      "required": true,
+      "name": "user_id",
+      "description": "User ID"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "POST",
+      "request_path": "api/v1/organization_users",
+      "request_body": "{\"organization_user\":{\"organization_id\":\"f275ead8-63bc-4c97-a52d-881b5e18566b\",\"user_id\":\"e568ebbc-aa35-415e-b048-14c71f258992\"}}",
+      "request_headers": {
+        "Content-Type": "application/json",
+        "X-Auth-Token": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjE1NWM2NzRjLWM4NDMtNDhjZi05MGFhLWQ3ZjUxZTE0NjhmNiIsImV4cCI6MTU5NDM5NjM4N30.T47VIeWotVKgjCIT8wnc9p7nDe3FYn5OM_YTUCP0Zcs"
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/json",
+      "response_status": 201,
+      "response_status_text": "Created",
+      "response_body": "[binary data]",
+      "response_headers": {
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": "curl \"http://api.example.comapi/v1/organization_users\" -d '{\"organization_user\":{\"organization_id\":\"f275ead8-63bc-4c97-a52d-881b5e18566b\",\"user_id\":\"e568ebbc-aa35-415e-b048-14c71f258992\"}}' -X POST \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"X-Auth-Token: eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjE1NWM2NzRjLWM4NDMtNDhjZi05MGFhLWQ3ZjUxZTE0NjhmNiIsImV4cCI6MTU5NDM5NjM4N30.T47VIeWotVKgjCIT8wnc9p7nDe3FYn5OM_YTUCP0Zcs\""
+    }
+  ]
+}

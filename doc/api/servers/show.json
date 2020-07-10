@@ -1,15 +1,15 @@
 {
-  "resource": "Users",
+  "resource": "Servers",
   "resource_explanation": null,
   "http_method": "GET",
-  "route": "api/v1/users/:id",
+  "route": "api/v1/servers/:id",
   "description": "show",
   "explanation": null,
   "parameters": [
     {
       "require": true,
       "name": "id",
-      "description": "User id"
+      "description": "Servers id"
     }
   ],
   "response_fields": [
@@ -18,11 +18,11 @@
   "requests": [
     {
       "request_method": "GET",
-      "request_path": "api/v1/users/115c6952-10ba-47d7-ad08-7a762b820ce3",
+      "request_path": "api/v1/servers/8de50562-8c8b-4b63-ac69-d227d5aca0e2",
       "request_body": null,
       "request_headers": {
         "Content-Type": "application/json",
-        "X-Auth-Token": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjExNWM2OTUyLTEwYmEtNDdkNy1hZDA4LTdhNzYyYjgyMGNlMyIsImV4cCI6MTU5NDM5NjM4N30.bGywvFk-F_QS2u3ZpFNXs_Qni5-HYP9z351ozDwuEHM"
+        "X-Auth-Token": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjdhNWQyNWI3LTM4YWQtNGJmOS04NTE1LWIwNWVjNTU1ZmM3NCIsImV4cCI6MTU5NDM5NjM4N30.N61ZSpMB30xi7jy7jWrayYGDRCYB2DyAATX2JmDwXK4"
       },
       "request_query_parameters": {
       },
@@ -33,7 +33,7 @@
       "response_headers": {
       },
       "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl -g \"http://api.example.comapi/v1/users/115c6952-10ba-47d7-ad08-7a762b820ce3\" -X GET \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"X-Auth-Token: eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjExNWM2OTUyLTEwYmEtNDdkNy1hZDA4LTdhNzYyYjgyMGNlMyIsImV4cCI6MTU5NDM5NjM4N30.bGywvFk-F_QS2u3ZpFNXs_Qni5-HYP9z351ozDwuEHM\""
+      "curl": "curl -g \"http://api.example.comapi/v1/servers/8de50562-8c8b-4b63-ac69-d227d5aca0e2\" -X GET \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"X-Auth-Token: eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjdhNWQyNWI3LTM4YWQtNGJmOS04NTE1LWIwNWVjNTU1ZmM3NCIsImV4cCI6MTU5NDM5NjM4N30.N61ZSpMB30xi7jy7jWrayYGDRCYB2DyAATX2JmDwXK4\""
     }
   ]
 }

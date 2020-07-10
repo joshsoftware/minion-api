@@ -43,11 +43,11 @@
   "requests": [
     {
       "request_method": "PATCH",
-      "request_path": "api/v1/users/ce950035-5f53-481a-8c34-56b3f943f79c",
-      "request_body": "{\"user\":{\"name\":\"Jimmy Runolfsson\",\"email\":\"napoleon.hansen@orn-effertz.org\",\"mobile_number\":8186157634,\"password\":\"s79cizueqyyi\",\"role\":\"admin\"}}",
+      "request_path": "api/v1/users/ac7d5529-2280-4390-a99c-19444651d88a",
+      "request_body": "{\"user\":{\"name\":\"Shirley Jerde\",\"email\":\"david@bashirian-koelpin.name\",\"mobile_number\":3343696416,\"password\":\"vs9uplgu72js\",\"role\":\"admin\"}}",
       "request_headers": {
         "Content-Type": "application/json",
-        "X-Auth-Token": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImNlOTUwMDM1LTVmNTMtNDgxYS04YzM0LTU2YjNmOTQzZjc5YyIsImV4cCI6MTU5MzYzMzM0NX0.wNmNyP-pmgLqYlbSj99adUZBvgDn_vDK2IzGW_dfgPQ"
+        "X-Auth-Token": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImFjN2Q1NTI5LTIyODAtNDM5MC1hOTljLTE5NDQ0NjUxZDg4YSIsImV4cCI6MTU5NDM5NjM4N30.iOfxC19MXukK3eP33vwTJPEB0WQSPrOlpx-rsdN42AQ"
       },
       "request_query_parameters": {
       },
@@ -58,7 +58,7 @@
       "response_headers": {
       },
       "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl \"http://api.example.comapi/v1/users/ce950035-5f53-481a-8c34-56b3f943f79c\" -d '{\"user\":{\"name\":\"Jimmy Runolfsson\",\"email\":\"napoleon.hansen@orn-effertz.org\",\"mobile_number\":8186157634,\"password\":\"s79cizueqyyi\",\"role\":\"admin\"}}' -X PATCH \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"X-Auth-Token: eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImNlOTUwMDM1LTVmNTMtNDgxYS04YzM0LTU2YjNmOTQzZjc5YyIsImV4cCI6MTU5MzYzMzM0NX0.wNmNyP-pmgLqYlbSj99adUZBvgDn_vDK2IzGW_dfgPQ\""
+      "curl": "curl \"http://api.example.comapi/v1/users/ac7d5529-2280-4390-a99c-19444651d88a\" -d '{\"user\":{\"name\":\"Shirley Jerde\",\"email\":\"david@bashirian-koelpin.name\",\"mobile_number\":3343696416,\"password\":\"vs9uplgu72js\",\"role\":\"admin\"}}' -X PATCH \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"X-Auth-Token: eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImFjN2Q1NTI5LTIyODAtNDM5MC1hOTljLTE5NDQ0NjUxZDg4YSIsImV4cCI6MTU5NDM5NjM4N30.iOfxC19MXukK3eP33vwTJPEB0WQSPrOlpx-rsdN42AQ\""
     }
   ]
 }

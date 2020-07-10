@@ -19,11 +19,51 @@
           "method": "post"
         },
         {
+          "description": "logout",
+          "link": "auth/logout.json",
+          "groups": "all",
+          "route": "/logout",
+          "method": "get"
+        },
+        {
           "description": "signup",
           "link": "auth/signup.json",
           "groups": "all",
           "route": "/signup",
           "method": "post"
+        }
+      ]
+    },
+    {
+      "name": "Base",
+      "explanation": null,
+      "examples": [
+        {
+          "description": "minion",
+          "link": "base/minion.json",
+          "groups": "all",
+          "route": "api/v1/minion",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "name": "OrganizationUsers",
+      "explanation": null,
+      "examples": [
+        {
+          "description": "create",
+          "link": "organizationusers/create.json",
+          "groups": "all",
+          "route": "api/v1/organization_users",
+          "method": "post"
+        },
+        {
+          "description": "delete",
+          "link": "organizationusers/delete.json",
+          "groups": "all",
+          "route": "api/v1/organization_users",
+          "method": "delete"
         }
       ]
     },
@@ -64,6 +104,47 @@
           "link": "organizations/update.json",
           "groups": "all",
           "route": "api/v1/organizations/:id",
+          "method": "patch"
+        }
+      ]
+    },
+    {
+      "name": "Servers",
+      "explanation": null,
+      "examples": [
+        {
+          "description": "create",
+          "link": "servers/create.json",
+          "groups": "all",
+          "route": "api/v1/servers",
+          "method": "post"
+        },
+        {
+          "description": "delete",
+          "link": "servers/delete.json",
+          "groups": "all",
+          "route": "api/v1/servers/:id",
+          "method": "delete"
+        },
+        {
+          "description": "index",
+          "link": "servers/index.json",
+          "groups": "all",
+          "route": "api/v1/servers",
+          "method": "get"
+        },
+        {
+          "description": "show",
+          "link": "servers/show.json",
+          "groups": "all",
+          "route": "api/v1/servers/:id",
+          "method": "get"
+        },
+        {
+          "description": "update",
+          "link": "servers/update.json",
+          "groups": "all",
+          "route": "api/v1/servers/:id",
           "method": "patch"
         }
       ]
