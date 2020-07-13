@@ -18,11 +18,11 @@
   "requests": [
     {
       "request_method": "DELETE",
-      "request_path": "api/v1/organizations/1de25941-9a5d-4d31-9ba8-4ec20dc6990b",
+      "request_path": "api/v1/organizations/9dd170fe-56a1-456e-b59e-0b9d348dbf01",
       "request_body": null,
       "request_headers": {
         "Content-Type": "application/json",
-        "X-Auth-Token": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImFiZTBmN2FiLTU4NjUtNDBhZi1iYWVhLWFkZjI0NDdmZTdiYiIsImV4cCI6MTU5MzYzMzM0NX0.b2Kze9_dMIMHTmnWJhA23WiPoB4u9knKvFrO7yiGJkk"
+        "X-Auth-Token": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImM4NjRlMWFlLWU2MDUtNGJkZi1hNTViLTJmMGFiMzBmNGY2MCIsImV4cCI6MTU5NDM5NjM4N30.J0sU7VzkO9h-hB20-ZyNucFvGBkaLnDUmyI3KlIfsUo"
       },
       "request_query_parameters": {
       },
@@ -33,7 +33,7 @@
       "response_headers": {
       },
       "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl \"http://api.example.comapi/v1/organizations/1de25941-9a5d-4d31-9ba8-4ec20dc6990b\" -d '' -X DELETE \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"X-Auth-Token: eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImFiZTBmN2FiLTU4NjUtNDBhZi1iYWVhLWFkZjI0NDdmZTdiYiIsImV4cCI6MTU5MzYzMzM0NX0.b2Kze9_dMIMHTmnWJhA23WiPoB4u9knKvFrO7yiGJkk\""
+      "curl": "curl \"http://api.example.comapi/v1/organizations/9dd170fe-56a1-456e-b59e-0b9d348dbf01\" -d '' -X DELETE \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"X-Auth-Token: eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImM4NjRlMWFlLWU2MDUtNGJkZi1hNTViLTJmMGFiMzBmNGY2MCIsImV4cCI6MTU5NDM5NjM4N30.J0sU7VzkO9h-hB20-ZyNucFvGBkaLnDUmyI3KlIfsUo\""
     }
   ]
 }
