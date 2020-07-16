@@ -273,9 +273,17 @@ Given a post body like the following:
 }
 ```
 
-Create a command object in RethinkDB (not PostgreSQL) for that server. That's
-it; that's all you have to do. Other parts of the infrastructure will pick up
-the change, execute the command, and report the telemetry from it.
+You'll need to create an "external" (type) command in the PostgreSQL database in
+the `commands` table. Then you'll need to link it to that server using the
+servers_commands` table. (Leave `response_id`, `dispatched_at`, and
+`response_at` blank when you insert.) Next, insert the `command_id` into the
+`command_queues` table. Then run the SQL query:
+
+```sql
+NOTIFY agent_commands;
+```
+
+To run it.
 
 ### Logs
 
