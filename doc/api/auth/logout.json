@@ -1,9 +1,9 @@
 {
-  "resource": "Users",
+  "resource": "Auth",
   "resource_explanation": null,
   "http_method": "GET",
-  "route": "api/v1/me",
-  "description": "me",
+  "route": "/logout",
+  "description": "logout",
   "explanation": null,
   "parameters": [
 
@@ -14,11 +14,11 @@
   "requests": [
     {
       "request_method": "GET",
-      "request_path": "api/v1/me",
+      "request_path": "/logout",
       "request_body": null,
       "request_headers": {
         "Content-Type": "application/json",
-        "X-Auth-Token": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjZhM2FmMTcxLThiYWUtNDdhZS04Zjc4LTJkZTg3OTY3ZjBiMCIsImV4cCI6MTU5NDM5NjM4N30.bqR8OzwGGZQFzvmI96pXnWX4oPImeGOFbKVwiPOdIa4"
+        "X-Auth-Token": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImZlMTJhYjNkLWU0ZWUtNDZiYi04ZTIwLTIwYWU0N2M3ZWViMyIsImV4cCI6MTU5NDM5NjM4N30.W5nEZzOlqPMVAIcHIWaWHaC48Kb1G_iTICQ-yZXAsqQ"
       },
       "request_query_parameters": {
       },
@@ -29,7 +29,7 @@
       "response_headers": {
       },
       "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl -g \"http://api.example.comapi/v1/me\" -X GET \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"X-Auth-Token: eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjZhM2FmMTcxLThiYWUtNDdhZS04Zjc4LTJkZTg3OTY3ZjBiMCIsImV4cCI6MTU5NDM5NjM4N30.bqR8OzwGGZQFzvmI96pXnWX4oPImeGOFbKVwiPOdIa4\""
+      "curl": "curl -g \"http://api.example.com/logout\" -X GET \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"X-Auth-Token: eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImZlMTJhYjNkLWU0ZWUtNDZiYi04ZTIwLTIwYWU0N2M3ZWViMyIsImV4cCI6MTU5NDM5NjM4N30.W5nEZzOlqPMVAIcHIWaWHaC48Kb1G_iTICQ-yZXAsqQ\""
     }
   ]
 }

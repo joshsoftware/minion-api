@@ -44,7 +44,7 @@
     {
       "request_method": "POST",
       "request_path": "/signup",
-      "request_body": "{\"user\":{\"name\":\"Nicky Borer VM\",\"email\":\"alphonse@hoppe.info\",\"mobile_number\":8238234690,\"password\":\"24c636c4325e074ec434403a523c34ab\",\"organizations_attributes\":[{\"name\":\"Alphonse Schamberger\"}]}}",
+      "request_body": "{\"user\":{\"name\":\"Elden Hodkiewicz\",\"email\":\"glady@kirlin-ullrich.net\",\"mobile_number\":5742246414,\"password\":\"ee055fbd0eb328b154d9c9f80721fb40\",\"organizations_attributes\":[{\"name\":\"Rev. Dannie Mueller\"}]}}",
       "request_headers": {
         "Content-Type": "application/json",
         "X-Auth-Token": ""
@@ -58,7 +58,7 @@
       "response_headers": {
       },
       "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl \"http://api.example.com/signup\" -d '{\"user\":{\"name\":\"Nicky Borer VM\",\"email\":\"alphonse@hoppe.info\",\"mobile_number\":8238234690,\"password\":\"24c636c4325e074ec434403a523c34ab\",\"organizations_attributes\":[{\"name\":\"Alphonse Schamberger\"}]}}' -X POST \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"X-Auth-Token: \""
+      "curl": "curl \"http://api.example.com/signup\" -d '{\"user\":{\"name\":\"Elden Hodkiewicz\",\"email\":\"glady@kirlin-ullrich.net\",\"mobile_number\":5742246414,\"password\":\"ee055fbd0eb328b154d9c9f80721fb40\",\"organizations_attributes\":[{\"name\":\"Rev. Dannie Mueller\"}]}}' -X POST \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"X-Auth-Token: \""
     }
   ]
 }

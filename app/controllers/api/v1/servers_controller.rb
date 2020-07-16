@@ -69,6 +69,12 @@ module Api::V1
 
     def load_server
       @server = Server.find_by(id: params[:id])
+      return if @server
+
+      error_response(
+        message: I18n.t('server.invalid'),
+        status_code: :not_found
+      )
     end
 
     def server_params
@@ -79,7 +85,7 @@ module Api::V1
       if @server.present?
         authorize @server.organization_id, policy_class: V1::ServerPolicy
       else
-        authorize server_params[:organization_id], policy_class: V1::ServerPolicy
+        authorize params[:server][:organization_id], policy_class: V1::ServerPolicy
       end
     end
   end

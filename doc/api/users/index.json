@@ -18,14 +18,14 @@
   "requests": [
     {
       "request_method": "GET",
-      "request_path": "api/v1/users?organization_id=a8b22a9f-82c9-4f70-ab5c-62eb05497667",
+      "request_path": "api/v1/users?organization_id=93b7c3ec-7967-465f-83c3-6c466ffb6938",
       "request_body": null,
       "request_headers": {
         "Content-Type": "application/json",
-        "X-Auth-Token": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjJmYTE1NTY4LTNhZWUtNDA3Zi04MWYyLTVkNTkzZGM0ZTMwMyIsImV4cCI6MTU5MzYzMzM0NX0.mrIZAUsaKR-26N-FN4XtC0SqYkA3rTpJjUFanrOHm4A"
+        "X-Auth-Token": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImRjOTJhNWEzLWYxM2MtNGVmOS04YjUwLTYzNzRjMGQ1NDVhNyIsImV4cCI6MTU5NDM5NjM4OH0.P92LOTjUug1Mkqa4cXGtvE4y2FGHy0XfBfeJqYtnyK4"
       },
       "request_query_parameters": {
-        "organization_id": "a8b22a9f-82c9-4f70-ab5c-62eb05497667"
+        "organization_id": "93b7c3ec-7967-465f-83c3-6c466ffb6938"
       },
       "request_content_type": "application/json",
       "response_status": 200,
@@ -34,7 +34,7 @@
       "response_headers": {
       },
       "response_content_type": "application/json; charset=utf-8",
-      "curl": "curl -g \"http://api.example.comapi/v1/users?organization_id=a8b22a9f-82c9-4f70-ab5c-62eb05497667\" -X GET \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"X-Auth-Token: eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjJmYTE1NTY4LTNhZWUtNDA3Zi04MWYyLTVkNTkzZGM0ZTMwMyIsImV4cCI6MTU5MzYzMzM0NX0.mrIZAUsaKR-26N-FN4XtC0SqYkA3rTpJjUFanrOHm4A\""
+      "curl": "curl -g \"http://api.example.comapi/v1/users?organization_id=93b7c3ec-7967-465f-83c3-6c466ffb6938\" -X GET \\\n\t-H \"Content-Type: application/json\" \\\n\t-H \"X-Auth-Token: eyJhbGciOiJIUzI1NiJ9.eyJpZCI6ImRjOTJhNWEzLWYxM2MtNGVmOS04YjUwLTYzNzRjMGQ1NDVhNyIsImV4cCI6MTU5NDM5NjM4OH0.P92LOTjUug1Mkqa4cXGtvE4y2FGHy0XfBfeJqYtnyK4\""
     }
   ]
 }
