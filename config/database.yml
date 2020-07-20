@@ -7,13 +7,7 @@
 default: &default
   adapter: postgresql
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-<<<<<<< Updated upstream
   database: minion_api_<%= ENV["RAILS_ENV"] || "development" %>
-=======
-  database: minion_api_development
-  host: 127.0.0.1
-
->>>>>>> Stashed changes
 
 development:
   <<: *default
