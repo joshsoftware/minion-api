@@ -7,7 +7,11 @@
 default: &default
   adapter: postgresql
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  database: minion_api_<%= ENV["RAILS_ENV"] || "development" %>
+  #database: minion_api_<%= ENV["RAILS_ENV"] || "development" %>
+  database: minion
+  host: 127.0.0.1
+  user: postgres
+  password: Xander19981!
 
 development:
   <<: *default
@@ -18,5 +22,9 @@ development:
 test:
   <<: *default
 
+# postgresql://postgres:7NiU71xdhfsj=onjx5sC@database-20200712.cxbz5wqjuwlx.us-east-2.rds.amazonaws.com/minion_api_development
 production:
   <<: *default
+  database: minion_api_development
+  host: database-20200712.cxbz5wqjuwlx.us-east-2.rds.amazonaws.com
+  password: 7NiU71xdhfsj=onjx5sC
