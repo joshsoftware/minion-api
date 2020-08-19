@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_10_173556) do
+ActiveRecord::Schema.define(version: 2020_08_19_013844) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -62,10 +62,8 @@ ActiveRecord::Schema.define(version: 2020_08_10_173556) do
     t.string "type", default: "external", null: false
   end
 
-  create_table "logs", primary_key: ["id", "server_id"], force: :cascade do |t|
-    t.bigserial "id", null: false
+  create_table "logs", id: :uuid, default: nil, force: :cascade do |t|
     t.uuid "server_id", null: false
-    t.uuid "uuid", null: false
     t.string "service", null: false
     t.string "msg", null: false
     t.datetime "created_at", precision: 6, null: false
