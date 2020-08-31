@@ -33,3 +33,11 @@
 
 /config/credentials/development.key
 /coverage/*
+
+# Athena stuff
+/athena/docs/
+/athena/lib/
+/athena/bin/
+/athena/.shards/
+*.dwarf
+

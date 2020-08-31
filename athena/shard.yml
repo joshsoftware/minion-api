@@ -1,0 +1,28 @@
+name: minion-api
+version: 0.1.0
+
+authors:
+  - Kirk Haines <kirk.haines@joshsoftware.com>
+
+targets:
+  minion-api:
+    main: src/minion-api.cr
+
+dependencies:
+  athena:
+    github: athena-framework/athena
+    version: ~> 0.10.0
+  pg:
+    github: will/crystal-pg
+  jwt:
+    github: crystal-community/jwt
+  debug:
+    github: Sija/debug.cr
+  sodium:
+    github: didactic-drunk/sodium.cr
+  minion-common:
+    github: joshsoftware/minion-common
+
+crystal: 0.35.1
+
+license: MIT
