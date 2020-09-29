@@ -48,16 +48,21 @@ module MinionAPI
       end
 
       data_ary = data_ary.select { |h| h["criteria"] != "limit" }
+      debug!(data_ary)
 
-      telemetry_data = MinionAPI::Telemetry.get_data(
-        limit: limit,
-        uuid: data["uuid"].as_s,
-        criteria: data_ary.map do |h|
-          new_h = Hash(String, String).new
-          h.each { |k, v| new_h[k] = v.as_s }
-          new_h
-        end
-      )
+      begin
+        telemetry_data = MinionAPI::Telemetry.get_data(
+          limit: limit,
+          uuid: data["uuid"].as_s,
+          criteria: data_ary.map do |h|
+            new_h = Hash(String, String).new
+            h.each { |k, v| new_h[k] = v.as_s }
+            new_h
+          end
+        )
+      rescue ex : Exception
+        debug!(ex)
+      end
 
       ART::Response.new(
         {

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_02_131804) do
+ActiveRecord::Schema.define(version: 2020_09_28_230543) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -133,8 +133,10 @@ ActiveRecord::Schema.define(version: 2020_09_02_131804) do
     t.jsonb "data"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["created_at"], name: "created_at_idx"
-    t.index ["data"], name: "data_idx", using: :gin
+    t.text "data_key", default: "", null: false
+    t.index ["created_at"], name: "telemetries_create_at_brin_idx", using: :brin
+    t.index ["data"], name: "telemetries_data_idx", using: :gin
+    t.index ["server_id", "created_at", "data_key"], name: "telemetries_kitchen_sink_idx"
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

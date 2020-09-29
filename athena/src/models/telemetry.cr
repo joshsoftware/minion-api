@@ -3,17 +3,23 @@ module MinionAPI
     include JSON::Serializable
 
     def self.get_data(uuid : String, criteria : Array(Hash(String, String))?, limit = 500)
+      debug!("get_data")
       data = {} of String => Array({JSON::Any, Int64})
 
       where_by_date = MinionAPI::Helpers.where_by_date("created_at", criteria)
       where_by_json_key = MinionAPI::Helpers.where_by_json_key("data", "type", criteria)
 
-      MinionAPI::Helpers.list_of_where_by_json_key("data", "type", criteria).each do |key_sql_pair|
+      # start = Time.parse(start_timestamp, ,"%Y-%m-%d %H:%M:%S", Time::Location::UTC)
+      # finish = Time.parse(finish_timestamp, ,"%Y-%m-%d %H:%M:%S", Time::Location::UTC)
+      # seconds_per_point = (finish - start).to_i / points
+
+      MinionAPI::Helpers.list_of_where_by_data_key("type", criteria).each do |key_sql_pair|
         key, key_sql = key_sql_pair
 
         sql = <<-ESQL
         SELECT
-          COUNT(*)
+          MIN(created_at),
+          MAX(created_at)
         FROM
           telemetries
         WHERE
@@ -21,44 +27,65 @@ module MinionAPI
           #{where_by_date}
           #{key_sql}
         ESQL
-  
-        count = 0_64
+
+        from_date : Time? = nil
+        to_date : Time? = nil
         DBH.using_connection do |conn|
-          count = conn.query_one(sql, uuid, as: {Int64})
+          conn.query_each(sql, uuid) do |rs|
+            from_date = rs.read(Time)
+            to_date = rs.read(Time)
+          end
         end
-  
-        row_modulo = (count / limit).to_i # TODO: Make this use the max lines instead
-        row_modulo = 1 if row_modulo == 0
+
+        interval = "#{(to_date.not_nil! - from_date.not_nil!).to_f / limit} seconds"
 
         sql = <<-ESQL
         SELECT
-          t.*
-        FROM (
-          SELECT
-            data,
-            created_at,
-            row_number()
-              OVER (ORDER BY created_at ASC)
-              AS row
-          FROM
-            telemetries
-          WHERE
-            server_id = $1
-            #{where_by_date}
-            #{key_sql}
-          ) 
-        AS t
-        WHERE
-          t.row %#{row_modulo} = 0
+          (row).data,
+          (row).created_at
+        FROM
+          (
+            SELECT
+              (
+                SELECT
+                  (
+                    t.data,
+                    t.created_at
+                  )::jsonb_x_timestamp as row
+                FROM
+                  telemetries t
+                WHERE
+                  server_id = $1
+                  #{key_sql}
+                  AND t.created_at >= s.target
+                  AND t.created_at <=
+                    (s.target + INTERVAL '#{interval}')
+                  LIMIT 1
+                )
+              FROM
+                (
+                  SELECT
+                    target
+                  FROM
+                    GENERATE_SERIES(
+                      $2,
+                      $3,
+                      INTERVAL '#{interval}'
+                    ) target
+                ) s
+          ) response
         ESQL
 
         query_data = [] of Tuple(JSON::Any, Int64)
-        debug!(sql)
         DBH.using_connection do |conn|
-          conn.query_each(sql, uuid) do |rs|
+          conn.query_each(sql, uuid, from_date.not_nil!.to_s("%Y-%m-%d %H:%M:%S"), to_date.not_nil!.to_s("%Y-%m-%d %H:%M:%S")) do |rs|
+            js = rs.read(JSON::Any?)
+            ts = rs.read(Time?)
+            next if js.nil? || ts.nil?
+
             query_data << {
-              rs.read(JSON::Any),
-              rs.read(Time).to_unix_ms,
+              js.not_nil!,
+              ts.not_nil!.to_unix_ms,
             }
           end
         end
@@ -87,10 +114,8 @@ module MinionAPI
         telemetries
       WHERE
         jsonb_typeof(data) = 'array' AND
-        server_id IN(SERVERS)
-      ORDER BY
-        created_at DESC
-      LIMIT 10000
+        server_id IN(SERVERS) AND
+        created_at > (NOW() - INTERVAL '1 day')
       ) AS ky
     ESQL
 

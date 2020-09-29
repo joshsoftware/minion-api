@@ -34,6 +34,8 @@ module MinionAPI
       {nil, nil, nil, nil, nil, nil}
     end
 
+    # This code won't bother finding a load average older than
+    # 10 minutes because that is just pretty useless in the summary.
     GET_SUMMARY_BY_ORGANIZATION = <<-ESQL
     SELECT
       s.id,
@@ -47,7 +49,8 @@ module MinionAPI
           telemetries t
         WHERE
           t.server_id = s.id AND
-          data ? 'load_avg'
+          t.data ? 'load_avg' AND
+          t.created_at > (now() - interval '10 minutes')
         ORDER BY
           created_at DESC LIMIT 1
       ) AS load_avg,
@@ -67,6 +70,7 @@ module MinionAPI
           /ORGS/,
           Array(String).new(organizations.size) { |x| "$#{x + 1}" }.join(",")
         )
+      debug!(sql)
       DBH.using_connection do |conn|
         conn.query_all(sql, args: organizations, as: {String, String?, Time, String, JSON::Any?, Time, String})
       end

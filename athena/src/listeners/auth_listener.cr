@@ -14,7 +14,7 @@ module MinionAPI
     def initialize(@user_storage : MinionAPI::UserStorage); end
 
     def call(event : ART::Events::Request, _dispatcher : AED::EventDispatcherInterface) : Nil
-      if {"/api/v1/auth/sigin", "/api/v1/health/heartbeat", "/api/v1/health/stats"}.includes? event.request.path
+      if {"/api/v1/auth/signin", "/api/v1/health/heartbeat", "/api/v1/health/stats"}.includes? event.request.path
         return
       end
       # Return a 401 error if the token is missing or malformed
