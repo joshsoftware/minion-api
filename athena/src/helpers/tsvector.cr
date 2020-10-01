@@ -56,7 +56,7 @@ module MinionAPI::Helpers
     sql = [] of String
     sql << "(\n"
     clauses.each do |clause|
-      sql << "( #{field} ilike '%#{args.arg = clause.phrase.tr(" ", "%")}%' ) #{clause.conjunction.to_s.upcase}\n".gsub(/%+/, "%")
+      sql << "( #{field} ilike $#{args.arg = "%#{clause.phrase.tr(" ", "%")}%"} ) #{clause.conjunction.to_s.upcase}\n".gsub(/%+/, "%")
     end
     sql << ")"
 

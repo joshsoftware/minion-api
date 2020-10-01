@@ -91,7 +91,7 @@ module MinionAPI
       sql_args = MinionAPI::Helpers::SQLArgs.new
 
       # Always leading with the server_id that we are collecting logs for.
-      where_by_uuid = %(server_id = #{sql_args.arg = uuid}\n)
+      where_by_uuid = %(server_id = $#{sql_args.arg = uuid}\n)
 
       if !dedups.empty?
         where_by_dedup = <<-EDEDUP
@@ -125,9 +125,10 @@ module MinionAPI
       fulltexts = [] of String
       keywords = [] of String
       criteria.each do |crt|
+        debug!(crt)
         case crt["criteria"]
         when "service"
-          services << %(service = '#{sql_args.arg = crt["value"]}')
+          services << %(service = $#{sql_args.arg = crt["value"]})
         when "fulltext"
           fulltexts << crt["value"]
         when "keyword"
@@ -144,7 +145,7 @@ module MinionAPI
   fulltexts.map do |term|
       MinionAPI::Helpers.parse_input_to_tsv(term)
     end.map do |term|
-      %(tsv @@ to_tsquery('english', '#{sql_args.arg = term}'))
+      %(tsv @@ to_tsquery('english', $#{sql_args.arg = term}))
     end.join(" OR ")
 })\n)
       end
@@ -180,6 +181,7 @@ module MinionAPI
 
       logs = [] of Tuple(String, String, String, Time)
       debug!(sql)
+      debug!(sql_args.argv)
       DBH.using_connection do |conn|
         conn.query_each(sql, args: sql_args.argv) do |rs|
           logs << {
