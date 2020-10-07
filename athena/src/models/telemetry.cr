@@ -137,18 +137,28 @@ module MinionAPI
       data_keys
     end
 
-    COUNT_SQL = <<-ESQL
+    ACCURATE_COUNT_SQL = <<-ESQL
     SELECT
       count(*)
     FROM
       telemetries
     ESQL
 
-    def self.count
+    FAST_COUNT_SQL = <<-ESQL
+    SELECT
+      count_estimate('SELECT 1 FROM TELEMETRIES')
+    ESQL
+
+    def self.count(accurate = false)
       DBH.using_connection do |conn|
-        conn.query_one(COUNT_SQL, as: {Int64})
+        unless accurate
+          conn.query_one(FAST_COUNT_SQL, as: {Int64})
+        else
+          conn.query_one(ACCURATE_COUNT_SQL, as: {Int64})
+        end
       end
-    rescue
+    rescue ex : Exception
+      debug!(ex)
       {nil}
     end
 

@@ -137,20 +137,20 @@ module MinionAPI
 
       if !fulltexts.empty?
         where_by_tsv = %(AND (#{
-          fulltexts.map do |term|
-            MinionAPI::Helpers.parse_input_to_tsv(term)
-          end.map do |term|
-            %(tsv @@ to_tsquery('english', $#{sql_args.arg = term}))
-          end.join(" OR ")
-        })\n)
+  fulltexts.map do |term|
+      MinionAPI::Helpers.parse_input_to_tsv(term)
+    end.map do |term|
+      %(tsv @@ to_tsquery('english', $#{sql_args.arg = term}))
+    end.join(" OR ")
+})\n)
       end
 
       if !keywords.empty?
         where_by_trgm = %(AND (#{
-          keywords.map do |term|
-            MinionAPI::Helpers.parse_input_to_ilike(term, "msg", sql_args)
-          end.join(" OR ")
-        }))
+  keywords.map do |term|
+      MinionAPI::Helpers.parse_input_to_ilike(term, "msg", sql_args)
+    end.join(" OR ")
+}))
       end
 
       debug!("calculating next_from #{next_from}")
@@ -211,28 +211,26 @@ module MinionAPI
 
         # 5) Find the ones which are from before the next_from record,
         #    according to their UUID timestamps.
-        duplicates = timestamp.nil? ?
-          [] of Minion::UUID :
-          possible_duplicates.select do |pd|
-            debug!("#{pd.utc} <= #{timestamp}")
-            pd.utc.not_nil! <= timestamp
-          end
+        duplicates = timestamp.nil? ? [] of Minion::UUID : possible_duplicates.select do |pd|
+          debug!("#{pd.utc} <= #{timestamp}")
+          pd.utc.not_nil! <= timestamp
+        end
 
         # 6) Write SQL to query >= the timestamp, but to exclude all
         #    records that are too old in that second.
 
         if duplicates.empty?
-          and_id_in = ""
+          and_id_not_in = ""
         else
-          and_id_in = <<-EANDIDIN
-          AND id NOT IN (#{duplicates.map {|d| "$#{sql_args.arg = d.to_s}" }.join(",")})
-          EANDIDIN
+          and_id_not_in = <<-EANDIDNOTIN
+          AND id NOT IN (#{duplicates.map { |d| "$#{sql_args.arg = d.to_s}" }.join(",")})
+          EANDIDNOTIN
         end
 
         where_by_next_from = <<-ENEXTFROM
         -- where_by_next_from
         AND created_at >= $#{sql_args.arg = created_at.not_nil!.to_s("%Y-%m-%d %H:%M:%S.%N")}
-        #{and_id_in}
+        #{and_id_not_in}
         ENEXTFROM
         debug!(where_by_next_from)
       end
@@ -273,7 +271,7 @@ module MinionAPI
             t_service,
             t_msg,
             t_created_at,
-            t_create_at_to_f
+            t_create_at_to_f,
           }
         end
       end
@@ -281,18 +279,28 @@ module MinionAPI
       logs
     end
 
-    COUNT_SQL = <<-ESQL
+    ACCURATE_COUNT_SQL = <<-ESQL
     SELECT
       count(*)
     FROM
       logs
     ESQL
 
-    def self.count
+    FAST_COUNT_SQL = <<-ESQL
+    SELECT
+      count_estimate('SELECT 1 FROM LOGS')
+    ESQL
+
+    def self.count(accurate = false)
       DBH.using_connection do |conn|
-        conn.query_one(COUNT_SQL, as: {Int64})
+        unless accurate
+          conn.query_one(FAST_COUNT_SQL, as: {Int64})
+        else
+          conn.query_one(ACCURATE_COUNT_SQL, as: {Int64})
+        end
       end
-    rescue
+    rescue ex : Exception
+      debug!(ex)
       {nil}
     end
 
