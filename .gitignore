@@ -35,9 +35,9 @@
 /coverage/*
 
 # Athena stuff
-/athena/docs/
-/athena/lib/
-/athena/bin/
-/athena/.shards/
+/docs/
+/lib/
+/bin/
+/.shards/
 *.dwarf
 
