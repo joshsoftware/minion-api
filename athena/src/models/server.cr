@@ -2,10 +2,10 @@ module MinionAPI
   struct Server
     GET_QUERY = <<-ESQL
     SELECT
-      id,
+      id::varchar,
       aliases,
       addresses,
-      organization_id,
+      organization_id::varchar,
       created_at,
       updated_at,
       heartbeat_at
@@ -21,6 +21,7 @@ module MinionAPI
           GET_QUERY,
           uuid,
           as: {
+            String,
             Array(String),
             Array(String),
             UUID,
@@ -31,14 +32,14 @@ module MinionAPI
         )
       end
     rescue
-      {nil, nil, nil, nil, nil, nil}
+      {nil, nil, nil, nil, nil, nil, nil}
     end
 
     # This code won't bother finding a load average older than
     # 10 minutes because that is just pretty useless in the summary.
     GET_SUMMARY_BY_ORGANIZATION = <<-ESQL
     SELECT
-      s.id,
+      s.id::varchar,
       s.aliases[array_length(s.aliases,1)],
       s.heartbeat_at,
       s.addresses[array_length(s.addresses,1)],
@@ -81,7 +82,7 @@ module MinionAPI
 
     NAMES_SQL = <<-ESQL
     SELECT
-      id,
+      id::varchar,
       aliases[array_length(aliases,1)]
     FROM
       servers

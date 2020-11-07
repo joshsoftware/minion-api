@@ -105,18 +105,12 @@ module MinionAPI
     # a dedicated table, thus eliminating the dynamic querying of this data.
     PDK_SQL = <<-ESQL
     SELECT
-      DISTINCT(ky.keys)
+      DISTINCT(data_key)
     FROM
-     (
-       SELECT
-         jsonb_path_query(data,'$[0]') AS keys
-      FROM
-        telemetries
-      WHERE
-        jsonb_typeof(data) = 'array' AND
-        server_id IN(SERVERS) AND
-        created_at > (NOW() - INTERVAL '1 day')
-      ) AS ky
+      telemetries
+    WHERE
+      server_id IN(SERVERS) AND
+      created_at > (NOW() - INTERVAL '90 day')
     ESQL
 
     # This determines which query keys are available for accessing data that
@@ -130,7 +124,7 @@ module MinionAPI
       debug!(pdk_sql)
       DBH.using_connection do |conn|
         conn.query_each(pdk_sql, args: servers) do |rs|
-          data_keys << rs.read(JSON::Any).as_s
+          data_keys << rs.read(String)
         end
       end
 

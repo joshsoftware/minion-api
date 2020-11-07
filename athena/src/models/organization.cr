@@ -4,7 +4,7 @@ module MinionAPI
 
     ALL_UUIDS_SQL = <<-ESQL
     SELECT
-      id
+      id::varchar
     FROM
       organizations
     ORDER BY
@@ -45,12 +45,16 @@ module MinionAPI
       @name, @created_at = Organization.get_data(@uuid)
     end
 
+    def initialize(_uuid : UUID)
+      initialize(_uuid.to_s)
+    end
+
     def initialize(@uuid : String, @name : String?, @created_at : Time?)
     end
 
     SERVERS_SQL = <<-ESQL
     SELECT
-      id
+      id::varchar
     FROM
       servers
     WHERE
@@ -69,7 +73,7 @@ module MinionAPI
 
     USERS_SQL = <<-ESQL
     SELECT
-      id
+      id::varchar
     FROM
       users
     WHERE

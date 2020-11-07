@@ -22,6 +22,8 @@ dependencies:
     github: didactic-drunk/sodium.cr
   minion-common:
     github: joshsoftware/minion-common
+  splay_tree_map:
+    github: wyhaines/splay_tree_map.cr
 
 crystal: 0.35.1
 

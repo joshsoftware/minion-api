@@ -4,12 +4,12 @@ module MinionAPI
 
     SODIUM_MEMLIMIT    = (1024 * 512).to_u64
     SODIUM_OPSLIMIT    = 1024.to_u64
-    HashCache          = Minion::SplayTreeMap({String, String}, Bool).new
+    HashCache          = SplayTreeMap({String, String}, Bool).new
     HashCacheSizeLimit = 10000 # TODO: SplayTreeMap should support internal size limit context
 
     def self.authenticate!(email : String?, password : String?) : Bool
       unless email.nil?
-        password_digest = uninitialized String
+        password_digest = uninitialized String # TODO: This is probably really dumb?
         sql = <<-ESQL
         SELECT
           password_digest
@@ -24,7 +24,8 @@ module MinionAPI
 
         sodium_hash = Sodium::Password::Hash.new
         hash_key = {password_digest.to_s, password}
-        cached_hash = HashCache[hash_key]
+        debug!("Validating #{email} -- #{password} -- #{hash_key.inspect}.cached? #{HashCache.has_key?(hash_key)}")
+        cached_hash = HashCache[hash_key]?
         if cached_hash
           return cached_hash
         else
@@ -43,17 +44,20 @@ module MinionAPI
     def self.validate(token)
       payload = nil
       begin
-        payload, _ = JWT.decode(token, JWT_SECRET, JWT::Algorithm::HS256)
+        debug!(token)
+        payload, other = JWT.decode(token, JWT_SECRET, JWT::Algorithm::HS256)
+        debug!(other)
       rescue ex
         pp ex
         User.raise_invalid
       end
+      debug!(payload)
       self.new(uuid: payload["uuid"].as_s)
     end
 
     ALL_UUIDS_SQL = <<-ESQL
     SELECT
-      id
+      id::varchar
     FROM
       users
     ORDER BY
@@ -83,7 +87,7 @@ module MinionAPI
 
     GET_UUID_FROM_EMAIL_QUERY = <<-ESQL
     SELECT
-      id
+      id::varchar
     FROM
       users
     WHERE
@@ -106,12 +110,12 @@ module MinionAPI
 
     GET_QUERY = <<-ESQL
     SELECT
-      u.id,
+      u.id::varchar,
       u.email,
       u.name,
       u.mobile_number,
       u.administration,
-      array_agg(ou.organization_id) AS organizations
+      array_agg(ou.organization_id::varchar) AS organizations
     FROM
       users u,
       organization_users ou
@@ -127,11 +131,18 @@ module MinionAPI
     ESQL
 
     def self.get_data_impl(uuid : String)
+      debug!("Querying: #{GET_QUERY}\nWITH: #{uuid}\n")
       DBH.using_connection do |conn|
         conn.query_one(GET_QUERY, uuid, as: {String, String, String, String, Bool, Array(String)})
       end
-    rescue
+    rescue ex : Exception
+      debug!(ex)
+
       {nil, nil, nil, nil, nil, nil}
+    end
+
+    def self.get_data_impl(uuid : UUID)
+      get_data_impl(uuid.to_s)
     end
 
     def self.get_by(email : String)
@@ -159,15 +170,22 @@ module MinionAPI
     # @organizations : Array(Organization)?
     def initialize(uuid : String? = nil, email : String = "")
       if uuid
-        @uuid, @email, @name, @mobile_number, @administrator, organization_ids = User.get_data(uuid: uuid)
+        _uuid, @email, @name, @mobile_number, @administrator, organization_ids = User.get_data(uuid: uuid)
       else
-        @uuid, @email, @name, @mobile_number, @administrator, organization_ids = User.get_data(email: email)
+        _uuid, @email, @name, @mobile_number, @administrator, organization_ids = User.get_data(email: email)
       end
+      @uuid = _uuid.to_s
+
       if organization_ids.nil?
         @organizations = [] of Organization
       else
         @organizations = organization_ids.map { |o| Organization.new(o) }
       end
+      debug!(self)
+    end
+
+    def initialize(uuid : UUID = nil, email : String = "")
+      initialize(uuid: uuid.to_s, email: email)
     end
 
     def self.raise_invalid

@@ -26,11 +26,11 @@ module MinionAPI
 
     def signin_impl(email, password)
       if User.authenticate!(email, password)
+        debug!("Getting user by #{email}")
         user = User.get_by(email: email)
-        pp "Encoding {#{user}} with {#{JWT_SECRET}} and JWT::Algorithm::HS256"
-        pp "JWT enc: #{JWT.encode(user, JWT_SECRET, JWT::Algorithm::HS256)}"
-
-        pp "JWT dec: #{JWT.decode(JWT.encode(user, JWT_SECRET, JWT::Algorithm::HS256), JWT_SECRET, JWT::Algorithm::HS256)}"
+        debug!("Encoding {#{user}} with {#{JWT_SECRET}} and JWT::Algorithm::HS256")
+        debug!("JWT enc: #{JWT.encode(user, JWT_SECRET, JWT::Algorithm::HS256)}")
+        debug!("JWT dec: #{JWT.decode(JWT.encode(user, JWT_SECRET, JWT::Algorithm::HS256), JWT_SECRET, JWT::Algorithm::HS256)}")
         ART::Response.new(
           {
             accessToken: JWT.encode(user, JWT_SECRET, JWT::Algorithm::HS256),
