@@ -1,21 +1,8 @@
 # frozen_string_literal: true
 
-require_relative 'boot'
-
-require 'rails'
-# Pick the frameworks you want:
-require 'active_model/railtie'
-require 'active_job/railtie'
+#require 'rails'
+require 'active_record'
 require 'active_record/railtie'
-require 'active_storage/engine'
-require 'action_controller/railtie'
-require 'action_mailer/railtie'
-require 'action_mailbox/engine'
-require 'action_text/engine'
-require 'action_view/railtie'
-require 'action_cable/engine'
-require "sprockets/railtie"
-require 'rails/test_unit/railtie'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -35,5 +22,15 @@ module MinionApi
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    # This requires explanation. In the Rake task for migrations, it tries to access
+    # an original configuration before it runs the migration. In our case, where there
+    # is no actual application -- all we care about is the migrations -- this isn't
+    # setup. So, even though there is no point to it, and the migration task is going
+    # to make its own connection, we need to create an original connection here before
+    # Rake gets to take over the action.
+    # For reference, it is around like 83 of active_record/railties/databases.rake
+    dbconfig = YAML::load File.read(File.join(Rails.root, "config/database.yml"))
+    ActiveRecord::Base.establish_connection dbconfig[Rails.env]
   end
 end
