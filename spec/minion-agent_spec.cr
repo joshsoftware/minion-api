@@ -1,6 +1,6 @@
 require "./spec_helper"
 
-describe MinionApi do
+describe MinionAPI do
   # TODO: Write tests
 
   it "works" do
