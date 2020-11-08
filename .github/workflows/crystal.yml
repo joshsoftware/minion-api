@@ -11,13 +11,17 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    container:
-      image: crystallang/crystal
+#    container:
+#      image: crystallang/crystal
 
     steps:
     - uses: actions/checkout@v2
     - name: Install wget
-      run: sudo apt-get install wget
+      run: sudo apt install wget
+    - name: Setup crystal repo
+      run: curl -sSL https://dist.crystal-lang.org/apt/setup.sh | sudo bash
+    - name: Install crystal and system dependencies
+      run: sudo apt install crystal libyaml-dev
     - name: Install dependencies
       run: shards install
     - name: Run tests
