@@ -16,6 +16,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: Install wget
+      run: sudo apt-get install wget
     - name: Install dependencies
       run: shards install
     - name: Run tests
