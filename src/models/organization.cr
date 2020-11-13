@@ -12,7 +12,7 @@ module MinionAPI
     ESQL
 
     def self.all
-      MinionAPI.dbh(default: Array(String).new) {|dbh| dbh.query_all(ALL_UUIDS_SQL, as: {String})}.map do |uuid|
+      MinionAPI.dbh(default: Array(String).new) { |dbh| dbh.query_all(ALL_UUIDS_SQL, as: {String}) }.map do |uuid|
         self.new(uuid).as(Organization)
       end
     end
@@ -28,7 +28,7 @@ module MinionAPI
     ESQL
 
     def self.get_data(uuid) : {String?, Time?}
-      MinionAPI.dbh(default: {"", Time.local}) {|dbh| dbh.query_one(GET_QUERY, uuid, as: {String, Time})}
+      MinionAPI.dbh(default: {"", Time.local}) { |dbh| dbh.query_one(GET_QUERY, uuid, as: {String, Time}) }
     rescue
       {nil, nil}
     end
@@ -60,7 +60,7 @@ module MinionAPI
     ESQL
 
     def servers
-      MinionAPI.dbh {|dbh| dbh.query_all(SERVERS_SQL, @uuid, as: {String})}.map do |uuid|
+      MinionAPI.dbh { |dbh| dbh.query_all(SERVERS_SQL, @uuid, as: {String}) }.map do |uuid|
         Server.new(uuid)
       end
     end
@@ -77,7 +77,7 @@ module MinionAPI
     ESQL
 
     def users
-      MinionAPI.dbh {|dbh| dbh.query_all(USERS_SQL, @uuid, as: {String})}.map do |uuid|
+      MinionAPI.dbh { |dbh| dbh.query_all(USERS_SQL, @uuid, as: {String}) }.map do |uuid|
         User.new(uuid)
       end
     end
@@ -92,7 +92,7 @@ module MinionAPI
     ESQL
 
     def server_count : Int64
-      MinionAPI.dbh {|dbh| dbh.query_one(SERVERS_COUNT_SQL, @uuid, as: {Int64})}
+      MinionAPI.dbh { |dbh| dbh.query_one(SERVERS_COUNT_SQL, @uuid, as: {Int64}) }
     end
 
     USERS_COUNT_SQL = <<-ESQL
@@ -105,7 +105,7 @@ module MinionAPI
     ESQL
 
     def user_count : Int64
-      MinionAPI.dbh {|dbh| dbh.query_one(USERS_COUNT_SQL, @uuid, as: {Int64})}
+      MinionAPI.dbh { |dbh| dbh.query_one(USERS_COUNT_SQL, @uuid, as: {Int64}) }
     end
 
     def to_h

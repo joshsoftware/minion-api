@@ -132,21 +132,20 @@ module MinionAPI
       end
 
       if !fulltexts.empty?
-        where_by_tsv = %(AND (#{
-  fulltexts.map do |term|
-      MinionAPI::Helpers.parse_input_to_tsv(term)
-    end.map do |term|
-      %(tsv @@ to_tsquery('english', $#{sql_args.arg = term}))
-    end.join(" OR ")
-})\n)
+        fm = fulltexts.map do |term|
+          MinionAPI::Helpers.parse_input_to_tsv(term)
+        end.map do |term|
+          %(tsv @@ to_tsquery('english', $#{sql_args.arg = term}))
+        end.join(" OR ")
+
+        where_by_tsv = %(AND (#{fm})\n)
       end
 
       if !keywords.empty?
-        where_by_trgm = %(AND (#{
-  keywords.map do |term|
-      MinionAPI::Helpers.parse_input_to_ilike(term, "msg", sql_args)
-    end.join(" OR ")
-}))
+        km = keywords.map do |term|
+          MinionAPI::Helpers.parse_input_to_ilike(term, "msg", sql_args)
+        end.join(" OR ")
+        where_by_trgm = %(AND (#{km}))
       end
 
       debug!("calculating next_from #{next_from}")
