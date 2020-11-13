@@ -18,9 +18,7 @@ module MinionAPI
         WHERE
           email = $1
         ESQL
-        DBH.using_connection do |conn|
-          password_digest = conn.query_one(sql, email, as: {String})
-        end
+        password_digest = MinionAPI.dbh { |dbh| dbh.query_one(sql, email, as: {String}) }
 
         sodium_hash = Sodium::Password::Hash.new
         hash_key = {password_digest.to_s, password}
@@ -65,10 +63,10 @@ module MinionAPI
     ESQL
 
     def self.all
-      DBH.using_connection do |conn|
-        conn.query_all(ALL_UUIDS_SQL, as: {String}).map do |uuid|
-          self.new(uuid).as(User)
-        end
+      MinionAPI.dbh(default: [""]) do |dbh|
+        dbh.query_all(ALL_UUIDS_SQL, as: {String})
+      end.map do |uuid|
+        self.new(uuid).as(User)
       end
     end
 
@@ -80,9 +78,7 @@ module MinionAPI
     ESQL
 
     def self.count
-      DBH.using_connection do |conn|
-        conn.query_one(COUNT_SQL, as: {Int64})
-      end
+      MinionAPI.dbh { |dbh| dbh.query_one(COUNT_SQL, as: {Int64}) }
     end
 
     GET_UUID_FROM_EMAIL_QUERY = <<-ESQL
@@ -95,9 +91,7 @@ module MinionAPI
     ESQL
 
     def self.get_uuid_from(email : String)
-      DBH.using_connection do |conn|
-        conn.query_one(GET_UUID_FROM_EMAIL_QUERY, email, as: {String})
-      end
+      MinionAPI.dbh { |dbh| dbh.query_one(GET_UUID_FROM_EMAIL_QUERY, email, as: {String}) }
     end
 
     def self.get_data(uuid : String? = nil, email : String = "")
@@ -132,13 +126,9 @@ module MinionAPI
 
     def self.get_data_impl(uuid : String)
       debug!("Querying: #{GET_QUERY}\nWITH: #{uuid}\n")
-      DBH.using_connection do |conn|
-        conn.query_one(GET_QUERY, uuid, as: {String, String, String, String, Bool, Array(String)})
+      MinionAPI.dbh(default = {"", "", "", "", false, [] of String}) do |dbh|
+        dbh.query_one(GET_QUERY, uuid, as: {String, String, String, String, Bool, Array(String)})
       end
-    rescue ex : Exception
-      debug!(ex)
-
-      {nil, nil, nil, nil, nil, nil}
     end
 
     def self.get_data_impl(uuid : UUID)

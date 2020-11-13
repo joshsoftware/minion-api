@@ -16,8 +16,18 @@ module MinionAPI
     ESQL
 
     def self.get_data(uuid)
-      DBH.using_connection do |conn|
-        conn.query_one(
+      MinionAPI.dbh(
+        default: {
+          "",
+          Array(String).new,
+          Array(String).new,
+          UUID.random,
+          Time.local,
+          Time.local,
+          Time.local,
+        }
+      ) do |dbh|
+        dbh.query_one(
           GET_QUERY,
           uuid,
           as: {
@@ -31,8 +41,6 @@ module MinionAPI
           }
         )
       end
-    rescue
-      {nil, nil, nil, nil, nil, nil, nil}
     end
 
     # This code won't bother finding a load average older than
@@ -72,12 +80,9 @@ module MinionAPI
           Array(String).new(organizations.size) { |x| "$#{x + 1}" }.join(",")
         )
       debug!(sql)
-      DBH.using_connection do |conn|
-        conn.query_all(sql, args: organizations, as: {String, String?, Time, String, JSON::Any?, Time, String})
+      MinionAPI.dbh(default: {"","",Time.local,"",nil,Time.local,""}) do |dbh|
+        dbh.query_all(sql, args: organizations, as: {String, String?, Time, String, JSON::Any?, Time, String})
       end
-    rescue ex
-      pp ex
-      {nil, nil, nil, nil, nil, nil, nil}
     end
 
     NAMES_SQL = <<-ESQL
@@ -99,8 +104,8 @@ module MinionAPI
       end
 
       debug!(names_sql)
-      DBH.using_connection do |conn|
-        conn.query_each(names_sql, args: servers) do |rs|
+      MinionAPI.dbh(default: data) do |dbh|
+        dbh.query_each(names_sql, args: servers) do |rs|
           uuid = rs.read(String)
           name = rs.read(String?)
           data[uuid] = name

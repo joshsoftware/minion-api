@@ -1,4 +1,5 @@
 require "debug"
+require "./command_line"
 require "athena"
 require "jwt"
 require "pg"

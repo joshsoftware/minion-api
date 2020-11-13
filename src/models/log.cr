@@ -50,10 +50,8 @@ module MinionAPI
         servers.map { |s| arg_n += 1; "$#{arg_n}" }.join(",")
       end
       debug!(service_sql)
-      DBH.using_connection do |conn|
-        conn.query_each(service_sql, args: servers.concat(servers)) do |rs|
-          services << rs.read(String)
-        end
+      MinionAPI.dbh.query_each(service_sql, args: servers.concat(servers)) do |rs|
+        services << rs.read(String)
       end
 
       services
@@ -74,9 +72,7 @@ module MinionAPI
     ESQL
 
     def self.get_log(uuid : String)
-      DBH.using_connection do |conn|
-        conn.query_one(GET_QUERY, uuid, as: {String, String, String, String, Time, Time})
-      end
+      MinionAPI.dbh.query_one(GET_QUERY, uuid, as: {String, String, String, String, Time, Time})
     rescue
       {nil, nil, nil, nil, nil, nil}
     end
@@ -169,10 +165,8 @@ module MinionAPI
 
         debug!("a")
         created_at = nil
-        DBH.using_connection do |conn|
-          conn.query_each(sql, args: [next_from]) do |rs|
-            created_at = rs.read(Time)
-          end
+        MinionAPI.dbh.query_each(sql, args: [next_from]) do |rs|
+          created_at = rs.read(Time)
         end
 
         # 3) Get it's specific timestamp from it's UUID.
@@ -199,13 +193,11 @@ module MinionAPI
         debug!(sql)
 
         possible_duplicates = [] of Minion::UUID
-        DBH.using_connection do |conn|
-          conn.query_each(
-            sql,
-            args: sql_args.argv
-          ) do |rs|
-            possible_duplicates << Minion::UUID.new(rs.read(String))
-          end
+        MinionAPI.dbh.query_each(
+          sql,
+          args: sql_args.argv
+        ) do |rs|
+          possible_duplicates << Minion::UUID.new(rs.read(String))
         end
         debug!(possible_duplicates)
 
@@ -237,7 +229,7 @@ module MinionAPI
 
       sql = <<-ESQL
       SELECT
-        id,
+        id::varchar,
         service,
         msg,
         created_at
@@ -259,21 +251,19 @@ module MinionAPI
       logs = [] of Tuple(String, String, String, Time, Float64)
       debug!(sql)
       debug!(sql_args.argv)
-      DBH.using_connection do |conn|
-        conn.query_each(sql, args: sql_args.argv) do |rs|
-          t_id = rs.read(String)
-          t_service = rs.read(String)
-          t_msg = rs.read(String)
-          t_created_at = rs.read(Time)
-          t_create_at_to_f = t_created_at.to_unix_f
-          logs << {
-            t_id,
-            t_service,
-            t_msg,
-            t_created_at,
-            t_create_at_to_f,
-          }
-        end
+      MinionAPI.dbh.query_each(sql, args: sql_args.argv) do |rs|
+        t_id = rs.read(String)
+        t_service = rs.read(String)
+        t_msg = rs.read(String)
+        t_created_at = rs.read(Time)
+        t_create_at_to_f = t_created_at.to_unix_f
+        logs << {
+          t_id,
+          t_service,
+          t_msg,
+          t_created_at,
+          t_create_at_to_f,
+        }
       end
 
       logs
@@ -292,12 +282,10 @@ module MinionAPI
     ESQL
 
     def self.count(accurate = false)
-      DBH.using_connection do |conn|
-        unless accurate
-          conn.query_one(FAST_COUNT_SQL, as: {Int64})
-        else
-          conn.query_one(ACCURATE_COUNT_SQL, as: {Int64})
-        end
+      unless accurate
+        MinionAPI.dbh.query_one(FAST_COUNT_SQL, as: {Int64})
+      else
+        MinionAPI.dbh.query_one(ACCURATE_COUNT_SQL, as: {Int64})
       end
     rescue ex : Exception
       debug!(ex)

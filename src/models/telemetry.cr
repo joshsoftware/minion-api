@@ -30,8 +30,8 @@ module MinionAPI
 
         from_date : Time? = nil
         to_date : Time? = nil
-        DBH.using_connection do |conn|
-          conn.query_each(sql, uuid) do |rs|
+        MinionAPI.dbh do |dbh|
+          dbh.query_each(sql, uuid) do |rs|
             from_date = rs.read(Time)
             to_date = rs.read(Time)
           end
@@ -77,8 +77,12 @@ module MinionAPI
         ESQL
 
         query_data = [] of Tuple(JSON::Any, Int64)
-        DBH.using_connection do |conn|
-          conn.query_each(sql, uuid, from_date.not_nil!.to_s("%Y-%m-%d %H:%M:%S"), to_date.not_nil!.to_s("%Y-%m-%d %H:%M:%S")) do |rs|
+        MinionAPI.dbh(default: query_data) do |dbh|
+          dbh.query_each(
+            sql,
+            uuid,
+            from_date.not_nil!.to_s("%Y-%m-%d %H:%M:%S"),
+            to_date.not_nil!.to_s("%Y-%m-%d %H:%M:%S")) do |rs|
             js = rs.read(JSON::Any?)
             ts = rs.read(Time?)
             next if js.nil? || ts.nil?
@@ -122,8 +126,8 @@ module MinionAPI
         servers.map { |s| arg_n += 1; "$#{arg_n}" }.join(",")
       end
       debug!(pdk_sql)
-      DBH.using_connection do |conn|
-        conn.query_each(pdk_sql, args: servers) do |rs|
+      MinionAPI.dbh(default: data_keys) do |dbh|
+        dbh.query_each(pdk_sql, args: servers) do |rs|
           data_keys << rs.read(String)
         end
       end
@@ -144,12 +148,10 @@ module MinionAPI
     ESQL
 
     def self.count(accurate = false)
-      DBH.using_connection do |conn|
-        unless accurate
-          conn.query_one(FAST_COUNT_SQL, as: {Int64})
-        else
-          conn.query_one(ACCURATE_COUNT_SQL, as: {Int64})
-        end
+      unless accurate
+        MinionAPI.dbh { |dbh| dbh.query_one(FAST_COUNT_SQL, as: {Int64}) }
+      else
+        MinionAPI.dbh { |dbh| dbh.query_one(ACCURATE_COUNT_SQL, as: {Int64}) }
       end
     rescue ex : Exception
       debug!(ex)
