@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_08_070756) do
+ActiveRecord::Schema.define(version: 2020_12_08_080939) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -72,8 +72,7 @@ ActiveRecord::Schema.define(version: 2020_12_08_070756) do
     t.tsvector "tsv"
     t.index ["created_at"], name: "logs_created_at_idx"
     t.index ["msg"], name: "logs_msg_gin", opclass: :gin_trgm_ops, using: :gin
-    t.index ["server_id"], name: "logs_server_id_idx"
-    t.index ["service"], name: "index_logs_on_service"
+    t.index ["server_id", "service"], name: "logs_server_id_service_idx"
     t.index ["tsv"], name: "logs_tsv_idx", using: :gin
   end
 
@@ -140,6 +139,7 @@ ActiveRecord::Schema.define(version: 2020_12_08_070756) do
     t.index ["created_at"], name: "telemetries_create_at_brin_idx", using: :brin
     t.index ["data"], name: "telemetries_data_idx", using: :gin
     t.index ["server_id", "created_at", "data_key"], name: "telemetries_kitchen_sink_idx"
+    t.index ["server_id", "data_key"], name: "telemetries_server_id_data_key_idx"
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
