@@ -107,15 +107,59 @@ module MinionAPI
     # there were a background job that would, on a repeating basis, determine
     # the query keys available for each customer, and would put that data into
     # a dedicated table, thus eliminating the dynamic querying of this data.
+
     PDK_SQL = <<-ESQL
+    WITH RECURSIVE t AS (                                                                                 
+      (
+        SELECT
+          data_key
+        FROM
+          telemetries
+        WHERE
+          server_id IN(SERVERS)
+        ORDER BY
+          data_key
+        LIMIT
+          1
+        )
+      UNION ALL
+      SELECT
+        (
+          SELECT
+            data_key
+          FROM
+            telemetries
+          WHERE
+            data_key > t.data_key AND
+            server_id IN(SERVERS)
+          ORDER BY
+            data_key
+          LIMIT
+            1
+        )
+      FROM
+        t                      
+      WHERE
+        t.data_key IS NOT NULL
+      )                                              
     SELECT
-      DISTINCT(data_key)
+      data_key
     FROM
-      telemetries
+      t
     WHERE
-      server_id IN(SERVERS) AND
-      created_at > (NOW() - INTERVAL '90 day')
+      data_key
+    IS NOT NULL
     ESQL
+
+#    PDK_SQL = <<-ESQL
+#    SELECT
+#      DISTINCT(data_key)
+#    FROM
+#      telemetries
+#    WHERE
+#      server_id IN(SERVERS) AND
+#      created_at > (NOW() - INTERVAL '90 day')
+#    ESQL
 
     # This determines which query keys are available for accessing data that
     # is stored via tuples of key and value, as an array.

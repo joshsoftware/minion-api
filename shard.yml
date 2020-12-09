@@ -11,7 +11,8 @@ targets:
 dependencies:
   athena:
     github: athena-framework/athena
-    version: ~> 0.10.0
+    version: ~> 0.11.0
+    branch: master
   pg:
     github: will/crystal-pg
   jwt:

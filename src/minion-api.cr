@@ -3,7 +3,7 @@ require "./core"
 
 module MinionAPI
   @@dbh : DB::Database? = nil
-
+  
   def self.create_database_connection
     begin
       @@dbh = DB.open(CONFIG.pgurl)

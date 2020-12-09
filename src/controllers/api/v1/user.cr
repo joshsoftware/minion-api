@@ -1,13 +1,15 @@
 module MinionAPI
   @[ADI::Register(public: true)]
   class UserController < ART::Controller
+    property user : MinionAPI::User.class = User
+
     def initialize(@user_storage : MinionAPI::UserStorage); end
 
     @[ART::Get("/api/v1/user/count")]
     def getCount : ART::Response
       ART::Response.new(
         {
-          count: User.count,
+          count: @user.count,
         }.to_json,
         headers: HTTP::Headers{"content-type" => "application/json"}
       )
@@ -20,7 +22,7 @@ module MinionAPI
     def getUsers : ART::Response
       ART::Response.new(
         {
-          users: User.all,
+          users: @user.all,
         }.to_json,
         headers: HTTP::Headers{"content-type" => "application/json"}
       )
@@ -30,7 +32,7 @@ module MinionAPI
     def getUser(uuid : String) : ART::Response
       ART::Response.new(
         {
-          user: User.find(uuid: uuid),
+          user: @user.find(uuid: uuid),
         }.to_json,
         headers: HTTP::Headers{"content-type" => "application/json"}
       )

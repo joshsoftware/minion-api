@@ -9,7 +9,6 @@ module MinionAPI
 
     def self.authenticate!(email : String?, password : String?) : Bool
       unless email.nil?
-        password_digest = uninitialized String # TODO: This is probably really dumb?
         sql = <<-ESQL
         SELECT
           password_digest

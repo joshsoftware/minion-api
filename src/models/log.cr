@@ -19,7 +19,8 @@ module MinionAPI
           server_id IN(SERVERS)
         ORDER BY
           service
-        LIMIT 1
+        LIMIT
+          1
       )
       UNION ALL
       SELECT
@@ -33,14 +34,20 @@ module MinionAPI
             server_id IN(SERVERS)
           ORDER BY
             service
-          LIMIT 1
+          LIMIT
+          1
         )
       FROM
         t
       WHERE
         t.service IS NOT NULL
-    )
-    SELECT service FROM t WHERE service IS NOT NULL
+      )
+    SELECT
+      service
+    FROM
+      t
+    WHERE
+      service IS NOT NULL
     ESQL
 
     def self.get_unique_services(servers)
@@ -50,7 +57,7 @@ module MinionAPI
         servers.map { |s| arg_n += 1; "$#{arg_n}" }.join(",")
       end
       debug!(service_sql)
-      MinionAPI.dbh.query_each(service_sql, args: servers.concat(servers)) do |rs|
+      MinionAPI.dbh.query_each(service_sql, args: servers) do |rs|
         services << rs.read(String)
       end
 
