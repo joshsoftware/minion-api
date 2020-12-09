@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_07_160255) do
+ActiveRecord::Schema.define(version: 2020_12_08_070756) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -70,8 +70,11 @@ ActiveRecord::Schema.define(version: 2020_10_07_160255) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.tsvector "tsv"
+    t.index ["created_at"], name: "logs_created_at_idx"
     t.index ["msg"], name: "logs_msg_gin", opclass: :gin_trgm_ops, using: :gin
+    t.index ["server_id"], name: "logs_server_id_idx"
     t.index ["service"], name: "index_logs_on_service"
+    t.index ["tsv"], name: "logs_tsv_idx", using: :gin
   end
 
   create_table "organization_users", force: :cascade do |t|
