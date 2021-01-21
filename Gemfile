@@ -10,3 +10,4 @@ gem 'rails', '~> 6.0.3', '>= 6.0.3.2'
 
 # Use sqlite3 as the database for Active Record
 gem 'pg'
+gem "nokogiri", ">= 1.11.0.rc4"
