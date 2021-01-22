@@ -57,7 +57,9 @@ module MinionAPI
         servers.map { |s| arg_n += 1; "$#{arg_n}" }.join(",")
       end
       debug!(service_sql)
-      MinionAPI.dbh.query_each(service_sql, args: servers) do |rs|
+
+      servers_uuids = servers.map{|s| UUID.new(s)}
+      MinionAPI.dbh.query_each(service_sql, args: servers_uuids + servers_uuids) do |rs|
         services << rs.read(String)
       end
 
@@ -182,7 +184,7 @@ module MinionAPI
         # 4) Query all records which are for the same second.
         sql = <<-ESQL
         SELECT
-          id
+          id::varchar
         FROM
           logs
         WHERE

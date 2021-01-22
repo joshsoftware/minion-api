@@ -170,7 +170,6 @@ module MinionAPI
       else
         @organizations = organization_ids.map { |o| Organization.new(o) }
       end
-      debug!(self)
     end
 
     def initialize(uuid : UUID = nil, email : String = "")

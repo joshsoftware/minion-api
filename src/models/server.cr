@@ -81,7 +81,7 @@ module MinionAPI
         )
       debug!(sql)
       MinionAPI.dbh(default: {"", "", Time.local, "", nil, Time.local, ""}) do |dbh|
-        dbh.query_all(sql, args: organizations, as: {String, String?, Time, String, JSON::Any?, Time, String})
+        dbh.query_all(sql, args: organizations, as: {String?, String?, Time?, String?, JSON::Any?, Time?, String?})
       end
     end
 

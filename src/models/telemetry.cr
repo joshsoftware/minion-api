@@ -3,7 +3,6 @@ module MinionAPI
     include JSON::Serializable
 
     def self.get_data(uuid : String, criteria : Array(Hash(String, String))?, limit = 500)
-      debug!("get_data")
       data = {} of String => Array({JSON::Any, Int64})
 
       where_by_date = MinionAPI::Helpers.where_by_date("created_at", criteria)
@@ -151,16 +150,6 @@ module MinionAPI
     IS NOT NULL
     ESQL
 
-#    PDK_SQL = <<-ESQL
-#    SELECT
-#      DISTINCT(data_key)
-#    FROM
-#      telemetries
-#    WHERE
-#      server_id IN(SERVERS) AND
-#      created_at > (NOW() - INTERVAL '90 day')
-#    ESQL
-
     # This determines which query keys are available for accessing data that
     # is stored via tuples of key and value, as an array.
     def self.get_primary_data_keys(servers)
@@ -170,8 +159,10 @@ module MinionAPI
         servers.map { |s| arg_n += 1; "$#{arg_n}" }.join(",")
       end
       debug!(pdk_sql)
+      servers_uuids = servers.map{|s| UUID.new(s)}
+
       MinionAPI.dbh(default: data_keys) do |dbh|
-        dbh.query_each(pdk_sql, args: servers) do |rs|
+        dbh.query_each(pdk_sql, args: servers_uuids + servers_uuids) do |rs|
           data_keys << rs.read(String)
         end
       end
