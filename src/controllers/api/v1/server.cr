@@ -3,8 +3,8 @@ module MinionAPI
   class ServerController < ART::Controller
     def initialize(@user_storage : MinionAPI::UserStorage); end
 
-    @[ART::QueryParam("organizations")]
-    @[ART::Get("/api/v1/server/summary")]
+    @[ARTA::QueryParam("organizations")]
+    @[ARTA::Get("/api/v1/server/summary")]
     def getServerSummary(organizations : String? = nil) : ART::Response
       user_orgs = @user_storage.user.organizations || [] of String
       orgs = if organizations.nil?
@@ -23,7 +23,7 @@ module MinionAPI
       )
     end
 
-    @[ART::Post("/api/v1/server/names")]
+    @[ARTA::Post("/api/v1/server/names")]
     def get_names(request : HTTP::Request) : ART::Response
       raise ART::Exceptions::BadRequest.new "Missing request body." unless body = request.body
 

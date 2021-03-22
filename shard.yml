@@ -2,7 +2,7 @@ name: minion-api
 version: 0.1.0
 
 authors:
-  - Kirk Haines <kirk.haines@joshsoftware.com>
+  - Kirk Haines <wyhaines@gmail.com>
 
 targets:
   minion-api:
@@ -11,8 +11,7 @@ targets:
 dependencies:
   athena:
     github: athena-framework/athena
-    version: ~> 0.11.0
-    branch: master
+    version: ~> 0.13.0
   pg:
     github: will/crystal-pg
   jwt:
@@ -26,6 +25,14 @@ dependencies:
   splay_tree_map:
     github: wyhaines/splay_tree_map.cr
 
-crystal: 0.35.1
+development_dependencies:
+  ameba:
+    github: crystal-ameba/ameba
+    version: ~> 0.13.0
+  athena-spec:
+    github: athena-framework/spec
+    version: ~> 0.2.3
+
+crystal: 0.36.1
 
 license: MIT

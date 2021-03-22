@@ -3,7 +3,7 @@ module MinionAPI
   class LogController < ART::Controller
     def initialize(@user_storage : MinionAPI::UserStorage); end
 
-    @[ART::Get("/api/v1/log/count")]
+    @[ARTA::Get("/api/v1/log/count")]
     def getCount : ART::Response
       ART::Response.new(
         {
@@ -13,7 +13,7 @@ module MinionAPI
       )
     end
 
-    @[ART::Post("/api/v1/log/services")]
+    @[ARTA::Post("/api/v1/log/services")]
     def get_services(request : HTTP::Request) : ART::Response
       raise ART::Exceptions::BadRequest.new "Missing request body." unless body = request.body
 
@@ -32,7 +32,7 @@ module MinionAPI
       )
     end
 
-    @[ART::Post("/api/v1/log/get")]
+    @[ARTA::Post("/api/v1/log/get")]
     def get_data(request : HTTP::Request) : ART::Response
       raise ART::Exceptions::BadRequest.new "Missing request body." unless body = request.body
 

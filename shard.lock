@@ -2,35 +2,43 @@ version: 2.0
 shards:
   amber_router:
     git: https://github.com/amberframework/amber-router.git
-    version: 0.4.2
+    version: 0.4.4
+
+  ameba:
+    git: https://github.com/crystal-ameba/ameba.git
+    version: 0.13.4
 
   athena:
     git: https://github.com/athena-framework/athena.git
-    version: 0.11.0+git.commit.479b3c372e9f42fa124555d0d56f0760826736b4
+    version: 0.13.0
 
   athena-config:
     git: https://github.com/athena-framework/config.git
-    version: 0.1.2
+    version: 0.2.1
 
   athena-dependency_injection:
     git: https://github.com/athena-framework/dependency-injection.git
-    version: 0.2.1
+    version: 0.2.6
 
   athena-event_dispatcher:
     git: https://github.com/athena-framework/event-dispatcher.git
-    version: 0.1.1
+    version: 0.1.3
 
   athena-serializer:
     git: https://github.com/athena-framework/serializer.git
-    version: 0.2.1
+    version: 0.2.6
+
+  athena-spec:
+    git: https://github.com/athena-framework/spec.git
+    version: 0.2.4
 
   athena-validator:
     git: https://github.com/athena-framework/validator.git
-    version: 0.1.1
+    version: 0.1.4
 
   bindata:
     git: https://github.com/spider-gazelle/bindata.git
-    version: 1.8.0
+    version: 1.8.1
 
   db:
     git: https://github.com/crystal-lang/crystal-db.git
@@ -42,7 +50,7 @@ shards:
 
   jwt:
     git: https://github.com/crystal-community/jwt.git
-    version: 1.4.2
+    version: 1.5.0
 
   minion-common:
     git: https://github.com/joshsoftware/minion-common.git
@@ -50,21 +58,21 @@ shards:
 
   msgpack:
     git: https://github.com/crystal-community/msgpack-crystal.git
-    version: 0.17.1
+    version: 0.17.2
 
   openssl_ext:
-    git: https://github.com/stakach/openssl_ext.git
-    version: 1.2.2
+    git: https://github.com/spider-gazelle/openssl_ext.git
+    version: 2.1.2
 
   pg:
     git: https://github.com/will/crystal-pg.git
-    version: 0.22.1
+    version: 0.23.1
 
   sodium:
     git: https://github.com/didactic-drunk/sodium.cr.git
-    version: 1.2.0
+    version: 1.2.1
 
   splay_tree_map:
     git: https://github.com/wyhaines/splay_tree_map.cr.git
-    version: 0.1.0+git.commit.384a3bf00cdf3315b4b09cdece056ab62df81147
+    version: 0.1.0+git.commit.0a5e019d2f545aabcaf687311fb18f1415d02829
 

@@ -2,7 +2,7 @@
 # access point for the API server itself.
 module MinionAPI
   class HealthController < ART::Controller
-    @[ART::Get("/api/v1/health/heartbeat")]
+    @[ARTA::Get("/api/v1/health/heartbeat")]
     def heartbeat : ART::Response
       ART::Response.new(
         {
@@ -12,7 +12,7 @@ module MinionAPI
       )
     end
 
-    @[ART::Get("/api/v1/health/stats")]
+    @[ARTA::Get("/api/v1/health/stats")]
     def stats : ART::Response
       stats = GC.stats
       data = {

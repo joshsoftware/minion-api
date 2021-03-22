@@ -3,7 +3,7 @@ module MinionAPI
   class OrganizationController < ART::Controller
     def initialize(@user_storage : MinionAPI::UserStorage); end
 
-    @[ART::Get("/api/v1/organizations")]
+    @[ARTA::Get("/api/v1/organizations")]
     def getOrganizations : ART::Response
       ART::Response.new(
         {

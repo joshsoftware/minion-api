@@ -1,5 +1,5 @@
 module MinionAPI
-  struct User
+  class User
     include JSON::Serializable
 
     SODIUM_MEMLIMIT    = (1024 * 512).to_u64

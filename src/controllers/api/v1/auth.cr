@@ -1,18 +1,18 @@
 module MinionAPI
   class AuthController < ART::Controller
-    @[ART::Get("/api/v1/auth/")]
+    @[ARTA::Get("/api/v1/auth/")]
     def index : String
       "TODO: Return appropriate top level response."
     end
 
-    @[ART::QueryParam("email")]
-    @[ART::QueryParam("password")]
-    @[ART::Get("/api/v1/auth/signin")]
+    @[ARTA::QueryParam("email")]
+    @[ARTA::QueryParam("password")]
+    @[ARTA::Get("/api/v1/auth/signin")]
     def signin(email : String = "", password : String = "") : ART::Response
       signin_impl(email, password)
     end
 
-    @[ART::Post("/api/v1/auth/signin")]
+    @[ARTA::Post("/api/v1/auth/signin")]
     def signin(request : HTTP::Request) : ART::Response
       raise ART::Exceptions::BadRequest.new "Missing request body." unless body = request.body
 

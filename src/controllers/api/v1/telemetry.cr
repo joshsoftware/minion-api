@@ -3,7 +3,7 @@ module MinionAPI
   class TelemetryController < ART::Controller
     def initialize(@user_storage : MinionAPI::UserStorage); end
 
-    @[ART::Get("/api/v1/telemetry/count")]
+    @[ARTA::Get("/api/v1/telemetry/count")]
     def get_count : ART::Response
       ART::Response.new(
         {
@@ -13,7 +13,7 @@ module MinionAPI
       )
     end
 
-    @[ART::Post("/api/v1/telemetry/primary_data_keys")]
+    @[ARTA::Post("/api/v1/telemetry/primary_data_keys")]
     def get_primary_data_keys(request : HTTP::Request) : ART::Response
       raise ART::Exceptions::BadRequest.new "Missing request body." unless body = request.body
 
@@ -32,7 +32,7 @@ module MinionAPI
       )
     end
 
-    @[ART::Post("/api/v1/telemetry/get")]
+    @[ARTA::Post("/api/v1/telemetry/get")]
     def get_data(request : HTTP::Request) : ART::Response
       raise ART::Exceptions::BadRequest.new "Missing request body." unless body = request.body
 
