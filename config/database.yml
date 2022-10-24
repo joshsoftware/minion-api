@@ -1,0 +1,19 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: <%= ENV.fetch("DB_USER") { "dev" } %>
+  password: <%= ENV.fetch("DB_PASSWORD") { "dev" } %>
+  host: <%= ENV.fetch("DB_HOST") { "localhost" } %>
+
+development:
+  <<: *default
+  database: minion-development
+
+test:
+  <<: *default
+  database: minion-test
+
+production:
+  <<: *default
+  database: minion-production
